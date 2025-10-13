@@ -1,4 +1,4 @@
-.content {
+.content_packages {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -7,7 +7,6 @@
   gap: 40px;
 }
 
-/* === Секции (wrapper_group) === */
 .wrapper_group {
   background: linear-gradient(180deg, #ffffff 0%, #f9f9fc 100%);
   border-radius: 20px;
@@ -105,7 +104,7 @@ footer {
 
 /* === Адаптив === */
 @media (max-width: 768px) {
-  .content {
+  .content_packages {
     grid-template-columns: 1fr;
     padding: 20px;
   }

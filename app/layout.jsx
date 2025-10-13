@@ -1,13 +1,56 @@
+"use client";
+import { useEffect, useState } from "react";
 import "./layout.css";
 import "./global.css";
-import AnimationHandler from "./AnimationHandler";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
+  const [animationType, setAnimationType] = useState("none"); // "first", "reload", "none"
+  const pathName = usePathname();
+
+  useEffect(() => {
+    const navigation = performance.getEntriesByType("navigation")[0];
+    const navigationType = navigation?.type; // reload / navigate / back_forward
+    const sessionStarted = sessionStorage.getItem("sessionStarted");
+    const firstVisit = !localStorage.getItem("visited");
+
+    // Первый визит
+    if (firstVisit) {
+      localStorage.setItem("visited", "true");
+      sessionStorage.setItem("sessionStarted", "true");
+      setAnimationType("reload");
+    }
+    // Перезагрузка страницы
+    else if (navigationType === "reload") {
+      setAnimationType("reload");
+    }
+    // Новая вкладка (предыдущая была закрыта)
+    else if (!sessionStarted) {
+      sessionStorage.setItem("sessionStarted", "true");
+      setAnimationType("reload");
+    }
+    // Переход внутри сайта (не показываем)
+    else {
+      setAnimationType("none");
+    }
+  }, []);
+
+  const mainLogoClass = () => {
+    if (
+      pathName === "/" &&
+      animationType === "first"
+      // ||      (pathName === "/" && animationType === "reload")
+    ) {
+      return "main_logo_wrapper_animate";
+    }
+    return "main_logo_wrapper";
+  };
+
   return (
     <html lang="ru">
       <body>
-        <AnimationHandler />
-        <div className="main_logo_wrapper">
+        <div className={mainLogoClass()}>
           <img
             src="/assets/logo/Shanyrak.png"
             alt="logo"
@@ -32,7 +75,7 @@ export default function RootLayout({ children }) {
               className="header_contact_telegram header_img_contact"
             ></a>
           </div>
-          <a href="s-mart-ui.netlify.app" className="logo_img"></a>
+          <Link href="/" className="logo_img"></Link>
         </header>
         {children}
       </body>
