@@ -161,7 +161,7 @@ export default function Sensor() {
           <SensorHumanPresenceFP1Aqara dataTab="14" />
           <SensorHumanPresenceFP2Aqara dataTab="15" />
           <SensorHumanPresenceRoximo dataTab="16" />
-          <SensorHumanPresence24G dataTab="10" />
+          <SensorHumanPresence24G dataTab="17" />
           <SensorMove dataTab="18" />
           <SensorMoveAqara dataTab="19" />
           <SensorMoveSber dataTab="110" />
