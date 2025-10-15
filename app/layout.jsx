@@ -50,6 +50,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <head>
+        <meta
+          name="google-site-verification"
+          content="4h_1OthH4N9OFmQOn8-0j1lEEkQHdpS-gjWitvVrTBw"
+        />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="assets/logo/Shanyrak-violet.png" />
