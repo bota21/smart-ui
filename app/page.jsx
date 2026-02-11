@@ -1,134 +1,135 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useLanguage } from "./i18n/LanguageContext";
 import "./page.css";
-import "./global.css";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export default function Home() {
-  const [animationType, setAnimationType] = useState("none");
-  const pathName = usePathname();
+  const { t, lang, setLang } = useLanguage();
 
+  // Автоматически обновляем все элементы с data-i18n при смене языка
   useEffect(() => {
-    const navigation = performance.getEntriesByType("navigation")[0];
-    const navType = navigation?.type; // может быть reload / navigate / back_forward
-    const sessionStarted = sessionStorage.getItem("sessionStarted");
-    const visited = localStorage.getItem("visited");
-
-    // Событие возврата назад
-    const handlePopState = () => {
-      setAnimationType("none"); // при возврате анимация не показывается
-    };
-    window.addEventListener("popstate", handlePopState);
-
-    // Первый визит (вообще впервые на сайте)
-    if (!visited) {
-      localStorage.setItem("visited", "true");
-      sessionStorage.setItem("sessionStarted", "true");
-      setAnimationType("reload");
-    }
-    // Новая вкладка (предыдущая была закрыта)
-    else if (!sessionStarted) {
-      sessionStorage.setItem("sessionStarted", "true");
-      setAnimationType("reload");
-    }
-    // Перезагрузка страницы (F5 или ctrl+R)
-    else if (navType === "reload") {
-      setAnimationType("reload");
-    }
-    // Обычный переход между страницами
-    else {
-      setAnimationType("none");
-    }
-
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
-  const mainContentClass = () => {
-    if (
-      pathName === "/" &&
-      animationType === "first"
-      // ||      (pathName === "/" && animationType === "reload")
-    ) {
-      return "main_content animate";
-    }
-    return "main_content";
-  };
+    const elements = document.querySelectorAll("[data-i18n]");
+    elements.forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      el.textContent = t(key);
+    });
+  }, [lang, t]);
 
   return (
-    <div className="content">
-      <div className={mainContentClass()}>
-        <div className="main_text_wrapper">
-          <div className="text_bold text_center">Добро пожаловать!</div>
-          <p className="text_center m_text_justify">
-            Уважаемый клиент, наша компания "SmartÜi" предоставляет услуги по
-            интеграции Умного дома Алиса.
-          </p>
-          <p>
-            Здесь вы найдёте всё, что нужно, чтобы сделать ваш дом удобнее и
-            жизнь комфортнее. Ознакомьтесь с нашим каталогом, посмотрите какие
-            услуги мы предлагаем, сравните тарифы и загляните в портфолио, чтобы
-            наглядно увидеть, как всё работает. Мы здесь, чтобы помочь вам
-            выбрать лучшее и сделать первый шаг максимально просто. Для
-            подробной консультации просим связаться по указанным контактам. Наши
-            менеджеры обязательно предоставят Вам подробную консультацию.
+    <div id="main_content" className="main_content">
+      {/* <!-- HERO --> */}
+      <section className="hero">
+        <div className="hero-text">
+          <div>
+            <h1 data-i18n="hero_header">
+              SmartÜi — Умный дом с Алисой в Алматы
+            </h1>
+            <p data-i18n="hero_text">
+              Полностью интегрированная система умного дома для вашего комфорта
+              и безопасности
+            </p>
+            <div className="hero-buttons">
+              <a data-i18n="hero_cost" className="btn-primary" href="#form">
+                Рассчитать стоимость
+              </a>
+              <a
+                data-i18n="hero_consult"
+                className="btn-secondary"
+                href="#contacts"
+              >
+                Консультация
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="hero-img">
+          <img src="/assets/logo/Shanyrak.png" alt="Smart Ui" />
+        </div>
+      </section>
+
+      {/* <!-- ПРЕИМУЩЕСТВА --> */}
+      <section className="features">
+        <div className="feature-card">
+          <h3 data-i18n="feature_header_1">Интеграция с Алисой</h3>
+          <p data-i18n="feature_header_text_1">
+            Полное управление голосом для вашего дома
           </p>
         </div>
-
-        <div className="main_icons_wrapper">
-          <Link href="/packages" className="main_icon_wrapper">
-            <img
-              src="./assets/icons/packages.png"
-              alt="Пакеты"
-              className="main_icon_img"
-            />
-            <div className="main_icon text_bold">Пакеты</div>
-            <div className="main_icon_line"></div>
-            <div className="main_icon_text">
-              Изучите все доступные варианты и найдите оптимальное решение.
-            </div>
-          </Link>
-
-          <Link href="/catalog" className="main_icon_wrapper">
-            <img
-              src="./assets/icons/catalog.png"
-              alt="Каталог"
-              className="main_icon_img"
-            />
-            <div className="main_icon text_bold">Каталог</div>
-            <div className="main_icon_line"></div>
-            <div className="main_icon_text">
-              Найдите всё необходимое в одном месте — удобно и быстро.
-            </div>
-          </Link>
-
-          <Link href="/services" className="main_icon_wrapper">
-            <img
-              src="./assets/icons/services.png"
-              alt="Услуги"
-              className="main_icon_img"
-            />
-            <div className="main_icon text_bold">Услуги</div>
-            <div className="main_icon_line"></div>
-            <div className="main_icon_text">
-              Доверьтесь нам — мы настроим, подключим и сделаем всё за вас.
-            </div>
-          </Link>
-
-          <Link href="/portfolio" className="main_icon_wrapper">
-            <img
-              src="./assets/icons/portfolio.png"
-              alt="Портфолио"
-              className="main_icon_img"
-            />
-            <div className="main_icon text_bold">Портфолио</div>
-            <div className="main_icon_line"></div>
-            <div className="main_icon_text">
-              Узнайте, как всё работает — наглядно и просто.
-            </div>
-          </Link>
+        <div className="feature-card">
+          <h3 data-i18n="feature_header_2">Поддержка 24/7</h3>
+          <p data-i18n="feature_header_text_2">
+            Мы всегда на связи для вашей безопасности
+          </p>
         </div>
-      </div>
+        <div className="feature-card">
+          <h3 data-i18n="feature_header_3">Современные технологии</h3>
+          <p data-i18n="feature_header_text_3">
+            Безопасность, автоматизация и комфорт
+          </p>
+        </div>
+      </section>
+
+      {/* <!-- ПАКЕТЫ --> */}
+      <section>
+        <h2 data-i18n="package_header" className="package-header">
+          Наши пакеты
+        </h2>
+        <div className="cards">
+          <div className="card">
+            <h3 data-i18n="package_header_1">Базовый</h3>
+            <p data-i18n="package_header_text_1">
+              Свет, базовая автоматика, управление через приложение
+            </p>
+          </div>
+          <div className="card">
+            <h3 data-i18n="package_header_2">Стандарт</h3>
+            <p data-i18n="package_header_text_2">
+              Базовый + голосовое управление через Алису
+            </p>
+          </div>
+          <div className="card">
+            <h3 data-i18n="package_header_3">Премиум</h3>
+            <p data-i18n="package_header_text_3">
+              Полный умный дом под ключ + поддержка 24/7
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- ФОРМА --> */}
+      <section id="form">
+        <h2 data-i18n="form_header">Оставьте заявку</h2>
+        <form name="smartui-form" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="smartui-form" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Ваше имя / Аты-жөні / Name"
+            required
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+7 777 123 45 67"
+            pattern="^\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}$"
+            required
+            title="Введите полный номер, например +7 777 123 45 67"
+          />
+          <button data-i18n="form_send" type="submit">
+            Отправить
+          </button>
+        </form>
+      </section>
+
+      {/* <!-- КОНТАКТЫ --> */}
+      <section id="contacts">
+        <div data-i18n="contact_header" className="contact-header">
+          Контакты
+        </div>
+        <div data-i18n="contact_address" className="contact-text">
+          г. Алматы, Казахстан
+        </div>
+      </section>
     </div>
   );
 }
