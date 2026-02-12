@@ -1,8 +1,8 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
-import ru from "./ru.json";
-import kz from "./kz.json";
-import en from "./en.json";
+const ru = require("./ru.json");
+const kz = require("./kz.json");
+const en = require("./en.json");
 
 const LanguageContext = createContext(null);
 
