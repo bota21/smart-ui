@@ -126,16 +126,23 @@ export default function Home() {
             }
           }}
         >
-          <input type="text" name="name" placeholder="Ваше имя" required />
+          <input
+            type="text"
+            name="name"
+            placeholder="Ваше имя / Аты-жөні / Name"
+            required
+          />
           <input
             type="tel"
             name="phone"
             placeholder="+7 777 123 45 67"
             pattern="^\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}$"
             required
-            title="Введите номер полностью, например +7 777 123 45 67"
+            title="Введите полный номер, например +7 777 123 45 67"
           />
-          <button type="submit">Отправить</button>
+          <button type="submit" data-i18n="form_send">
+            Отправить
+          </button>
         </form>
       </section>
 

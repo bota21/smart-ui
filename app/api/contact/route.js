@@ -11,11 +11,11 @@ export async function POST(req) {
       });
     }
 
-    // Настройка почты
+    // Настройка Mail.ru
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST, // smtp сервер
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false, // true для 465
+      host: "smtp.mail.ru",
+      port: 465, // SSL
+      secure: true, // SSL
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -24,7 +24,7 @@ export async function POST(req) {
 
     await transporter.sendMail({
       from: `"SmartUi Website" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_EMAIL, // куда приходят заявки
+      to: process.env.CONTACT_EMAIL,
       subject: "Новая заявка с сайта",
       text: `Имя: ${name}\nТелефон: ${phone}`,
       html: `<p><strong>Имя:</strong> ${name}</p><p><strong>Телефон:</strong> ${phone}</p>`,
