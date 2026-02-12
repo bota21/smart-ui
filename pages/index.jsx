@@ -1,8 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function Home() {
   const { t, lang } = useLanguage();
+  const [value, setValue] = useState("");
+
+  const handleChange = (e) => {
+    let x = e.target.value.replace(/\D/g, "");
+    if (x.startsWith("7")) x = x.slice(1);
+    let formatted = "+7 ";
+    if (x.length > 0) formatted += x.substring(0, 3);
+    if (x.length > 3) formatted += " " + x.substring(3, 6);
+    if (x.length > 6) formatted += " " + x.substring(6, 8);
+    if (x.length > 8) formatted += " " + x.substring(8, 10);
+    setValue(formatted);
+  };
 
   useEffect(() => {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -98,32 +110,35 @@ export default function Home() {
           Оставьте заявку
         </h2>
         <form
-          onSubmit={async (e) => {
+          action="https://formspree.io/f/mjgeybwd" // ваш URL формы на Formspree
+          method="POST"
+          onSubmit={(e) => {
             e.preventDefault();
             const form = e.target;
-            const data = {
-              name: form.name.value,
-              phone: form.phone.value,
-            };
 
-            try {
-              const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+              method: form.method,
+              body: formData,
+              headers: {
+                Accept: "application/json",
+              },
+            })
+              .then((response) => {
+                if (response.ok) {
+                  alert(
+                    "Форма отправлена! Мы с вами свяжемся в ближайшее время",
+                  );
+                  form.reset();
+                } else {
+                  alert("Ошибка отправки формы");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+                alert("Ошибка отправки формы");
               });
-
-              const result = await res.json();
-              if (res.ok) {
-                alert(result.message);
-                form.reset();
-              } else {
-                alert(result.error);
-              }
-            } catch (err) {
-              console.error(err);
-              alert("Ошибка отправки формы");
-            }
           }}
         >
           <input
@@ -134,11 +149,10 @@ export default function Home() {
           />
           <input
             type="tel"
-            name="phone"
             placeholder="+7 777 123 45 67"
-            pattern="^\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}$"
+            value={value}
+            onChange={handleChange}
             required
-            title="Введите полный номер, например +7 777 123 45 67"
           />
           <button type="submit" data-i18n="form_send">
             Отправить
