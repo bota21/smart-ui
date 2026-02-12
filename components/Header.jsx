@@ -47,13 +47,11 @@ export default function Header({ children }) {
           ))}
         </div>
       </header>
-      <div
-        id="main_content"
-        className="main_content"
-        style={{ display: open ? "none" : "flex" }}
-      >
-        {children}
-      </div>
+      {open ? null : (
+        <div id="main_content" className="main_content">
+          {children}
+        </div>
+      )}
     </>
   );
 }
