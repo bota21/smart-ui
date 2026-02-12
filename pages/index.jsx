@@ -95,8 +95,7 @@ export default function Home() {
       {/* <!-- ФОРМА --> */}
       <section id="form">
         <h2 data-i18n="form_header">Оставьте заявку</h2>
-        <form name="smartui-form" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="smartui-form" />
+        <form>
           <input
             type="text"
             name="name"
