@@ -21,8 +21,9 @@ export default function FloatingContacts() {
           </a>
 
           <a
-            href="https://t.me/77778410050"
+            href="https://t.me/+77778410050"
             target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary"
           >
             <svg

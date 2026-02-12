@@ -131,6 +131,7 @@ export default function Home() {
                     "Форма отправлена! Мы с вами свяжемся в ближайшее время",
                   );
                   form.reset();
+                  setValue("");
                 } else {
                   alert("Ошибка отправки формы");
                 }

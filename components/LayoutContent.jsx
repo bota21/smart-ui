@@ -8,9 +8,7 @@ export default function LayoutContent({ children }) {
 
   return (
     <>
-      <Header />
-
-      <main>{children}</main>
+      <Header>{children}</Header>
 
       <FloatingContacts />
     </>
