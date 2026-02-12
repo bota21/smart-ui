@@ -1,15 +1,12 @@
-"use client";
 import { useEffect } from "react";
-import { useLanguage } from "./i18n/LanguageContext";
-import "./page.css";
+import { useLanguage } from "../i18n/LanguageContext";
+import "../page.css";
 
 export default function Home() {
-  const { t, lang, setLang } = useLanguage();
+  const { t, lang } = useLanguage();
 
-  // Автоматически обновляем все элементы с data-i18n при смене языка
   useEffect(() => {
-    const elements = document.querySelectorAll("[data-i18n]");
-    elements.forEach((el) => {
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       el.textContent = t(key);
     });
