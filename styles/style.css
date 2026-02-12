@@ -176,7 +176,8 @@ form button:hover {
 
 .package-header,
 .contact-header,
-.contact-text {
+.contact-text,
+.form_header {
   color: var(--card-bg);
   text-align: center;
 }

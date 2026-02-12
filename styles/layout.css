@@ -136,11 +136,6 @@ footer {
 
   z-index: 2000;
   background: var(--bg);
-
-  /* Для случая когда меню не на всю страницу  */
-  /* top: 70px; */
-  /* width: 220px; */
-  /* border-radius: 12px; */
 }
 
 .mobile-menu a {
@@ -151,6 +146,7 @@ footer {
   padding: 8px;
 
   border-radius: 8px;
+  cursor: pointer;
 
   transition: 0.2s;
 }

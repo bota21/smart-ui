@@ -94,25 +94,48 @@ export default function Home() {
 
       {/* <!-- ФОРМА --> */}
       <section id="form">
-        <h2 data-i18n="form_header">Оставьте заявку</h2>
-        <form>
-          <input
-            type="text"
-            name="name"
-            placeholder="Ваше имя / Аты-жөні / Name"
-            required
-          />
+        <h2 data-i18n="form_header" className="form_header">
+          Оставьте заявку
+        </h2>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+              name: form.name.value,
+              phone: form.phone.value,
+            };
+
+            try {
+              const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+              });
+
+              const result = await res.json();
+              if (res.ok) {
+                alert(result.message);
+                form.reset();
+              } else {
+                alert(result.error);
+              }
+            } catch (err) {
+              console.error(err);
+              alert("Ошибка отправки формы");
+            }
+          }}
+        >
+          <input type="text" name="name" placeholder="Ваше имя" required />
           <input
             type="tel"
             name="phone"
             placeholder="+7 777 123 45 67"
             pattern="^\+7\s\d{3}\s\d{3}\s\d{2}\s\d{2}$"
             required
-            title="Введите полный номер, например +7 777 123 45 67"
+            title="Введите номер полностью, например +7 777 123 45 67"
           />
-          <button data-i18n="form_send" type="submit">
-            Отправить
-          </button>
+          <button type="submit">Отправить</button>
         </form>
       </section>
 

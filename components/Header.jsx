@@ -33,7 +33,7 @@ export default function Header() {
           <button
             key={l}
             onClick={() => setLang(l)}
-            className={lang === l ? "active" : ""}
+            className={`lang-switcher-button ${lang === l ? "lang-active" : ""}`}
           >
             {l.toUpperCase()}
           </button>
