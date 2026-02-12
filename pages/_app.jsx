@@ -1,13 +1,14 @@
 import "@/styles/style.css";
 import "@/styles/layout.css";
 import { LanguageProvider } from "@/context/LanguageContext";
-import Header from "@/components/Header";
+import LayoutContent from "@/components/LayoutContent";
 
 export default function App({ Component, pageProps }) {
   return (
     <LanguageProvider>
-      <Header />
-      <Component {...pageProps} />
+      <LayoutContent>
+        <Component {...pageProps} />
+      </LayoutContent>
     </LanguageProvider>
   );
 }
