@@ -1,14 +1,11 @@
-import { LanguageProvider } from "./i18n/LanguageContext";
-import LayoutContent from "./LayoutContent.jsx";
-import "../pages/styles/layout.css";
-import "../pages/styles/style.css";
+import "@/styles/style.css";
+import "@/styles/layout.css";
+import { LanguageProvider } from "@/context/LanguageContext";
 
-export default function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   return (
     <LanguageProvider>
-      <LayoutContent>
-        <Component {...pageProps} />
-      </LayoutContent>
+      <Component {...pageProps} />
     </LanguageProvider>
   );
 }
