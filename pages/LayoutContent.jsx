@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useLanguage } from "./i18n/LanguageContext";
-import "./layout.css";
+import { useLanguage } from "./i18n/LanguageContext.jsx";
 
 export default function LayoutContent({ children }) {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);

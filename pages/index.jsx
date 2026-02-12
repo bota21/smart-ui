@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useLanguage } from "../i18n/LanguageContext";
-import "../page.css";
+import { useLanguage } from "./i18n/LanguageContext";
+// import "./style.css";
 
 export default function Home() {
   const { t, lang } = useLanguage();
