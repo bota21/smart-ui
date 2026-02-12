@@ -173,6 +173,10 @@
 =============================== */
 
 @media (max-width: 900px) {
+  .wrapper_for_smart_home_tabs {
+    padding: 0;
+  }
+
   .wrapper_for_smart_home_item.active {
     grid-template-columns: 1fr;
   }
