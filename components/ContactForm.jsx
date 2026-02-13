@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
+import { useEffect, useState } from "react";
 
 export default function ContactForm() {
   const [value, setValue] = useState("");
@@ -6,6 +7,15 @@ export default function ContactForm() {
     show: false,
     success: true,
   });
+
+  const { t, lang } = useLanguage();
+
+  useEffect(() => {
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      el.textContent = t(key);
+    });
+  }, [lang, t, modal.show]);
 
   const handleChange = (e) => {
     let x = e.target.value.replace(/\D/g, "");
@@ -83,17 +93,28 @@ export default function ContactForm() {
               {modal.success ? "✓" : "⚠"}
             </div>
 
-            <h3>
+            <h3
+              data-i18n={
+                modal.success ? "modal_success_title" : "modal_error_title"
+              }
+            >
               {modal.success ? "Спасибо! Заявка отправлена" : "Ошибка отправки"}
             </h3>
 
-            <p>
+            <p
+              data-i18n={
+                modal.success ? "modal_success_text" : "modal_error_text"
+              }
+            >
               {modal.success
                 ? "Мы свяжемся с вами в ближайшее время"
                 : "Попробуйте отправить форму позже"}
             </p>
 
-            <button onClick={() => setModal({ ...modal, show: false })}>
+            <button
+              data-i18n="modal_close"
+              onClick={() => setModal({ ...modal, show: false })}
+            >
               Закрыть
             </button>
           </div>
