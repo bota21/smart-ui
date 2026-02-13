@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function ContactForm() {
   const [value, setValue] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [modal, setModal] = useState({
     show: false,
     success: true,
@@ -54,9 +55,16 @@ export default function ContactForm() {
 
           const digits = value.replace(/\D/g, "");
 
+          // if (digits.length !== 11) {
+          //   setModal({ show: true, success: false });
+          //   return;
+          // }
+
           if (digits.length !== 11) {
-            setModal({ show: true, success: false });
+            setPhoneError("Введите полный номер телефона");
             return;
+          } else {
+            setPhoneError("");
           }
 
           fetch(form.action, {
@@ -81,7 +89,6 @@ export default function ContactForm() {
             })
             .catch((error) => {
               console.error(error);
-              alert("Ошибка отправки формы");
             });
         }}
       >
@@ -96,12 +103,17 @@ export default function ContactForm() {
           name="phone"
           placeholder="+7 777 123 45 67"
           value={value}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            setPhoneError("");
+          }}
           required
+          className={phoneError ? "input-error" : ""}
         />
+        {phoneError && <div className="error-text">{phoneError}</div>}
         <button
           type="submit"
-          disabled={value.replace(/\D/g, "").length !== 11}
+          // disabled={value.replace(/\D/g, "").length !== 11}
           data-i18n="form_send"
         >
           Отправить
