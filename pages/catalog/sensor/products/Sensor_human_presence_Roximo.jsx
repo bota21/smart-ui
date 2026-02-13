@@ -11,7 +11,7 @@ export default function Sensor_human_presence_Roximo({ activeTab, tabNumber }) {
           onclick="toggleZoom(this)"
         />
         <div className="text_tab">
-          <span data-i18n="Sensor_Human_presence_Roximo_text">
+          <span data-i18n="Sensor_human_presence_Roximo_text">
             Датчик присутствия определят находится ли в данный момент человек в
             поле обнаружения датчика. В настройках датчика можно установить
             параметры расстояния и чувствительности. Также в устройстве

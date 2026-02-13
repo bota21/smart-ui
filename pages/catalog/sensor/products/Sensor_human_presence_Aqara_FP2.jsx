@@ -14,24 +14,24 @@ export default function Sensor_human_presence_Aqara_FP2({
           onclick="toggleZoom(this)"
         />
         <div className="text_tab">
-          <span data-i18n="Sensor_Human_presence_Aqara_FP2_text_1">
+          <span data-i18n="Sensor_human_presence_Aqara_FP2_text_1">
             Aqara Presence Sensor FP2 фиксирует малейшие движения с максимальной
             конфиденциальностью. Он обнаруживает присутствие, даже если вы не
             двигаетесь.
           </span>
-          <p data-i18n="Sensor_Human_presence_Aqara_FP2_text_2">
+          <p data-i18n="Sensor_human_presence_Aqara_FP2_text_2">
             Автоматизация освещения: Включайте свет автоматически, когда кто-то
             входит в комнату, и выключайте его, когда все уходят.
           </p>
-          <p data-i18n="Sensor_Human_presence_Aqara_FP2_text_3">
+          <p data-i18n="Sensor_human_presence_Aqara_FP2_text_3">
             Системы безопасности: Используйте датчик FP2 для включения
             сигнализации или камер безопасности, когда обнаруживается движение.
           </p>
-          <p data-i18n="Sensor_Human_presence_Aqara_FP2_text_4">
+          <p data-i18n="Sensor_human_presence_Aqara_FP2_text_4">
             Управление климатом: Регулируйте температуру автоматически, исходя
             из того, присутствуют ли люди в комнате.
           </p>
-          <p data-i18n="Sensor_Human_presence_Aqara_FP2_text_5">
+          <p data-i18n="Sensor_human_presence_Aqara_FP2_text_5">
             Управление шторами: Автоматически открывайте шторы утром, когда
             кто-то встает с кровати. FP2 может определить, находится ли кто-то
             еще в постели, и автоматизация пробуждения не сработает, если другой

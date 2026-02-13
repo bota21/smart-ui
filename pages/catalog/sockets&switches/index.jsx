@@ -36,6 +36,7 @@ import Smart_Din_63A from "./products/Smart_Din_63A";
 import Smart_Din_40A from "./products/Smart_Din_40A";
 import Smart_Din_Moes_16A from "./products/Smart_Din_Moes_16A";
 import Smart_Din_Tuya_63A from "./products/Smart_Din_Tuya_63A";
+import { useRouter } from "next/router";
 
 export default function Sockets_and_Switches() {
   const tabs = [
@@ -43,213 +44,180 @@ export default function Sockets_and_Switches() {
       id: 1,
       title: "Выключатель одноклавишный Яндекс",
       translation: "Switch_Yandex_1x",
-      package: "Switch_Yandex_1x",
     },
     {
       id: 2,
       title: "Выключатель двухклавишный Яндекс",
       translation: "Switch_Yandex_2x",
-      package: "Switch_Yandex_2x",
     },
     {
       id: 3,
       title: "Выключатель сенсорный BSEED 1кл",
       translation: "Switch_Bseed_sensor_1x",
-      package: "Switch_Bseed_sensor_1x",
     },
     {
       id: 4,
       title: "Выключатель сенсорный BSEED 2кл",
       translation: "Switch_Bseed_sensor_2x",
-      package: "Switch_Bseed_sensor_2x",
     },
     {
       id: 5,
       title: "Выключатель сенсорный BSEED 3кл",
       translation: "Switch_Bseed_sensor_3x",
-      package: "Switch_Bseed_sensor_3x",
     },
     {
       id: 6,
       title: "Выключатель клавишный BSEED 1кл",
       translation: "Switch_Bseed_keyboard_1x",
-      package: "Switch_Bseed_keyboard_1x",
     },
     {
       id: 7,
       title: "Выключатель клавишный BSEED 2кл",
       translation: "Switch_Bseed_keyboard_2x",
-      package: "Switch_Bseed_keyboard_2x",
     },
     {
       id: 8,
       title: "Выключатель клавишный BSEED 3кл",
       translation: "Switch_Bseed_keyboard_3x",
-      package: "Switch_Bseed_keyboard_3x",
     },
     {
       id: 9,
       title: "Выключатель клавишный BSEED 4кл",
       translation: "Switch_Bseed_keyboard_4x",
-      package: "Switch_Bseed_keyboard_4x",
     },
     {
       id: 10,
       title: "Выключатель ROXIMO 1кл",
       translation: "Switch_Roximo_1x",
-      package: "Switch_Roximo_1x",
     },
     {
       id: 11,
       title: "Выключатель ROXIMO 2кл",
       translation: "Switch_Roximo_2x",
-      package: "Switch_Roximo_2x",
     },
     {
       id: 12,
       title: "Выключатель ROXIMO 3кл",
       translation: "Switch_Roximo_3x",
-      package: "Switch_Roximo_3x",
     },
     {
       id: 13,
       title: "Выключатель клавишный Aqara 1кл",
       translation: "Switch_Aqara_1x",
-      package: "Switch_Aqara_1x",
     },
     {
       id: 14,
       title: "Выключатель клавишный Aqara 2кл",
       translation: "Switch_Aqara_2x",
-      package: "Switch_Aqara_2x",
     },
     {
       id: 15,
       title: "Выключатель клавишный Aqara 3кл",
       translation: "Switch_Aqara_3x",
-      package: "Switch_Aqara_3x",
     },
     {
       id: 16,
       title: "Выключатель клавишный Aqara 4кл",
       translation: "Switch_Aqara_4x",
-      package: "Switch_Aqara_4x",
     },
     {
       id: 17,
       title: "Диммер стеклянный",
       translation: "Dimmer_Bseed",
-      package: "Dimmer_Bseed",
     },
     {
       id: 18,
       title: "Умный диммер Яндекс",
       translation: "Dimmer_Yandex",
-      package: "Dimmer_Yandex",
     },
     {
       id: 19,
       title: "Диммер Aqara поворотный",
       translation: "Dimmer_Aqara",
-      package: "Dimmer_Aqara",
     },
     {
       id: 20,
       title: "Выключатель для роллштор сенсорный",
       translation: "Switch_roller_touch",
-      package: "Switch_roller_touch",
     },
     {
       id: 21,
       title: "Розетка встроенная",
       translation: "Socket_buildIn_1x",
-      package: "Socket_buildIn_1x",
     },
     {
       id: 22,
       title: "Розетка встроенная двойная",
       translation: "Socket_buildIn_2x",
-      package: "Socket_buildIn_2x",
     },
     {
       id: 23,
       title: "Розетка встроенная тройная",
       translation: "Socket_buildIn_3x",
-      package: "Socket_buildIn_3x",
     },
     {
       id: 24,
       title: "Реле для диммера ZigBee с Алисой, 2 линии",
       translation: "Relay_dimmer",
-      package: "Relay_dimmer",
     },
     {
       id: 25,
       title: "Умная розетка Яндекс",
       translation: "Slug_Yandex",
-      package: "Slug_Yandex",
     },
     {
       id: 26,
       title: "Умная розетка Tuya",
       translation: "Slug_Tuya",
-      package: "Slug_Tuya",
     },
     {
       id: 27,
       title: "Умная розетка ROXIMO",
       translation: "Slug_Roximo",
-      package: "Slug_Roximo",
     },
     {
       id: 28,
       title: "Умная розетка SmartLife",
       translation: "Slug_Smartlife",
-      package: "Slug_Smartlife",
     },
     {
       id: 29,
       title: "Реле одноканальное Яндекс",
       translation: "Relay_Yandex_1x",
-      package: "Relay_Yandex_1x",
     },
     {
       id: 30,
       title: "Реле двуканальное Яндекс",
       translation: "Relay_Yandex_2x",
-      package: "Relay_Yandex_2x",
     },
     {
       id: 31,
       title: "Яндекс умная беспроводная кнопка",
       translation: "Button_Yandex",
-      package: "Button_Yandex",
     },
     {
       id: 32,
       title: "Умный автомат ZigBee на Din рейку 63А",
       translation: "Smart_Din_63A",
-      package: "Smart_Din_63A",
     },
     {
       id: 33,
       title: "Умный автомат 1P 40A",
       translation: "Smart_Din_40A",
-      package: "Smart_Din_40A",
     },
     {
       id: 34,
       title: "Умный автомат Moes 16A",
       translation: "Smart_Din_Moes_16A",
-      package: "Smart_Din_Moes_16A",
     },
     {
       id: 35,
       title: "Умный автомат Tuya 63A",
       translation: "Smart_Din_Tuya_63A",
-      package: "Smart_Din_Tuya_63A",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -266,6 +234,18 @@ export default function Sockets_and_Switches() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

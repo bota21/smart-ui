@@ -18,6 +18,7 @@ import Hub_Roximo from "./products/Hub_Roximo";
 import Hub_Tuya from "./products/Hub_Tuya";
 import Module_Mini_3_Pro from "./products/Module_Mini_3_Pro";
 import Footer from "../footer";
+import { useRouter } from "next/router";
 
 export default function Control() {
   const tabs = [
@@ -25,105 +26,89 @@ export default function Control() {
       id: 1,
       title: "Яндекс станция Макс",
       translation: "Station_Alice_Max",
-      package: "Station_Alice_Max",
     },
     {
       id: 2,
       title: "Яндекс станция Дуо Макс",
       translation: "Station_Alice_Duo",
-      package: "Station_Alice_Duo",
     },
     {
       id: 3,
       title: "Яндекс Станция 3",
       translation: "Station_Alice_Lite_3",
-      package: "Station_Alice_Lite_3",
     },
     {
       id: 4,
       title: "Яндекс станция Миди",
       translation: "Station_Alice_Midi",
-      package: "Station_Alice_Midi",
     },
     {
       id: 5,
       title: "Яндекс станция Мини 3 Про",
       translation: "Station_Alice_Mini3Pro",
-      package: "Station_Alice_Mini3Pro",
     },
     {
       id: 6,
       title: "Яндекс станция Мини 3",
       translation: "Station_Alice_Mini3",
-      package: "Station_Alice_Mini3",
     },
     {
       id: 7,
       title: "Яндекс станция Лайт 2",
       translation: "Station_Alice_Lite2",
-      package: "Station_Alice_Lite2",
     },
     {
       id: 8,
       title: "Телевизор Яндекс Про 140 см",
       translation: "Station_Alice_TV140",
-      package: "Station_Alice_TV140",
     },
     {
       id: 9,
       title: "Телевизор Яндекс Бейсик 165 см",
       translation: "Station_Alice_TV165",
-      package: "Station_Alice_TV165",
     },
     {
       id: 10,
       title: "Пульт ДУ Яндекс",
       translation: "Remote_Yandex",
-      package: "Remote_Yandex",
     },
     {
       id: 11,
       title: "Яндекс центр управления",
       translation: "Hub_Yandex",
-      package: "Hub_Yandex",
     },
     {
       id: 12,
       title: "Умный пульт с датчиком температуры и влажности Яндекс",
       translation: "Hub_Yandex_sensor",
-      package: "Hub_Yandex_sensor",
     },
     {
       id: 13,
       title: "Центр умного дома Aqara Hub M2",
       translation: "Hub_Aqara_M2",
-      package: "Hub_Aqara_M2",
     },
     {
       id: 14,
       title: "Центр умного дома Aqara Hub M3 EU",
       translation: "Hub_Aqara_M2",
-      package: "Hub_Aqara_M2",
     },
     {
       id: 15,
       title: "Умный хаб ROXIMO",
       translation: "Hub_Roximo",
-      package: "Hub_Roximo",
     },
     {
       id: 16,
       title: "Центр управления Tuya",
       translation: "Hub_Tuya",
-      package: "Hub_Tuya",
     },
     {
       id: 17,
       title: "Климатический модуль Яндекса для Станции Мини 3 Про",
       translation: "Modul_mini_3_pro",
-      package: "Modul_mini_3_pro",
     },
   ];
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -141,6 +126,18 @@ export default function Control() {
     });
   }, [lang, t]);
 
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
+
   return (
     <>
       <section className="content">
@@ -152,7 +149,6 @@ export default function Control() {
                 <div
                   key={tab.id}
                   className={`tabs_for_smart_home_item ${activeTab === tab.id ? "active" : ""}`}
-                  id={tab.package}
                   data-i18n={tab.translation}
                   onClick={() => handleTabClick(tab.id)}
                 >

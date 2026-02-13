@@ -22,6 +22,7 @@ import Bulb_E27_11_Yandex_RGB from "./products/Bulb_E27_11_Yandex_RGB";
 import Bulb_GU10_6_Yandex from "./products/Bulb_GU10_6_Yandex";
 import Bulb_GX53_9_Yandex from "./products/Bulb_GX53_9_Yandex";
 import Footer from "../footer";
+import { useRouter } from "next/router";
 
 export default function Lighting() {
   const tabs = [
@@ -29,129 +30,110 @@ export default function Lighting() {
       id: 1,
       title: "Светодиодная лента Яндекс 3м",
       translation: "LED_Strip_Yandex",
-      package: "LED_Strip_Yandex",
     },
     {
       id: 2,
       title: "Удлинитель для светодиодная лента Яндекс",
       translation: "Cable_LED_Strip_Yandex",
-      package: "Cable_LED_Strip_Yandex",
     },
     {
       id: 3,
       title: "Светодиодная лента KOJIMA 5м",
       translation: "LED_Strip_Kojimo",
-      package: "LED_Strip_Kojimo",
     },
     {
       id: 4,
       title: "Гирлянда ROXIMO",
       translation: "LED_Strip_Roximo",
-      package: "LED_Strip_Roximo",
     },
     {
       id: 5,
       title: "Cветильник потолочный Aqara Ceiling Light T1M",
       translation: "Lamp_Aqara",
-      package: "Lamp_Aqara",
     },
     {
       id: 6,
       title: "Умная эмби лампа Яндекс",
       translation: "Light_table_Yandex",
-      package: "Light_table_Yandex",
     },
     {
       id: 7,
       title: "Диммер для светодиодной ленты 12,24V 15А",
       translation: "Control_LED_Strip",
-      package: "Control_LED_Strip",
     },
     {
       id: 8,
       title: "Контроллер RGB для LED лент 12В, 24В",
       translation: "Control_LED_Strip_RGB",
-      package: "Control_LED_Strip_RGB",
     },
     {
       id: 9,
       title: "Лампочка Е14 4,5W Gauss филаментная теплый белый",
       translation: "Bulb_E14_4_5",
-      package: "Bulb_E14_4_5",
     },
     {
       id: 10,
       title: "Лампочка Е14 5W Gauss RGB",
       translation: "Bulb_E14_5_RGB",
-      package: "Bulb_E14_5_RGB",
     },
     {
       id: 11,
       title: "Лампочка Е14 6W 520 Лм Яндекс RGB",
       translation: "Bulb_E14_6_Yandex",
-      package: "Bulb_E14_6_Yandex",
     },
     {
       id: 12,
       title: "Лампочка E27 6.5W Gauss филаментная, желтый",
       translation: "Bulb_E27_6_5",
-      package: "Bulb_E27_6_5",
     },
     {
       id: 13,
       title: "Лампочка E27 7W Gauss теплый белый",
       translation: "Bulb_E27_7",
-      package: "Bulb_E27_7",
     },
     {
       id: 14,
       title: "Лампочка E27 8.5W Gauss RGB",
       translation: "Bulb_E27_8_5",
-      package: "Bulb_E27_8_5",
     },
     {
       id: 15,
       title: "Лампочка Е27 9W Яндекс филаментная белый свет",
       translation: "Bulb_E27_9_Yandex_filamentous",
-      package: "Bulb_E27_9_Yandex_filamentous",
     },
     {
       id: 16,
       title: "Лампочка Е27 9W Яндекс YNDX-00551 белая",
       translation: "Bulb_E27_9_Yandex",
-      package: "Bulb_E27_9_Yandex",
     },
     {
       id: 17,
       title: "Лампочка Е27 9W Яндекс RGB",
       translation: "Bulb_E27_9_Yandex_RGB",
-      package: "Bulb_E27_9_Yandex_RGB",
     },
     {
       id: 18,
       title: "Лампочка E27 10W Gauss RGB",
       translation: "Bulb_E27_10_RGB",
-      package: "Bulb_E27_10_RGB",
     },
     {
       id: 19,
       title: "Лампочка Е27 11W Яндекс RGB",
       translation: "Bulb_E27_11_Yandex_RGB",
-      package: "Bulb_E27_11_Yandex_RGB",
     },
     {
       id: 20,
       title: "Лампочка GU10 6W 520 Лм Яндекс RGB",
       translation: "Bulb_GU10_6_Yandex",
-      package: "Bulb_GU10_6_Yandex",
     },
     {
       id: 21,
       title: "Лампочка GX53 9W 806 Лм Яндекс RGB",
       translation: "Bulb_GX53_9_Yandex",
-      package: "Bulb_GX53_9_Yandex",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -168,6 +150,18 @@ export default function Lighting() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

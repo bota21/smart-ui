@@ -8,6 +8,7 @@ import Camera_E27_Roximo from "./products/Camera_E27_Roximo";
 import Camera_4G_Roximo from "./products/Camera_4G_Roximo";
 import Camera_street_rotary_Roximo from "./products/Camera_street_rotary_Roximo";
 import Footer from "../footer";
+import { useRouter } from "next/router";
 
 export default function Camera() {
   const tabs = [
@@ -15,45 +16,40 @@ export default function Camera() {
       id: 1,
       title: "Камера видео наблюдения Yandex",
       translation: "Camera_Yandex",
-      package: "Camera_Yandex",
     },
     {
       id: 2,
       title: "Умная камера уличная ROXIMO",
       translation: "Camera_street_Roximo",
-      package: "Camera_street_Roximo",
     },
     {
       id: 3,
       title: "Умная поворотная камера",
       translation: "Camera_rotary_Roximo",
-      package: "Camera_rotary_Roximo",
     },
     {
       id: 4,
       title: "Умная камера",
       translation: "Camera_Roximo",
-      package: "Camera_Roximo",
     },
     {
       id: 5,
       title: "Умная камера с адаптером питания E27",
       translation: "Camera_E27_Roximo",
-      package: "Camera_E27_Roximo",
     },
     {
       id: 6,
       title: "Умная 4G камера уличная поворотная ROXIMO",
       translation: "Camera_4G_Roximo",
-      package: "Camera_4G_Roximo",
     },
     {
       id: 7,
       title: "Умная камера уличная поворотная ROXIMO",
       translation: "Camera_street_rotary_Roximo",
-      package: "Camera_street_rotary_Roximo",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -70,6 +66,18 @@ export default function Camera() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

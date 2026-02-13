@@ -17,6 +17,7 @@ import Motor_roller_Aqara from "./products/Motor_roller_Aqara";
 import Cornice_roll_59 from "./products/Cornice_roll_59";
 import Motor_rolling_Aqara from "./products/Motor_rolling_Aqara";
 import Footer from "../footer";
+import { useRouter } from "next/router";
 
 export default function Sensor() {
   const tabs = [
@@ -24,99 +25,85 @@ export default function Sensor() {
       id: 1,
       title: "Умный карниз для штор Яндекс, длина 1,8-3 м",
       translation: "Cornice_Yandex_3",
-      package: "Cornice_Yandex_3",
     },
     {
       id: 2,
       title: "Умный карниз для штор Яндекс, длина 2,4-4,5 м",
       translation: "Cornice_Yandex_4",
-      package: "Cornice_Yandex_4",
     },
     {
       id: 3,
       title: "Карниз умный Tuya 4м",
       translation: "Cornice_Tuya_4",
-      package: "Cornice_Tuya_4",
     },
     {
       id: 4,
       title: "Карниз умный Tuya 5м",
       translation: "Cornice_Tuya_5",
-      package: "Cornice_Tuya_5",
     },
     {
       id: 5,
       title: "Карниз умный Tuya 6м",
       translation: "Cornice_Tuya_6",
-      package: "Cornice_Tuya_6",
     },
     {
       id: 6,
       title: "Карниз умный Tuya 7м",
       translation: "Cornice_Tuya_7",
-      package: "Cornice_Tuya_7",
     },
     {
       id: 7,
       title: "Карниз Aqara 175см",
       translation: "Cornice_Aqara_175",
-      package: "Cornice_Aqara_175",
     },
     {
       id: 8,
       title: "Карниз Aqara 210см",
       translation: "Cornice_Aqara_210",
-      package: "Cornice_Aqara_210",
     },
     {
       id: 9,
       title: "Карниз Aqara 250см",
       translation: "Cornice_Aqara_250",
-      package: "Cornice_Aqara_250",
     },
     {
       id: 10,
       title: "Мотор для раздвижных штор Aqara Curtain Controller",
       translation: "Controller_curtain_Aqara",
-      package: "Controller_curtain_Aqara",
     },
     {
       id: 11,
       title: "Мотор раздвижных штор Aqara Curtain Driver E1 (Track Version)",
       translation: "Driver_curtain_Aqara_track",
-      package: "Driver_curtain_Aqara_track",
     },
     {
       id: 12,
       title: "Мотор раздвижных штор Aqara Curtain Driver E1 (Rod Version)",
       translation: "Driver_curtain_Aqara_rod",
-      package: "Driver_curtain_Aqara_rod",
     },
     {
       id: 13,
       title: "Мотор для роллштор Tuya",
       translation: "Motor_roller_Tuya",
-      package: "Motor_roller_Tuya",
     },
     {
       id: 14,
       title: "Мотор для роллштор Aqara",
       translation: "Motor_roller_Aqara",
-      package: "Motor_roller_Aqara",
     },
     {
       id: 15,
       title: "Карниз для роллштор 59см",
       translation: "Cornice_roll_59",
-      package: "Cornice_roll_59",
     },
     {
       id: 16,
       title: "Мотор для рулонных штор Aqara Curtain Rolling Shutter Motor",
       translation: "Motor_rolling_Aqara",
-      package: "Motor_rolling_Aqara",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -133,6 +120,18 @@ export default function Sensor() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

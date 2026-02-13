@@ -6,6 +6,7 @@ import Smart_door_Aqara_A100 from "./products/Smart_door_Aqara_A100";
 import Smart_door_Aqara_D100 from "./products/Smart_door_Aqara_D100";
 import Smart_door_Aqara_N100 from "./products/Smart_door_Aqara_N100";
 import Footer from "../footer";
+import { useRouter } from "next/router";
 
 export default function Sensor() {
   const tabs = [
@@ -13,33 +14,30 @@ export default function Sensor() {
       id: 1,
       title: "Замок Xiaomi электро механический XMZNMST10LK",
       translation: "Smart_Door_Xiaomi",
-      package: "Smart_Door_Xiaomi",
     },
     {
       id: 2,
       title: "Умный дверной замок Xiaomi Smart Door Lock E30 (XMZNMST11LK) CN",
       translation: "Smart_Door_Xiaomi_E30",
-      package: "Smart_Door_Xiaomi_E30",
     },
     {
       id: 3,
       title: "Замок Aqara A100 ZNMMS02ES",
       translation: "Smart_Door_Aqara_A100",
-      package: "Smart_Door_Aqara_A100",
     },
     {
       id: 4,
       title: "Замок Aqara электро механический Door Lock D100",
       translation: "Smart_Door_Aqara_D100",
-      package: "Smart_Door_Aqara_D100",
     },
     {
       id: 5,
       title: "Замок Aqara электро механический Door Lock N100",
       translation: "Smart_Door_Aqara_N100",
-      package: "Smart_Door_Aqara_N100",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -56,6 +54,18 @@ export default function Sensor() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

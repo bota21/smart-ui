@@ -29,6 +29,7 @@ import Sensor_Smoke_Smartlife from "./products/Sensor_smoke_Smartlife";
 import Sensor_Smoke_Aqara from "./products/Sensor_smoke_Aqara";
 import Sensor_Smoke_Tuya from "./products/Sensor_smoke_Tuya";
 import Siren from "./products/Siren";
+import { useRouter } from "next/router";
 
 export default function Sensor() {
   const tabs = [
@@ -36,171 +37,145 @@ export default function Sensor() {
       id: 1,
       title: "Датчик вибрации",
       translation: "Sensor_vibration",
-      package: "Sensor_vibration",
     },
     {
       id: 2,
       title: "Датчик открытия дверей",
       translation: "Sensor_open",
-      package: "Sensor_open",
     },
     {
       id: 3,
       title: "Датчик открытия дверей Яндекс",
       translation: "Sensor_open_Yandex",
-      package: "Sensor_open_Yandex",
     },
     {
       id: 4,
       title: "Датчик освещённости Aqara",
       translation: "Sensor_light_Aqara",
-      package: "Sensor_light_Aqara",
     },
     {
       id: 5,
       title: "Датчик присутствия Aqara Human Presence Sensor FP1",
       translation: "Sensor_human_presence_Aqara_FP1",
-      package: "Sensor_human_presence_Aqara_FP1",
     },
     {
       id: 6,
       title: "Датчик присутствия Aqara Presence Sensor FP2",
       translation: "Sensor_human_presence_Aqara_FP2",
-      package: "Sensor_human_presence_Aqara_FP2",
     },
     {
       id: 7,
       title: "Датчик присутствия и освещенности ROXIMO",
       translation: "Sensor_human_presence_Roximo",
-      package: "Sensor_human_presence_Roximo",
     },
     {
       id: 8,
       title: "Датчик движения Яндекс",
       translation: "Sensor_move_Yandex",
-      package: "Sensor_move_Yandex",
     },
     {
       id: 9,
       title: "Датчик движения Aqara Motion Sensor",
       translation: "Sensor_move_Aqara",
-      package: "Sensor_move_Aqara",
     },
     {
       id: 10,
       title: "Датчик движения SBER",
       translation: "Sensor_move_Sber",
-      package: "Sensor_move_Sber",
     },
     {
       id: 11,
       title: "Датчик движения eWeLink",
       translation: "Sensor_move_Ewelink",
-      package: "Sensor_move_Ewelink",
     },
     {
       id: 12,
       title: "Датчик температуры и влажности Яндекс",
       translation: "Sensor_temperature_Yandex",
-      package: "Sensor_temperature_Yandex",
     },
     {
       id: 13,
       title: "Датчик температуры и влажности (монитор)",
       translation: "Sensor_temperature_monitor",
-      package: "Sensor_temperature_monitor",
     },
     {
       id: 14,
       title: "Датчик температуры и влажности Kojimo",
       translation: "Sensor_temperature_Kojimo",
-      package: "Sensor_temperature_Kojimo",
     },
     {
       id: 15,
       title: "Датчик температуры и влажности Sonoff",
       translation: "Sensor_temperature_Sonoff",
-      package: "Sensor_temperature_Sonoff",
     },
     {
       id: 16,
       title: "Датчик качества воздуха Aqara TVOC Air Quality Monitor",
       translation: "Sensor_air_Aqara",
-      package: "Sensor_air_Aqara",
     },
     {
       id: 17,
       title: "Монитор качества воздуха QingPing Air Monitor Lite",
       translation: "Sensor_air_QingPing",
-      package: "Sensor_air_QingPing",
     },
     {
       id: 18,
       title: "Датчик протечки воды Яндекс",
       translation: "Sensor_water_Yandex",
-      package: "Sensor_water_Yandex",
     },
     {
       id: 19,
       title: "Датчик протечки воды Sonoff",
       translation: "Sensor_water_Sonoff",
-      package: "Sensor_water_Sonoff",
     },
     {
       id: 20,
       title: "Датчик протечки Aqara Water Leak Sensor",
       translation: "Sensor_water_Aqara",
-      package: "Sensor_water_Aqara",
     },
     {
       id: 21,
       title: "Детектор газа Aqara",
       translation: "Sensor_gas_Aqara",
-      package: "Sensor_gas_Aqara",
     },
     {
       id: 22,
       title: "Детектор газа (CH4) SmartLife",
       translation: "Sensor_gas_Smartlife",
-      package: "Sensor_gas_Smartlife",
     },
     {
       id: 23,
       title: "Датчик газа (метан)",
       translation: "Sensor_gas_metan",
-      package: "Sensor_gas_metan",
     },
     {
       id: 24,
       title: "Датчик газа (пропан)",
       translation: "Sensor_gas_propan",
-      package: "Sensor_gas_propan",
     },
     {
       id: 25,
       title: "Датчик дыма SmartLife",
       translation: "Sensor_smoke_Smartlife",
-      package: "Sensor_smoke_Smartlife",
     },
     {
       id: 26,
       title: "Датчик дыма Aqara",
       translation: "Sensor_smoke_Aqara",
-      package: "Sensor_smoke_Aqara",
     },
     {
       id: 27,
       title: "Датчик дыма Tuya",
       translation: "Sensor_smoke_Tuya",
-      package: "Sensor_smoke_Tuya",
     },
     {
       id: 28,
       title: "Сирена для умного дома",
       translation: "Siren",
-      package: "Siren",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -217,6 +192,18 @@ export default function Sensor() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

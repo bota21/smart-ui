@@ -19,6 +19,7 @@ import Boiler_THERMEX_Sonne_white from "./products/Boiler_THERMEX_Sonne_white";
 import Heating_thermostat_ZONT from "./products/Heating_thermostat_ZONT";
 import Footer from "../footer";
 import { useLanguage } from "@/context/LanguageContext";
+import { useRouter } from "next/router";
 
 export default function Plumbing() {
   const tabs = [
@@ -26,111 +27,95 @@ export default function Plumbing() {
       id: 1,
       title: "Привод для перекрытия воды Aqara",
       translation: "Close_water_Aqara",
-      package: "Close_water_Aqara",
     },
     {
       id: 2,
       title: "Привод для перекрытия воды",
       translation: "Close_water",
-      package: "Close_water",
     },
     {
       id: 3,
       title: "Умный шаровый клапан DN25 1",
       translation: "Smart_ball_valve_DN25",
-      package: "Smart_ball_valve_DN25",
     },
     {
       id: 4,
       title: 'Умный шаровый клапан DN20 3/4"',
       translation: "Smart_ball_valve_DN20",
-      package: "Smart_ball_valve_DN20",
     },
     {
       id: 5,
       title: "Радиаторный терморегулятор Яндекс",
       translation: "Control_heater_Yandex",
-      package: "Control_heater_Yandex",
     },
     {
       id: 6,
       title: "Радиаторный термо-регулятор Aqara",
       translation: "Control_heater_Aqara",
-      package: "Control_heater_Aqara",
     },
     {
       id: 7,
       title: "Умный термо-регулятор Electsmart черный",
       translation: "Control_floor_Electsmart_black",
-      package: "Control_floor_Electsmart_black",
     },
     {
       id: 8,
       title: "Умный термо-регулятор Welrok светлый",
       translation: "Control_floor_Welrok_white",
-      package: "Control_floor_Welrok_white",
     },
     {
       id: 9,
       title: "Умный термо-регулятор Celtic светлый",
       translation: "Control_floor_Celtic_white",
-      package: "Control_floor_Celtic_white",
     },
     {
       id: 10,
       title: "Умный термо-регулятор Celtic черный",
       translation: "Control_floor_Celtic_black",
-      package: "Control_floor_Celtic_black",
     },
     {
       id: 11,
       title: "Модуль управления котлом Wi-Fi Federica Bugatti",
       translation: "Control_boiler_Bugatti",
-      package: "Control_boiler_Bugatti",
     },
     {
       id: 12,
       title: "Термо-регулятор Beok для газового и электрического котла черный",
       translation: "Control_boiler_Beok_black",
-      package: "Control_boiler_Beok_black",
     },
     {
       id: 13,
       title: "Термо-регулятор Beok для газового и электрического котла белый",
       translation: "Control_boiler_Beok_white",
-      package: "Control_boiler_Beok_white",
     },
     {
       id: 14,
       title: "Электрический настенный котел THERMEX Sonne 12 Wi-Fi Grey",
       translation: "Boiler_THERMEX_Sonne_grey",
-      package: "Boiler_THERMEX_Sonne_grey",
     },
     {
       id: 15,
       title: "Электрический двухконтурный котел THERMEX Cometa 12-24 Wi-Fi",
       translation: "Boiler_THERMEX_Cometa",
-      package: "Boiler_THERMEX_Cometa",
     },
     {
       id: 16,
       title: "Электрический настенный котел THERMEX Boss 12 Wi-Fi White",
       translation: "Boiler_THERMEX_Boss",
-      package: "Boiler_THERMEX_Boss",
     },
     {
       id: 17,
       title: "Электрический настенный котел THERMEX Sonne 12 Wi-Fi White",
       translation: "Boiler_THERMEX_Sonne_white",
-      package: "Boiler_THERMEX_Sonne_white",
     },
     {
       id: 18,
       title: "Отопительный термостат ZONT GSM Wi-Fi H-1V NEW для котлов",
       translation: "Heating_thermostat_ZONT",
-      package: "Heating_thermostat_ZONT",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -147,6 +132,18 @@ export default function Plumbing() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>

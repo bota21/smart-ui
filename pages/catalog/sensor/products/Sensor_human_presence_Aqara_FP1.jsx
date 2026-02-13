@@ -14,7 +14,7 @@ export default function Sensor_human_presence_Aqara_FP1({
           onclick="toggleZoom(this)"
         />
         <div className="text_tab">
-          <span data-i18n="Sensor_Human_presence_Aqara_FP1_text">
+          <span data-i18n="Sensor_human_presence_Aqara_FP1_text">
             Улучшите свою домашнюю автоматизацию с помощью нашей технологии на
             базе искусственного интеллекта, которая эффективно отфильтровывает
             распространённые помехи, такие как шторы, вентиляторы и мелкие

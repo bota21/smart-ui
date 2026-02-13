@@ -27,9 +27,15 @@ export default function Header({ children }) {
             <Link href="/catalog" onClick={() => setOpen(false)}>
               {t("menu_catalog")}
             </Link>
-            <a>{t("menu_packages")}</a>
-            <a>{t("menu_services")}</a>
-            <a>{t("menu_portfolio")}</a>
+            <Link href="/packages" onClick={() => setOpen(false)}>
+              {t("menu_packages")}
+            </Link>
+            <Link href="/services" onClick={() => setOpen(false)}>
+              {t("menu_services")}
+            </Link>
+            <Link href="/portfolio" onClick={() => setOpen(false)}>
+              {t("menu_portfolio")}
+            </Link>
           </nav>
 
           <div className="logo">SmartÜi</div>

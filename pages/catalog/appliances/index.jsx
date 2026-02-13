@@ -33,6 +33,7 @@ import Smart_mirror_round from "./products/Smart_mirror_round";
 import Smart_mirror_rectangle from "./products/Smart_mirror_rectangle";
 import Smart_mirror_oval from "./products/Smart_mirror_oval";
 import Footer from "../footer";
+import { useRouter } from "next/router";
 
 export default function Sensor() {
   const tabs = [
@@ -40,200 +41,170 @@ export default function Sensor() {
       id: 1,
       title: "Увлажнитель воздуха Xiaomi 4.5 л",
       translation: "Humidifier_Xiaomi_4_5",
-      package: "Humidifier_Xiaomi_4_5",
     },
     {
       id: 2,
       title: "Увлажнитель воздуха Xiaomi 5 л",
       translation: "Humidifier_Xiaomi_5",
-      package: "Humidifier_Xiaomi_5",
     },
     {
       id: 3,
       title: "Увлажнитель воздуха Xiaomi 4 л",
       translation: "Humidifier_Xiaomi_4",
-      package: "Humidifier_Xiaomi_4",
     },
     {
       id: 4,
       title: "Увлажнитель воздуха Xiaomi 3 л",
       translation: "Humidifier_Xiaomi_3",
-      package: "Humidifier_Xiaomi_3",
     },
     {
       id: 5,
       title: "Очиститель воздуха Aminix",
       translation: "Humidifier_Aminix",
-      package: "Humidifier_Aminix",
     },
     {
       id: 6,
       title: "Очиститель воздуха Xiaomi Mijia Circulation Air Purifier белый",
       translation: "Air_purifier_Xiaomi",
-      package: "Air_purifier_Xiaomi",
     },
     {
       id: 7,
       title: "Очиститель воздуха Xiaomi Smart Air Purifier 5 Pro белый",
       translation: "Air_purifier_5_Xiaomi",
-      package: "Air_purifier_5_Xiaomi",
     },
     {
       id: 8,
       title: "Очиститель воздуха Rawmid",
       translation: "Air_purifier_Rawmid",
-      package: "Air_purifier_Rawmid",
     },
     {
       id: 9,
       title: "Кондиционер Samsung WindFree AI cooling + Filter 25 кв.м",
       translation: "Conditioner_Samsung_AI_25",
-      package: "Conditioner_Samsung_AI_25",
     },
     {
       id: 10,
       title: "Кондиционер Samsung WindFree AI cooling + Filter 35 кв.м",
       translation: "Conditioner_Samsung_AI_35",
-      package: "Conditioner_Samsung_AI_35",
     },
     {
       id: 11,
       title: "Кондиционер Samsung WindFree 25 кв.м",
       translation: "Conditioner_Samsung_25",
-      package: "Conditioner_Samsung_25",
     },
     {
       id: 12,
       title: "Кондиционер Samsung WindFree 35 кв.м",
       translation: "Conditioner_Samsung_35",
-      package: "Conditioner_Samsung_35",
     },
     {
       id: 13,
       title: "Кондиционер Haier 20 кв.м",
       translation: "Conditioner_Haier_20",
-      package: "Conditioner_Haier_20",
     },
     {
       id: 14,
       title: "Кондиционер Haier 35 кв.м",
       translation: "Conditioner_Haier_35",
-      package: "Conditioner_Haier_35",
     },
     {
       id: 15,
       title: "Кондиционер Haier 50 кв.м",
       translation: "Conditioner_Haier_50",
-      package: "Conditioner_Haier_50",
     },
     {
       id: 16,
       title: "Кондиционер Haier 70 кв.м",
       translation: "Conditioner_Haier_70",
-      package: "Conditioner_Haier_70",
     },
     {
       id: 17,
       title: "Кондиционер LG 27 кв.м.",
       translation: "Conditioner_LG_27",
-      package: "Conditioner_LG_27",
     },
     {
       id: 18,
       title: "Кондиционер LG 36 кв.м.",
       translation: "Conditioner_LG_36",
-      package: "Conditioner_LG_36",
     },
     {
       id: 19,
       title: "Робот-пылесос DREAME L40 белый",
       translation: "Robot_cleaner_DREAME_L40",
-      package: "Robot_cleaner_DREAME_L40",
     },
     {
       id: 20,
       title: "Робот-пылесос DREAME Robot Vacuum D20 Ultra белый",
       translation: "Robot_cleaner_DREAME_D20",
-      package: "Robot_cleaner_DREAME_D20",
     },
     {
       id: 21,
       title: "Робот-пылесос DREAME X50 Ultra Complete белый",
       translation: "Robot_cleaner_DREAME_X50",
-      package: "Robot_cleaner_DREAME_X50",
     },
     {
       id: 22,
       title: "Автокормушка Aqara 400 мл белый",
       translation: "Autoclave_Aqara",
-      package: "Autoclave_Aqara",
     },
     {
       id: 23,
       title: "Автоматическая кормушка Xiaomi для кошек и собак",
       translation: "Autoclave_Xiaomi",
-      package: "Autoclave_Xiaomi",
     },
     {
       id: 24,
       title: "Автопоилка Xiaomi Smart Pet Water Dispenser 3л",
       translation: "Water_dispenser_Xiaomi",
-      package: "Water_dispenser_Xiaomi",
     },
     {
       id: 25,
       title: "Умное мусорное ведро Xiaomi Smart Trash Can T1",
       translation: "Smart_trash_T1",
-      package: "Smart_trash_T1",
     },
     {
       id: 26,
       title: "Умное мусорное ведро Xiaomi Smart Trash Can T3",
       translation: "Smart_trash_T3",
-      package: "Smart_trash_T3",
     },
     {
       id: 27,
       title: "Сменные пакеты для Xiaomi Townew Smart Trash Can T1 150 шт",
       translation: "Packages_smart_trash_T1",
-      package: "Packages_smart_trash_T1",
     },
     {
       id: 28,
       title:
         "Сменные картриджи с пакетами для Xiaomi TowNew Smart Trash T3 150 шт",
       translation: "Packages_smart_trash_T3",
-      package: "Packages_smart_trash_T3",
     },
     {
       id: 29,
       title:
         "Умное зеркало с RGB - подсветкой, подогревом и часами, 85см., круглое",
       translation: "Smart_mirror_round",
-      package: "Smart_mirror_round",
     },
     {
       id: 30,
       title:
         "Умное зеркало с RGB - подсветкой, подогревом и часами, 80х80см., квадрат",
       translation: "Smart_mirror_square",
-      package: "Smart_mirror_square",
     },
     {
       id: 31,
       title:
         "Умное зеркало с RGB - подсветкой, подогревом и часами, 80х50см., прямоугольник",
       translation: "Smart_mirror_rectangle",
-      package: "Smart_mirror_rectangle",
     },
     {
       id: 32,
       title:
         "Умное зеркало с RGB - подсветкой, подогревом и часами, 90х40см., овал",
       translation: "Smart_mirror_oval",
-      package: "Smart_mirror_oval",
     },
   ];
+
+  const router = useRouter();
 
   const { t, lang } = useLanguage();
 
@@ -250,6 +221,18 @@ export default function Sensor() {
       el.textContent = t(key);
     });
   }, [lang, t]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const product = router.query.product;
+
+    const found = tabs.find((p) => p.translation === product);
+
+    if (found) {
+      setActiveTab(found.id);
+    }
+  }, [router.isReady]);
 
   return (
     <>
