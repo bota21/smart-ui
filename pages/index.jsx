@@ -1,20 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
+import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   const { t, lang } = useLanguage();
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    let x = e.target.value.replace(/\D/g, "");
-    if (x.startsWith("7")) x = x.slice(1);
-    let formatted = "+7 ";
-    if (x.length > 0) formatted += x.substring(0, 3);
-    if (x.length > 3) formatted += " " + x.substring(3, 6);
-    if (x.length > 6) formatted += " " + x.substring(6, 8);
-    if (x.length > 8) formatted += " " + x.substring(8, 10);
-    setValue(formatted);
-  };
 
   useEffect(() => {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -105,61 +94,7 @@ export default function Home() {
       </section>
 
       {/* <!-- ФОРМА --> */}
-      <section id="form">
-        <h2 data-i18n="form_header" className="form_header">
-          Оставьте заявку
-        </h2>
-        <form
-          action="https://formspree.io/f/mjgeybwd" // ваш URL формы на Formspree
-          method="POST"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const form = e.target;
-
-            const formData = new FormData(form);
-
-            fetch(form.action, {
-              method: form.method,
-              body: formData,
-              headers: {
-                Accept: "application/json",
-              },
-            })
-              .then((response) => {
-                if (response.ok) {
-                  alert(
-                    "Форма отправлена! Мы с вами свяжемся в ближайшее время",
-                  );
-                  form.reset();
-                  setValue("");
-                } else {
-                  alert("Ошибка отправки формы");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-                alert("Ошибка отправки формы");
-              });
-          }}
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Ваше имя / Аты-жөні / Name"
-            required
-          />
-          <input
-            type="tel"
-            placeholder="+7 777 123 45 67"
-            value={value}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit" data-i18n="form_send">
-            Отправить
-          </button>
-        </form>
-      </section>
+      <ContactForm />
 
       {/* <!-- КОНТАКТЫ --> */}
       <section id="contacts">
