@@ -2,6 +2,10 @@ import { useState } from "react";
 
 export default function ContactForm() {
   const [value, setValue] = useState("");
+  const [modal, setModal] = useState({
+    show: false,
+    success: true,
+  });
 
   const handleChange = (e) => {
     let x = e.target.value.replace(/\D/g, "");
@@ -37,12 +41,16 @@ export default function ContactForm() {
           })
             .then((response) => {
               if (response.ok) {
-                alert("Форма отправлена! Мы свяжемся с вами в ближайшее время");
+                setModal({ show: true, success: true });
                 form.reset();
                 setValue("");
               } else {
-                alert("Ошибка отправки формы");
+                setModal({ show: true, success: false });
               }
+            })
+            .catch((error) => {
+              console.error(error);
+              setModal({ show: true, success: false });
             })
             .catch((error) => {
               console.error(error);
@@ -68,6 +76,29 @@ export default function ContactForm() {
           Отправить
         </button>
       </form>
+      {modal.show && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div style={{ fontSize: "40px", marginBottom: "15px" }}>
+              {modal.success ? "✓" : "⚠"}
+            </div>
+
+            <h3>
+              {modal.success ? "Спасибо! Заявка отправлена" : "Ошибка отправки"}
+            </h3>
+
+            <p>
+              {modal.success
+                ? "Мы свяжемся с вами в ближайшее время"
+                : "Попробуйте отправить форму позже"}
+            </p>
+
+            <button onClick={() => setModal({ ...modal, show: false })}>
+              Закрыть
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

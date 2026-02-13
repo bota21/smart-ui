@@ -2,6 +2,7 @@ import "@/styles/style.css";
 import "@/styles/layout.css";
 import "@/styles/catalog.css";
 import "@/styles/catalog-tabs.css";
+import "@/styles/modalWindow.css";
 import Head from "next/head";
 import { LanguageProvider } from "@/context/LanguageContext";
 import LayoutContent from "@/components/LayoutContent";
