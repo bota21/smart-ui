@@ -18,13 +18,23 @@ export default function ContactForm() {
   }, [lang, t, modal.show]);
 
   const handleChange = (e) => {
-    let x = e.target.value.replace(/\D/g, "");
-    if (x.startsWith("7")) x = x.slice(1);
-    let formatted = "+7 ";
-    if (x.length > 0) formatted += x.substring(0, 3);
-    if (x.length > 3) formatted += " " + x.substring(3, 6);
-    if (x.length > 6) formatted += " " + x.substring(6, 8);
-    if (x.length > 8) formatted += " " + x.substring(8, 10);
+    let digits = e.target.value.replace(/\D/g, "");
+
+    // если ввели 7 или 8 в начале — убираем
+    if (digits.startsWith("7") || digits.startsWith("8")) {
+      digits = digits.slice(1);
+    }
+
+    // ограничиваем строго 10 цифрами
+    digits = digits.slice(0, 10);
+
+    let formatted = "+7";
+
+    if (digits.length > 0) formatted += " " + digits.slice(0, 3);
+    if (digits.length >= 4) formatted += " " + digits.slice(3, 6);
+    if (digits.length >= 7) formatted += " " + digits.slice(6, 8);
+    if (digits.length >= 9) formatted += " " + digits.slice(8, 10);
+
     setValue(formatted);
   };
 
@@ -41,6 +51,13 @@ export default function ContactForm() {
           const form = e.target;
 
           const formData = new FormData(form);
+
+          const digits = value.replace(/\D/g, "");
+
+          if (digits.length !== 11) {
+            setModal({ show: true, success: false });
+            return;
+          }
 
           fetch(form.action, {
             method: form.method,
@@ -82,7 +99,11 @@ export default function ContactForm() {
           onChange={handleChange}
           required
         />
-        <button type="submit" data-i18n="form_send">
+        <button
+          type="submit"
+          disabled={value.replace(/\D/g, "").length !== 11}
+          data-i18n="form_send"
+        >
           Отправить
         </button>
       </form>
