@@ -1,21 +1,21 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { useEffect, useState } from "react";
-import Cornice_Yandex_3 from "./Cornice_Yandex_3";
-import Cornice_Yandex_4 from "./Cornice_Yandex_4";
-import Cornice_Tuya_4 from "./Cornice_Tuya_4";
-import Cornice_Tuya_5 from "./Cornice_Tuya_5";
-import Cornice_Tuya_6 from "./Cornice_Tuya_6";
-import Cornice_Tuya_7 from "./Cornice_Tuya_7";
-import Cornice_Aqara_175 from "./Cornice_Aqara_175";
-import Cornice_Aqara_210 from "./Cornice_Aqara_210";
-import Cornice_Aqara_250 from "./Cornice_Aqara_250";
-import Controller_curtain_Aqara from "./Controller_curtain_Aqara";
-import Driver_curtain_Aqara_track from "./Driver_curtain_Aqara_track";
-import Driver_curtain_Aqara_rod from "./Driver_curtain_Aqara_rod";
-import Motor_roller_Tuya from "./Motor_roller_Tuya";
-import Motor_roller_Aqara from "./Motor_roller_Aqara";
-import Cornice_roll_59 from "./Cornice_roll_59";
-import Motor_rolling_Aqara from "./Motor_rolling_Aqara";
+import Cornice_Yandex_3 from "./products/Cornice_Yandex_3";
+import Cornice_Yandex_4 from "./products/Cornice_Yandex_4";
+import Cornice_Tuya_4 from "./products/Cornice_Tuya_4";
+import Cornice_Tuya_5 from "./products/Cornice_Tuya_5";
+import Cornice_Tuya_6 from "./products/Cornice_Tuya_6";
+import Cornice_Tuya_7 from "./products/Cornice_Tuya_7";
+import Cornice_Aqara_175 from "./products/Cornice_Aqara_175";
+import Cornice_Aqara_210 from "./products/Cornice_Aqara_210";
+import Cornice_Aqara_250 from "./products/Cornice_Aqara_250";
+import Controller_curtain_Aqara from "./products/Controller_curtain_Aqara";
+import Driver_curtain_Aqara_track from "./products/Driver_curtain_Aqara_track";
+import Driver_curtain_Aqara_rod from "./products/Driver_curtain_Aqara_rod";
+import Motor_roller_Tuya from "./products/Motor_roller_Tuya";
+import Motor_roller_Aqara from "./products/Motor_roller_Aqara";
+import Cornice_roll_59 from "./products/Cornice_roll_59";
+import Motor_rolling_Aqara from "./products/Motor_rolling_Aqara";
 import Footer from "../footer";
 
 export default function Sensor() {
