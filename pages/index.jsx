@@ -40,7 +40,9 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-img">
-          <img src="/assets/logo/Shanyrak.png" alt="Smart Ui" />
+          {/* <img src="/assets/logo/Shanyrak.png" alt="Smart Ui" /> */}
+          {/* <img src="/assets/logo/logo-su-1.jpeg" alt="Smart Ui" /> */}
+          <img src="/assets/logo/logo-su-2.png" alt="Smart Ui" />
         </div>
       </section>
 
