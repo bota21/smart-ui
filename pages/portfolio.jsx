@@ -11,5 +11,17 @@ export default function Home() {
     });
   }, [lang, t]);
 
-  return <div id="main_content" className="main_content"></div>;
+  return (
+    <div id="main_content" className="main_content">
+      <div className="video_wrappers">
+        <video
+          width="400"
+          height="400"
+          src="../assets/video/IMG_5074.MOV"
+          className="video_wrapper"
+          controls="controls"
+        ></video>
+      </div>
+    </div>
+  );
 }
