@@ -38,7 +38,7 @@ export default function Header({ children }) {
             </Link>
           </nav>
 
-          <div className="logo">SmartÜi</div>
+          {/* <div className="logo">SmartÜi</div> */}
         </div>
 
         <div className="lang-switch">
