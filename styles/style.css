@@ -199,11 +199,13 @@ button:disabled {
 
 @media (max-width: 768px) {
   .hero {
+    padding-top: 0;
     flex-direction: column;
     text-align: center;
+    gap: 0;
   }
   .hero-img img {
-    max-width: 80%;
+    max-width: 50%;
   }
   .features,
   .cards {

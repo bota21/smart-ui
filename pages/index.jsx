@@ -16,6 +16,9 @@ export default function Home() {
     <div id="main_content" className="main_content">
       {/* <!-- HERO --> */}
       <section className="hero">
+        <div className="hero-img">
+          <img src="/assets/logo/logo-su-2.png" alt="Smart Ui" />
+        </div>
         <div className="hero-text">
           <div>
             <h1 data-i18n="hero_header">
@@ -38,11 +41,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-        </div>
-        <div className="hero-img">
-          {/* <img src="/assets/logo/Shanyrak.png" alt="Smart Ui" /> */}
-          {/* <img src="/assets/logo/logo-su-1.jpeg" alt="Smart Ui" /> */}
-          <img src="/assets/logo/logo-su-2.png" alt="Smart Ui" />
         </div>
       </section>
 
