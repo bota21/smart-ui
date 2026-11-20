@@ -1,14 +1,15 @@
+import ZoomableImage from "@/components/ZoomableImage";
+
 export default function Smart_door_Aqara_N100({ activeTab, tabNumber }) {
   return (
     <>
       <div
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
-        <img
+        <ZoomableImage
           src="/assets/img/9-doors/Smart_lock_Aqara_N100.png"
           alt="Замок Aqara N100"
           className="image_tab"
-          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_Door_Aqara_N100_text_1">
