@@ -8,7 +8,7 @@ export default function Air_purifier_Rawmid({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Очиститель воздуха Rawmid.png"
           alt="Очиститель воздуха Rawmid"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Air_purifier_Rawmid_text_1">

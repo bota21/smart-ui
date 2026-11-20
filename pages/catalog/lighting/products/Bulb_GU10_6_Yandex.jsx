@@ -8,7 +8,7 @@ export default function Bulb_GU10_6_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/4-light/GX,GU/Лампочка GU10 6W 520 Лм Яндекс RGB.png"
           alt="Лампочка GU10 6W 520 Лм Яндекс RGB"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Bulb_Yandex_RGB_text">

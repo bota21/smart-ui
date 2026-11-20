@@ -8,7 +8,7 @@ export default function Cornice_Tuya_4({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/карниз Tuya.png"
           alt="карниз 4м"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Cornice_Tuya_text_1">
@@ -42,7 +42,7 @@ export default function Cornice_Tuya_4({ activeTab, tabNumber }) {
             src="../assets/img/5-cornice/Комплект карниза Tuya.png"
             alt="Комплект карниза Tuya"
             className="images_in_wrapper"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">

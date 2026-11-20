@@ -8,7 +8,7 @@ export default function Control_LED_Strip({ activeTab, tabNumber }) {
           src="../assets/img/4-light/Диммер для светодиодной ленты  12,24V 15А.png"
           alt="Диммер для светодиодной ленты  12,24V 15А"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_LED_Strip_text">

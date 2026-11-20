@@ -8,7 +8,7 @@ export default function Switch_Bseed_keyboard_2x({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Выключатель BSEED клавишный 2х.png"
           alt="Выключатель BSEED клавишный 2х"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Switch_Bseed_keyboard_text">

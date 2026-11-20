@@ -8,7 +8,7 @@ export default function Boiler_THERMEX_Sonne_white({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Электрический настенный котел THERMEX Sonne 12 Wi-Fi White.png"
           alt="Электрический настенный котел THERMEX Sonne 12 Wi-Fi White"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Boiler_THERMEX_Sonne_white_text">

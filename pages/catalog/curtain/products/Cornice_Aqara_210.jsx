@@ -8,7 +8,7 @@ export default function Cornice_Aqara_210({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Электрокарниз Aqara.png"
           alt="Электрокарниз Aqara 210"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Cornice_Aqara_210_text">

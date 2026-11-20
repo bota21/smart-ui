@@ -9,7 +9,7 @@ export default function Motor_roller_Tuya({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Мотор для роллштор Tuya.png"
           alt="Мотор для роллштор Tuya"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Motor_roller_Tuya_text_1">

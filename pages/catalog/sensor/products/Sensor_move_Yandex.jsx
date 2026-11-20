@@ -8,7 +8,7 @@ export default function Sensor_move_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/датчик_движения.png"
           alt="датчик движения"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="sensor_move_text">

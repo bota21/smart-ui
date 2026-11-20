@@ -8,7 +8,7 @@ export default function Camera_street_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/8-camera/видеокамера Roximo уличная.png"
           alt="видеокамера Roximo уличная"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Camera_street_Roximo_text_1">

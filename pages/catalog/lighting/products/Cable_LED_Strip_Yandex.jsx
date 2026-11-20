@@ -8,7 +8,7 @@ export default function Cable_LED_Strip_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/4-light/светодиодная лента удлинитель.png"
           alt="светодиодная лента удлинитель"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Cable_LED_Strip_Yandex_text">

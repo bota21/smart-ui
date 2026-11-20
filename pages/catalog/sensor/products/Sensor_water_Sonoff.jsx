@@ -8,7 +8,7 @@ export default function Sensor_water_Sonoff({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_протечки_Соноф.png"
           alt="Датчик протечки Соноф"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_water_Sonoff_text">

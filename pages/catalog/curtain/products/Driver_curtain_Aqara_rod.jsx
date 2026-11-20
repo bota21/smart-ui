@@ -8,7 +8,7 @@ export default function Driver_curtain_Aqara_rod({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Мотор раздвижных штор  Aqara Curtain Driver E1 (Rod Version).png"
           alt="Мотор раздвижных штор  Aqara Curtain Driver E1 (Rod Version)"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Driver_curtain_Aqara_rod_text_1">

@@ -8,7 +8,7 @@ export default function Heating_thermostat_ZONT({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Отопительный термостат ZONT GSM  Wi-Fi H-1V NEW для котлов.png"
           alt="Отопительный термостат ZONT GSM  Wi-Fi H-1V NEW для котлов"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Heating_thermostat_ZONT_text_1">

@@ -8,7 +8,7 @@ export default function Control_LED_Strip_RGB({ activeTab, tabNumber }) {
           src="../assets/img/4-light/Контроллер RGB для LED лент 12В, 24В.png"
           alt="Контроллер RGB для LED лент 12В, 24В"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_LED_Strip_RGB_text">

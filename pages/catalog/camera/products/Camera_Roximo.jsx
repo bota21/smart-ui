@@ -8,7 +8,7 @@ export default function Camera_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/8-camera/видеокамера Roximo умная.png"
           alt="видеокамера Roximo умная"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Camera_Roximo_text_1">

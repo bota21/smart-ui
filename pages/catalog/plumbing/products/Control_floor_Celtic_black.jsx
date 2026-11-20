@@ -8,7 +8,7 @@ export default function Control_floor_Celtic_black({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/терморегулятор селтик черный.png"
           alt="терморегулятор селтик черный"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_floor_Celtic_text_1"></span>

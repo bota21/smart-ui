@@ -8,7 +8,7 @@ export default function Conditioner_Haier_35({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Кондиционер Haier.png"
           alt="Кондиционер Haier"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Conditioner_Haier_text_1">

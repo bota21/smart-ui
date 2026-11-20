@@ -8,7 +8,7 @@ export default function Mini_3_station({ activeTab, tabNumber }) {
           src="../assets/img/0-control/мини3.png"
           alt="mini 3 yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab" data-i18n="Station_Alice_Mini3_text">
           Умная колонка Яндекс Мини 3 представлена в круглом сером корпусе с

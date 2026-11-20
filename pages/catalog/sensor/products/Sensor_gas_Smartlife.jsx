@@ -8,7 +8,7 @@ export default function Sensor_gas_Smartlife({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_газа_Tuya.png"
           alt="Датчик газа Tuya"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_gas_Smartlife_text">

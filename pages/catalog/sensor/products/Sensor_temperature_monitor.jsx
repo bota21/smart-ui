@@ -8,7 +8,7 @@ export default function Sensor_temperature_monitor({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_температуры_-_монитор_.png"
           alt="Датчик температуры -(монитор)"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_temperature_monitor_text">

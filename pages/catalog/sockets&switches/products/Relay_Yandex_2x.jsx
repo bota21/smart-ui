@@ -8,7 +8,7 @@ export default function Relay_Yandex_2x({ activeTab, tabNumber }) {
           src="../assets/img/3-socket/реле 2х.png"
           alt="реле 2х"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Relay_Yandex_text">

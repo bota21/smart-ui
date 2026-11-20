@@ -10,7 +10,7 @@ export default function Dimmer_Aqara({ activeTab, tabNumber }) {
               src="../assets/img/3-Switch/Диммер Aqara - white.png"
               alt="Диммер Aqara - white"
               className="image_tab"
-              onclick="toggleZoom(this)"
+              onClick="toggleZoom(this)"
             />
           </div>
           <div className="wrapper_for_image_first">
@@ -18,7 +18,7 @@ export default function Dimmer_Aqara({ activeTab, tabNumber }) {
               src="../assets/img/3-Switch/Диммер Aqara - black.png"
               alt="Диммер Aqara - black"
               className="image_tab"
-              onclick="toggleZoom(this)"
+              onClick="toggleZoom(this)"
             />
           </div>
         </div>

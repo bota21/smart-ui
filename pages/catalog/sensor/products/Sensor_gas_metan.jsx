@@ -8,7 +8,7 @@ export default function Sensor_gas_metan({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_газа__метан__GS_SGMHM-I1.png"
           alt="Датчик газа (метан) GS SGMHM-I1"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_gas_metan_text_1">

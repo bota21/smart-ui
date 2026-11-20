@@ -9,7 +9,7 @@ export default function Max_station({ activeTab, tabNumber }) {
             src="../assets/img/0-control/макс.png"
             alt="max yandex"
             className="image_tab"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="text_tab">

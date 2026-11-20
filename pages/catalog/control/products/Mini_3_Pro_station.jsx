@@ -8,7 +8,7 @@ export default function Mini_3_Pro_station({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Мини 3 Про.png"
           alt="mini 3 pro yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Station_Alice_Mini3Pro_text_1">

@@ -8,7 +8,7 @@ export default function Hub_Tuya({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Центр управления Tuya SGW01.png"
           alt="Центр управления Tuya SGW01"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Hub_Tuya_text">

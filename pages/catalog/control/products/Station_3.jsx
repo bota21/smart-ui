@@ -9,7 +9,7 @@ export default function Station_3({ activeTab, tabNumber }) {
             src="../assets/img/0-control/Станция 3.png"
             alt="lite 3 yandex"
             className="image_tab"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="text_tab">

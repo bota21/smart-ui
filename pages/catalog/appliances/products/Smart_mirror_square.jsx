@@ -8,7 +8,7 @@ export default function Smart_mirror_square({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Зеркало с rgb-подсветкой, часы, подогрев. Квадрат.png"
           alt="Зеркало с rgb-подсветкой, часы, подогрев. Квадрат"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_mirror_text_1">

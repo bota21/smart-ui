@@ -8,7 +8,7 @@ export default function Dimmer_Bseed({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Диммер Bseed.png"
           alt="Диммер Bseed"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Dimmer_Bseed_text">

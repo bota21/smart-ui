@@ -8,7 +8,7 @@ export default function Autoclave_Xiaomi({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Автоматическая кормушка Xiaomi для кошек и собак.png"
           alt="Автоматическая кормушка Xiaomi для кошек и собак"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Autoclave_Xiaomi_text_1">

@@ -8,7 +8,7 @@ export default function LED_Strip_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/4-light/светодиодная лента.png"
           alt="светодиодная лента"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="LED_Strip_Yandex_text">

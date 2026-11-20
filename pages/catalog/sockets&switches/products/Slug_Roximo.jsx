@@ -8,7 +8,7 @@ export default function Slug_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/3-socket/Умная розетка ROXIMO.png"
           alt="Умная розетка ROXIMO"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Slug_Roximo_text">

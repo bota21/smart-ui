@@ -5,10 +5,10 @@ export default function Smart_door_Xiaomi_E30({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/9-doors/Замок Xiaomi электромеханический XMZNMST11LK.png"
+          src="/assets/img/9-doors/Smart_lock_Xiaomi_XMZNMST11LK.png"
           alt="Замок Xiaomi электромеханический XMZNMST11LK"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <div className="italic-text" data-i18n="Smart_Door_Xiaomi_E30_text_1">

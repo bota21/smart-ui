@@ -8,7 +8,7 @@ export default function Robot_cleaner_DREAME_D20({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Робот-пылесос DREAME Robot Vacuum D20 Ultra.png"
           alt="Робот-пылесос DREAME Robot Vacuum D20 Ultra"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Robot_cleaner_DREAME_D20_text_1">

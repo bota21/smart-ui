@@ -8,7 +8,7 @@ export default function Humidifier_Aminix({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Очиститель воздуха Aminix.png"
           alt="Очиститель воздуха Aminix"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Humidifier_Aminix_text_1">

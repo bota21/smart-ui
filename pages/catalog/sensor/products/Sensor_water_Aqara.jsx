@@ -8,7 +8,7 @@ export default function Sensor_water_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_протечки_Aqara_Water_Leak_Sensor_T1.png"
           alt="Датчик протечки Aqara Water Leak Sensor T1"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_water_Aqara_text_1">

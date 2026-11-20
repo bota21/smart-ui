@@ -8,7 +8,7 @@ export default function Conditioner_LG_27({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Кондиционер LG.png"
           alt="Кондиционер LG"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Conditioner_LG_text">

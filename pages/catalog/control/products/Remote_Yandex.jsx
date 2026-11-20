@@ -8,7 +8,7 @@ export default function Remote_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Пульт ДУ Яндекс.png"
           alt="DU yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Remote_Yandex_text_1">

@@ -8,7 +8,7 @@ export default function Dimmer_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_открытия.png"
           alt="Датчик открытия дверей"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_open_text">

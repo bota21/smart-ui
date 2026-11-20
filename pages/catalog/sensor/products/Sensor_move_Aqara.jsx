@@ -8,7 +8,7 @@ export default function Sensor_move_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик движения Aqara Motion Sensor P1 MS-S02.png"
           alt="Датчик движения Aqara Motion Sensor P1 MS-S02"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_move_Aqara_text">

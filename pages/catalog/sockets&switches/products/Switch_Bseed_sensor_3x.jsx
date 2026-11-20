@@ -8,7 +8,7 @@ export default function Switch_Bseed_sensor_3x({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/выключатель Bseed сенсорный 3х - white.png"
           alt="выключатель Bseed сенсорный 3х - white"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Switch_Bseed_sensor_text">
@@ -40,19 +40,19 @@ export default function Switch_Bseed_sensor_3x({ activeTab, tabNumber }) {
             src="../assets/img/3-Switch/выключатель Bseed сенсорный 3х - gold.png"
             alt="выключатель Bseed сенсорный 3х - gold"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-Switch/выключатель Bseed сенсорный 3х - grey.png"
             alt="выключатель Bseed сенсорный 3х - grey"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-Switch/выключатель Bseed сенсорный 3х - black.png"
             alt="выключатель Bseed сенсорный 3х - black"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">

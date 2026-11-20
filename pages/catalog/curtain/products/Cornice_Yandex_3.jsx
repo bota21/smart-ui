@@ -8,7 +8,7 @@ export default function Cornice_Yandex_3({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Электрокарниз Яндекс 1.8.png"
           alt="Электрокарниз Яндекс 1.8"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Cornice_Yandex_3_text_1">

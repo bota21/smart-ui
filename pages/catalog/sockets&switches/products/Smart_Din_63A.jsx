@@ -8,7 +8,7 @@ export default function Smart_Din_63A({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Умный автомат ZigBee на Din рейку 63А.png"
           alt="Умный автомат ZigBee на Din рейку 63А"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_Din_63A_text_1">

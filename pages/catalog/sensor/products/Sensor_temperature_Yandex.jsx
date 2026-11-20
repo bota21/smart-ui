@@ -8,7 +8,7 @@ export default function Sensor_temperature_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик температуры Яндекс YNDX-00523.png"
           alt="датчик температуры Яндекс"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_temperature_Yandex_text">

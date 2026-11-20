@@ -8,7 +8,7 @@ export default function Controller_curtain_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Мотор для раздвижных штор  Aqara Curtain Controller.png"
           alt="/Мотор для раздвижных штор  Aqara Curtain Controller"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Controller_curtain_Aqara_text_1">

@@ -8,7 +8,7 @@ export default function Slug_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/3-socket/розетка.png"
           alt="розетка"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Slug_Yandex_text">

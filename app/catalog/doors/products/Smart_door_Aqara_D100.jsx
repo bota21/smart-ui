@@ -5,10 +5,10 @@ export default function Smart_door_Aqara_D100({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/9-doors/Замок Aqara D100.png"
+          src="/assets/img/9-doors/Smart_lock_Aqara_D100.png"
           alt="Замок Aqara D100"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_Door_Aqara_D100_text_1">

@@ -9,7 +9,7 @@ export default function Motor_roller_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Мотор для роллштор.png"
           alt="Мотор для роллштор"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Motor_roller_Aqara_text">

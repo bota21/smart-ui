@@ -8,7 +8,7 @@ export default function Sensor_temperature_Sonoff({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_температуры_и_влажности_Sonoff_SNZB-02D.png"
           alt="Датчик температуры и влажности Sonoff SNZB-02D"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_temperature_Sonoff_text_1">

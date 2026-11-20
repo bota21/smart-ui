@@ -8,7 +8,7 @@ export default function Sensor_human_presence_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/датчик_присутствия_и_освещенности_ROXIMO.png"
           alt="датчик присутствия и освещенности ROXIMO"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_human_presence_Roximo_text">

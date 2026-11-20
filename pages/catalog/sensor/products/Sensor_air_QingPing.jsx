@@ -8,7 +8,7 @@ export default function Sensor_air_QingPing({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Монитор качества воздуха QingPing Air Monitor Lite.png"
           alt="Монитор качества воздуха QingPing Air Monitor Lite"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_air_QingPing_text_1">

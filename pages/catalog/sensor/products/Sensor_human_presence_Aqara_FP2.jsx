@@ -11,7 +11,7 @@ export default function Sensor_human_presence_Aqara_FP2({
           src="../assets/img/1-sensor/Датчик_присутствия_Aqara_Presence_Sensor_FP2.png"
           alt="Датчик присутствия Aqara Presence Sensor FP2"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_human_presence_Aqara_FP2_text_1">

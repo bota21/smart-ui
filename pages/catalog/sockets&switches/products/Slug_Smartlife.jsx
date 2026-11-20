@@ -8,7 +8,7 @@ export default function Slug_Smartlife({ activeTab, tabNumber }) {
           src="../assets/img/3-socket/Умная розетка SmartLife.png"
           alt="Умная розетка SmartLife"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Slug_Smartlife_text_1">

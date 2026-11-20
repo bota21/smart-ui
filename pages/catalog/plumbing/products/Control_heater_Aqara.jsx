@@ -8,7 +8,7 @@ export default function Control_heater_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/терморегулятор радиатора акара.png"
           alt="терморегулятор радиатора акара"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_heater_Aqara_text">

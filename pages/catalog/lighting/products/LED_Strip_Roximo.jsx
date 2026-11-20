@@ -8,7 +8,7 @@ export default function LED_Strip_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/4-light/Гирлянда ROXIMO SFCL01-L.png"
           alt="Гирлянда ROXIMO SFCL01-L"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="LED_Strip_Roximo_text_1">

@@ -8,7 +8,7 @@ export default function Relay_dimmer({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Диммер реле ZigBee.png"
           alt="Диммер реле ZigBee"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Relay_Dimmer_text">

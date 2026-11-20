@@ -8,7 +8,7 @@ export default function Hub_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Умный хаб ROXIMO GWIR01.png"
           alt="Умный хаб ROXIMO GWIR01"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Hub_Roximo_text_1">

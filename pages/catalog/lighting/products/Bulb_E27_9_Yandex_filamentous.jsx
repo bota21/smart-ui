@@ -11,7 +11,7 @@ export default function Bulb_E27_9_Yandex_filamentous({
           src="../assets/img/4-light/Е27/Лампочка Е27 9W Яндекс филаментная белый свет.png"
           alt="Лампочка Е27 9W Яндекс филаментная белый свет"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Bulb_dimmable">Диммируемая лампочка</span>

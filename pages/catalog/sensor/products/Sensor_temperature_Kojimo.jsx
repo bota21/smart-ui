@@ -8,7 +8,7 @@ export default function Sensor_temperature_Kojimo({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_температуры_и_влажности_Kojimo.png"
           alt="Датчик температуры и влажности Kojimo"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_temperature_Kojimo_text_1">

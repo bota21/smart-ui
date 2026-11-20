@@ -8,7 +8,7 @@ export default function Camera_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/8-camera/Камера видеонаблюдения YNDX-00582GRY.png"
           alt="Камера видеонаблюдения YNDX-00582GRY"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Camera_Yandex_text_1">

@@ -8,7 +8,7 @@ export default function Hub_Yandex_sensor({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Умный пульт с датчиком температуры и влажности YNDX-00571.png"
           alt="hub yandex with sensor"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Hub_Yandex_sensor_text_1">

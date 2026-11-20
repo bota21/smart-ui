@@ -9,7 +9,7 @@ export default function Control_boiler_Beok_black({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Терморегулятор Beok для газового и электрического котла черный.png"
           alt="Терморегулятор Beok для газового и электрического котла черный"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_boiler_Beok_text_1">

@@ -8,7 +8,7 @@ export default function Sensor_vibration({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/датчик_вибрации.png"
           alt="датчик вибрации"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_vibration_text_1">

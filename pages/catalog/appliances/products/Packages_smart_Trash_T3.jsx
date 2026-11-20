@@ -8,7 +8,7 @@ export default function Packages_smart_Trash_T3({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Сменные картриджи с пакетами для Xiaomi TowNew Smart Trash T3.png"
           alt="Сменные картриджи с пакетами для Xiaomi TowNew Smart Trash T3"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Packages_smart_trash_T3_text_1">Объем - 13.0 л</span>

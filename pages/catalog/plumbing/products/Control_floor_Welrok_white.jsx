@@ -8,7 +8,7 @@ export default function Control_floor_Welrok_white({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/терморегулятор welrok.png"
           alt="терморегулятор welrok"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_floor_Welrok_white_text_1">

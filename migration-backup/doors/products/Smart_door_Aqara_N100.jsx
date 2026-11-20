@@ -8,7 +8,7 @@ export default function Smart_door_Aqara_N100({ activeTab, tabNumber }) {
           src="../assets/img/9-doors/Замок Aqara N100.png"
           alt="Замок Aqara N100"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_Door_Aqara_N100_text_1">

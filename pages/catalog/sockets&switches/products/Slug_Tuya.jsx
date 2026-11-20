@@ -8,7 +8,7 @@ export default function Slug_Tuya({ activeTab, tabNumber }) {
           src="../assets/img/3-socket/Умная розетка Tuya.png"
           alt="Умная розетка Tuya"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Slug_Tuya_text">

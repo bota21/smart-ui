@@ -8,7 +8,7 @@ export default function Sensor_smoke_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_дыма_Aqara.png"
           alt="Датчик дыма Aqara"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_smoke_Aqara_text">

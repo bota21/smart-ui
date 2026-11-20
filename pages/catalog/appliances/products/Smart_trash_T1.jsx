@@ -8,7 +8,7 @@ export default function Smart_trash_T1({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Умное мусорное ведро Xiaomi Smart Trash Can T1.png"
           alt="Умное мусорное ведро Xiaomi Smart Trash Can T1"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_trash_T1_text_1">

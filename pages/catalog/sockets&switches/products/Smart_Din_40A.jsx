@@ -8,7 +8,7 @@ export default function Smart_Din_40A({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Умный автомат 1P 40A.png"
           alt="Умный автомат 1P 40A"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_Din_40A_text">

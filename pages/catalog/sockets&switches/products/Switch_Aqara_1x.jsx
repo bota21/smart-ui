@@ -8,7 +8,7 @@ export default function Switch_Aqara_1x({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/выключатель Aqara 1х.png"
           alt="выключатель Aqara 1х"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Switch_Aqara_text_1">

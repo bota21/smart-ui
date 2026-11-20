@@ -8,7 +8,7 @@ export default function TV_140({ activeTab, tabNumber }) {
           src="../assets/img/0-control/тв 140.png"
           alt="tv 140 yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab" data-i18n="Station_Alice_TV140_text">
           Функция «Найди пульт» может работать как Станция, даже с выключенным

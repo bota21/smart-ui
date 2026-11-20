@@ -8,7 +8,7 @@ export default function Humidifier_Xiaomi_3({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Увлажнитель ксиоми 3л.png"
           alt="Увлажнитель ксиоми 3л"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Humidifier_Xiaomi_3_text_1">

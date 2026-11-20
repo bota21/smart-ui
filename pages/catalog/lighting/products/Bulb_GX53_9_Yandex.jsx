@@ -8,7 +8,7 @@ export default function Bulb_GX53_9_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/4-light/GX,GU/Лампочка GX53 9W 806 Лм Яндекс RGB.png"
           alt="Лампочка GX53 9W 806 Лм Яндекс RGB"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Bulb_Yandex_RGB_text">

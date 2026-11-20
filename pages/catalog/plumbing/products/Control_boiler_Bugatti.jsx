@@ -8,7 +8,7 @@ export default function Control_boiler_Bugatti({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Модуль управления котлом Wi-Fi Federica Bugatti.png"
           alt="/Модуль управления котлом Wi-Fi Federica Bugatti"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_boiler_Bugatti_text_1">

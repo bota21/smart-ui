@@ -9,7 +9,7 @@ export default function Duo_station({ activeTab, tabNumber }) {
             src="../assets/img/0-control/дуо.png"
             alt="duo yandex"
             className="image_tab"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="text_tab">

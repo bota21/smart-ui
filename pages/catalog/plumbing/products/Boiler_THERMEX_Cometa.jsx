@@ -8,7 +8,7 @@ export default function Boiler_THERMEX_Cometa({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Электрический двухконтурный котел THERMEX Cometa 12-24 Wi-Fi.png"
           alt="Электрический двухконтурный котел THERMEX Cometa 12-24 Wi-Fi"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Boiler_THERMEX_Cometa_text">

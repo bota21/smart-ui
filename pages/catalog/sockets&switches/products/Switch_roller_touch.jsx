@@ -8,7 +8,7 @@ export default function Switch_roller_touch({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/управление роллет.png"
           alt="управление роллет"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Switch_roller_touch_text">

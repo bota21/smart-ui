@@ -8,7 +8,7 @@ export default function Sensor_move_Ewelink({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик движения eWeLink.png"
           alt="Датчик движения eWeLink"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_move_Ewelink_text">

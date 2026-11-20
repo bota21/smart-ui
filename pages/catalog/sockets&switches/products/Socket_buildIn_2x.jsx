@@ -8,7 +8,7 @@ export default function Socket_buildIn_2x({ activeTab, tabNumber }) {
           src="../assets/img/3-socket/Розетка Bseed 2х - white.png"
           alt="Розетка Bseed 2х - white"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Socket_buildIn_text">
@@ -41,19 +41,19 @@ export default function Socket_buildIn_2x({ activeTab, tabNumber }) {
             src="../assets/img/3-socket/Розетка Bseed 2х - gold.png"
             alt="Розетка Bseed 2х - gold"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-socket/Розетка Bseed 2х - grey.png"
             alt="Розетка Bseed 2х - grey"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-socket/Розетка Bseed 2х - black.png"
             alt="Розетка Bseed 2х - black"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">

@@ -8,7 +8,7 @@ export default function Smart_Din_Moes_16A({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Умный автомат Moes 16A.png"
           alt="Умный автомат Moes 16A"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_Din_Moes_16A_text_1">

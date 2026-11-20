@@ -8,7 +8,7 @@ export default function Lamp_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/4-light/Cветильник потолочный Aqara Ceiling Light T1M.png"
           alt="Cветильник потолочный Aqara Ceiling Light T1M"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Lamp_Aqara_text_1">

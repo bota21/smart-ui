@@ -8,7 +8,7 @@ export default function Module_Mini_3_Pro({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Климатический модуль Яндекса.png"
           alt="Modul_mini_3_pro"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Modul_mini_3_pro_text_1">

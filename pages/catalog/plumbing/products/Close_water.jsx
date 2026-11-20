@@ -8,7 +8,7 @@ export default function Close_water({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Клапан перекрытия В.png"
           alt="Клапан перекрытия В"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Close_water_text">

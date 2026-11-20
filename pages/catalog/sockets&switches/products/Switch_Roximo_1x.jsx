@@ -8,7 +8,7 @@ export default function Switch_Roximo_1x({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Выключатель ROXIMO 1кл - white.png"
           alt="Выключатель ROXIMO 1кл - white"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Switch_Roximo_text_1">
@@ -42,31 +42,31 @@ export default function Switch_Roximo_1x({ activeTab, tabNumber }) {
             src="../assets/img/3-Switch/Выключатель ROXIMO 1кл - gold.png"
             alt="Выключатель ROXIMO 1кл - gold"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-Switch/Выключатель ROXIMO 1кл - bronza.png"
             alt="Выключатель ROXIMO 1кл - bronza"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-Switch/Выключатель ROXIMO 1кл - grey.png"
             alt="Выключатель ROXIMO 1кл - grey"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-Switch/Выключатель ROXIMO 1кл - platina.png"
             alt="/Выключатель ROXIMO 1кл - platina"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
           <img
             src="../assets/img/3-Switch/Выключатель ROXIMO 1кл - black.png"
             alt="Выключатель ROXIMO 1кл - black"
             className="images_many"
-            onclick="toggleZoom(this)"
+            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">

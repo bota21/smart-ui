@@ -8,7 +8,7 @@ export default function Sensor_air_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_качества_воздуха_Aqara_TVOC_Air_Quality_Monitor.png"
           alt="Датчик качества воздуха Aqara TVOC Air Quality Monitor"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_air_Aqara_text_1">

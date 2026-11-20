@@ -8,7 +8,7 @@ export default function Button_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/3-Switch/Кнопка Яндекс.png"
           alt="Кнопка Яндекс"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Button_Yandex_text">

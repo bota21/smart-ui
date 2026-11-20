@@ -8,7 +8,7 @@ export default function Lite_2_station({ activeTab, tabNumber }) {
           src="../assets/img/0-control/лайт.png"
           alt="lite 2 yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab" data-i18n="Station_Alice_Lite2_text">
           Каждый может заглянуть в глазки Алисе. Она подмигнёт в ответ на

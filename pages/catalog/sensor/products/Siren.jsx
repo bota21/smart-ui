@@ -8,7 +8,7 @@ export default function Siren({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Сирена для умного дома GS SRHMP-I1.png"
           alt="Сирена для умного дома GS SRHMP-I1"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Siren_text_1">

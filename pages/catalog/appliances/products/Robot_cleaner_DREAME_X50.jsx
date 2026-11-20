@@ -8,7 +8,7 @@ export default function Robot_cleaner_DREAME_X50({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Робот-пылесос DREAME X50.png"
           alt="Робот-пылесос DREAME X50"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Robot_cleaner_DREAME_X50_text_1">

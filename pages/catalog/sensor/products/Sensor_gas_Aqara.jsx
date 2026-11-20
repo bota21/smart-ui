@@ -8,7 +8,7 @@ export default function Sensor_gas_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Детектор_газа.png"
           alt="Детектор газа"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_gas_Aqara_text">

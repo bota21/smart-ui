@@ -8,7 +8,7 @@ export default function TV_165({ activeTab, tabNumber }) {
           src="../assets/img/0-control/тв 165.png"
           alt="tv 165 yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <br />

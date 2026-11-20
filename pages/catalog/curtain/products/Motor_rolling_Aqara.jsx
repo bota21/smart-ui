@@ -9,7 +9,7 @@ export default function Motor_rolling_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Мотор для рулонных штор Aqara Curtain Rolling Shutter Motor.png"
           alt="Мотор для рулонных штор Aqara Curtain Rolling Shutter Motor"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Motor_rolling_Aqara_text_1">

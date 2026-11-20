@@ -8,7 +8,7 @@ export default function Close_water_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/привод протечки Aqara.png"
           alt="привод протечки Aqara"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Close_water_Aqara_text">

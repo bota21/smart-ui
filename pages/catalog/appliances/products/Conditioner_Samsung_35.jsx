@@ -8,7 +8,7 @@ export default function Conditioner_Samsung_35({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Кондиционер Samsung.png"
           alt="Кондиционер Samsung"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Conditioner_Samsung_text_1">

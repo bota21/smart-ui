@@ -8,7 +8,7 @@ export default function Driver_curtain_Aqara_track({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/Мотор раздвижных штор Aqara Curtain Driver E1.png"
           alt="Мотор раздвижных штор Aqara Curtain Driver E1"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Driver_curtain_Aqara_track_text_1">

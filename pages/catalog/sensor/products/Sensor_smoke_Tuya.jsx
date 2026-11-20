@@ -8,7 +8,7 @@ export default function Sensor_smoke_Tuya({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_дыма_Tuya.png"
           alt="Датчик_дыма_Tuya"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_smoke_Tuya_text">

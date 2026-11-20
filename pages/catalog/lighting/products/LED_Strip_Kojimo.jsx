@@ -8,7 +8,7 @@ export default function LED_Strip_Kojimo({ activeTab, tabNumber }) {
           src="../assets/img/4-light/светодиодная лента kojimo.png"
           alt="светодиодная лента kojimo"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="LED_Strip_Kojimo_text">

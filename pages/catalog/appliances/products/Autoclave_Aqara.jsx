@@ -8,7 +8,7 @@ export default function Autoclave_Aqara({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Автокормушка Aqara C1 PETC1-M01 400 мл белый.png"
           alt="Автокормушка Aqara C1 PETC1-M01 400 мл белый"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <p data-i18n="Autoclave_Aqara_text_1">

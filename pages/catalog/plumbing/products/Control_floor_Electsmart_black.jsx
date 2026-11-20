@@ -11,7 +11,7 @@ export default function Control_floor_Electsmart_black({
           src="../assets/img/6-sanitary/терморегулятор Electsmart .png"
           alt="терморегулятор Electsmart "
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Control_floor_Electsmart_black_text">

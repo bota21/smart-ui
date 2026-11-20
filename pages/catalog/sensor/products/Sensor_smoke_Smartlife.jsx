@@ -8,7 +8,7 @@ export default function Sensor_smoke_Smartlife({ activeTab, tabNumber }) {
           src="../assets/img/1-sensor/Датчик_дыма_SmartLife.png"
           alt="Датчик_дыма_SmartLife"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Sensor_smoke_Smartlife_text">

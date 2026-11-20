@@ -8,7 +8,7 @@ export default function Bulb_E27_6_5({ activeTab, tabNumber }) {
           src="../assets/img/4-light/Е27/Лампочка E27 6.5W Gauss филаментная, желтый.png"
           alt="Лампочка E27 6.5W Gauss филаментная, желтый"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Bulb_dimmable">Диммируемая лампочка</span>

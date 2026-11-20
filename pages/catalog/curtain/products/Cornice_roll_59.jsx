@@ -8,7 +8,7 @@ export default function Cornice_roll_59({ activeTab, tabNumber }) {
           src="../assets/img/5-cornice/карниз для роллштор.png"
           alt="карниз для роллштор"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Cornice_roll_59_text">

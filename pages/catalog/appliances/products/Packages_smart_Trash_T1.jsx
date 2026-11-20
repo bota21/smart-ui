@@ -8,7 +8,7 @@ export default function Packages_smart_Trash_T1({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Сменные пакеты для Xiaomi Townew Smart Trash Can T1.png"
           alt="Сменные пакеты для Xiaomi Townew Smart Trash Can T1"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Packages_smart_trash_T1_text_1">Объем - 15.5 л</span>

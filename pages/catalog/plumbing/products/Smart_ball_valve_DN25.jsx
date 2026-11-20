@@ -8,7 +8,7 @@ export default function Smart_ball_valve_DN25({ activeTab, tabNumber }) {
           src="../assets/img/6-sanitary/Умный шаровой клапан.png"
           alt="Умный шаровой клапан"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Smart_ball_valve_DN25_text_1">

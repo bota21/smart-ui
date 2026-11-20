@@ -8,7 +8,7 @@ export default function Bulb_E27_7({ activeTab, tabNumber }) {
           src="../assets/img/4-light/Е27/Лампочка Е27 7W Gauss теплый белый.png"
           alt="Лампочка Е27 7W Gauss теплый белый"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Bulb_dimmable">Диммируемая лампочка</span>

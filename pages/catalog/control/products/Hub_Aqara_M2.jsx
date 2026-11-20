@@ -8,7 +8,7 @@ export default function Hub_Aqara_M2({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Хаб Aqara Hub M2.png"
           alt="Хаб Aqara Hub M2"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Hub_Aqara_M2_text_1">

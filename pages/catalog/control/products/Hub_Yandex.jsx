@@ -8,7 +8,7 @@ export default function Hub_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/0-control/Яндекс центр управления.png"
           alt="hub yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Hub_Yandex_text_1">

@@ -8,7 +8,7 @@ export default function Light_table_Yandex({ activeTab, tabNumber }) {
           src="../assets/img/4-light/эмби лампа яндекс.png"
           alt="Light_table_Yandex"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Light_table_Yandex_text_1">

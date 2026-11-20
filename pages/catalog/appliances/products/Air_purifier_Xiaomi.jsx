@@ -8,7 +8,7 @@ export default function Air_purifier_Xiaomi({ activeTab, tabNumber }) {
           src="../assets/img/7-technology/Очиститель воздуха Xiaomi Circulation.png"
           alt="Очиститель воздуха Xiaomi Circulation"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Air_purifier_Xiaomi_text_1">

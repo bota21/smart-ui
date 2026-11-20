@@ -8,7 +8,7 @@ export default function Camera_street_rotary_Roximo({ activeTab, tabNumber }) {
           src="../assets/img/8-camera/видеокамера Roximo wifi.png"
           alt="видеокамера Roximo wifi"
           className="image_tab"
-          onclick="toggleZoom(this)"
+          onClick="toggleZoom(this)"
         />
         <div className="text_tab">
           <span data-i18n="Camera_street_rotary_Roximo_text_1">
