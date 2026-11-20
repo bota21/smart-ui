@@ -5,7 +5,7 @@ export default function Sensor_human_presence_Roximo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/датчик_присутствия_и_освещенности_ROXIMO.png"
+          src="../assets/img/1-sensor/Sensor_presence_ROXIMO.png"
           alt="датчик присутствия и освещенности ROXIMO"
           className="image_tab"
           onClick="toggleZoom(this)"

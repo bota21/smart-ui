@@ -5,7 +5,7 @@ export default function Lite_2_station({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/лайт.png"
+          src="../assets/img/0-control/Smart_speaker_Yandex_Lite_2.png"
           alt="lite 2 yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

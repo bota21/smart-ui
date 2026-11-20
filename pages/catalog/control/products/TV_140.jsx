@@ -5,7 +5,7 @@ export default function TV_140({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/тв 140.png"
+          src="../assets/img/0-control/Smart_TV_Yandex_140.png"
           alt="tv 140 yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

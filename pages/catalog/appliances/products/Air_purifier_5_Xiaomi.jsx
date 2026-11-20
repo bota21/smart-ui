@@ -5,7 +5,7 @@ export default function Air_purifier_5_Xiaomi({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Очиститель воздуха Xiaomi Smart Air Purifier 5 Pro.png"
+          src="../assets/img/7-technology/Air_purifier_Xiaomi_Smart_Air_Purifier_5_Pro.png"
           alt="Очиститель воздуха Xiaomi Smart Air Purifier 5 Pro"
           className="image_tab"
           onClick="toggleZoom(this)"

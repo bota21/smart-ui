@@ -5,7 +5,7 @@ export default function Sensor_water_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_протечки_Яндекс.png"
+          src="../assets/img/1-sensor/Sensor_water_Yandex.png"
           alt="Датчик протечки Яндекс"
           className="image_tab"
           onClick="toggleZoom(this)"

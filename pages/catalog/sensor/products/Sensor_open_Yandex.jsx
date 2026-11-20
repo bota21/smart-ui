@@ -5,7 +5,7 @@ export default function Sensor_open_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_открытия_Яндекс.png"
+          src="../assets/img/1-sensor/Sensor_open_Yandex.png"
           alt="Датчик открытия дверей Яндекс"
           className="image_tab"
           onClick="toggleZoom(this)"

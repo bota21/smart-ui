@@ -5,7 +5,7 @@ export default function Sensor_water_Sonoff({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_протечки_Соноф.png"
+          src="../assets/img/1-sensor/Sensor_water_Sonoff.png"
           alt="Датчик протечки Соноф"
           className="image_tab"
           onClick="toggleZoom(this)"

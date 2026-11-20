@@ -13,7 +13,7 @@ import Sensor_human_Presence_Roximo from "./products/Sensor_human_presence_Roxim
 import Sensor_Move_Sber from "./products/Sensor_move_Sber";
 import Sensor_Move_Ewelink from "./products/Sensor_move_Ewelink";
 import Sensor_Temperature_Yandex from "./products/Sensor_temperature_Yandex";
-import Sensor_Temperature_Monitor from "./products/Sensor_temperature_monitor";
+import Sensor_Temperature_Tuya from "./products/Sensor_temperature_Tuya";
 import Sensor_Temperature_Kojimo from "./products/Sensor_temperature_Kojimo";
 import Sensor_Temperature_Sonoff from "./products/Sensor_temperature_Sonoff";
 import Sensor_Air_Aqara from "./products/Sensor_air_Aqara";
@@ -249,10 +249,7 @@ export default function Sensor() {
               <Sensor_Move_Sber activeTab={activeTab} tabNumber={10} />
               <Sensor_Move_Ewelink activeTab={activeTab} tabNumber={11} />
               <Sensor_Temperature_Yandex activeTab={activeTab} tabNumber={12} />
-              <Sensor_Temperature_Monitor
-                activeTab={activeTab}
-                tabNumber={13}
-              />
+              <Sensor_Temperature_Tuya activeTab={activeTab} tabNumber={13} />
               <Sensor_Temperature_Kojimo activeTab={activeTab} tabNumber={14} />
               <Sensor_Temperature_Sonoff activeTab={activeTab} tabNumber={15} />
               <Sensor_Air_Aqara activeTab={activeTab} tabNumber={16} />

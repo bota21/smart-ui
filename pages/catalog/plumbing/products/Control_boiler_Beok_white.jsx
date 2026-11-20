@@ -5,7 +5,7 @@ export default function Control_boiler_Beok_white({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/Терморегулятор Beok для газового и электрического котла белый.png"
+          src="../assets/img/6-sanitary/Thermostat_Beok_white.png"
           alt="Терморегулятор Beok для газового и электрического котла белый"
           className="image_tab"
           onClick="toggleZoom(this)"

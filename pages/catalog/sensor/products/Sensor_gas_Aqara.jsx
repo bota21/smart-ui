@@ -5,7 +5,7 @@ export default function Sensor_gas_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Детектор_газа.png"
+          src="../assets/img/1-sensor/Sensor_gas_Aqara.png"
           alt="Детектор газа"
           className="image_tab"
           onClick="toggleZoom(this)"

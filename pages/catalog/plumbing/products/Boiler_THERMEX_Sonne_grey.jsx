@@ -5,7 +5,7 @@ export default function Boiler_THERMEX_Sonne_grey({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/Электрический настенный котел THERMEX Sonne 12 Wi-Fi Grey.png"
+          src="../assets/img/6-sanitary/Smart_boiler_THERMEX_Sonne_Grey.png"
           alt="Электрический настенный котел THERMEX Sonne 12 Wi-Fi Grey"
           className="image_tab"
           onClick="toggleZoom(this)"

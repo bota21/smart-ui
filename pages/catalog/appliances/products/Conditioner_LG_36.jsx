@@ -5,7 +5,7 @@ export default function Conditioner_LG_36({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Кондиционер LG.png"
+          src="../assets/img/7-technology/Conditioner_LG.png"
           alt="Кондиционер LG"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function LED_Strip_Roximo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Гирлянда ROXIMO SFCL01-L.png"
+          src="../assets/img/4-light/Garland_ROXIMO_SFCL01-L.png"
           alt="Гирлянда ROXIMO SFCL01-L"
           className="image_tab"
           onClick="toggleZoom(this)"

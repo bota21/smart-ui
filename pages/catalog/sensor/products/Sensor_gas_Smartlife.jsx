@@ -5,7 +5,7 @@ export default function Sensor_gas_Smartlife({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_газа_Tuya.png"
+          src="../assets/img/1-sensor/Sensor_gas_Tuya.png"
           alt="Датчик газа Tuya"
           className="image_tab"
           onClick="toggleZoom(this)"

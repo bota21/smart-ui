@@ -5,7 +5,7 @@ export default function Module_Mini_3_Pro({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Климатический модуль Яндекса.png"
+          src="../assets/img/0-control/Climate_module_Yandex.png"
           alt="Modul_mini_3_pro"
           className="image_tab"
           onClick="toggleZoom(this)"

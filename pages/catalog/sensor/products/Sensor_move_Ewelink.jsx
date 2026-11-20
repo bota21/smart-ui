@@ -5,7 +5,7 @@ export default function Sensor_move_Ewelink({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик движения eWeLink.png"
+          src="../assets/img/1-sensor/Sensor_motion_EweLink.png"
           alt="Датчик движения eWeLink"
           className="image_tab"
           onClick="toggleZoom(this)"

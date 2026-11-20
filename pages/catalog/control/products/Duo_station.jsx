@@ -6,7 +6,7 @@ export default function Duo_station({ activeTab, tabNumber }) {
       >
         <div className="wrapper_for_images">
           <img
-            src="../assets/img/0-control/дуо.png"
+            src="../assets/img/0-control/Smart_speaker_Yandex_Duo.png"
             alt="duo yandex"
             className="image_tab"
             onClick="toggleZoom(this)"

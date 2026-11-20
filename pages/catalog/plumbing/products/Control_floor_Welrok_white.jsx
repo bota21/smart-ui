@@ -5,7 +5,7 @@ export default function Control_floor_Welrok_white({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/терморегулятор welrok.png"
+          src="../assets/img/6-sanitary/Thermostat_Welrok.png"
           alt="терморегулятор welrok"
           className="image_tab"
           onClick="toggleZoom(this)"

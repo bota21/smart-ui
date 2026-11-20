@@ -5,7 +5,7 @@ export default function Humidifier_Xiaomi_3({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Увлажнитель ксиоми 3л.png"
+          src="../assets/img/7-technology/Humidifier_Xiaomi_3l.png"
           alt="Увлажнитель ксиоми 3л"
           className="image_tab"
           onClick="toggleZoom(this)"

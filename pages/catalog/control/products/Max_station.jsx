@@ -6,7 +6,7 @@ export default function Max_station({ activeTab, tabNumber }) {
       >
         <div className="wrapper_for_images">
           <img
-            src="../assets/img/0-control/макс.png"
+            src="../assets/img/0-control/Smart_speaker_Yandex_Max.png"
             alt="max yandex"
             className="image_tab"
             onClick="toggleZoom(this)"

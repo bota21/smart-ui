@@ -5,7 +5,7 @@ export default function Control_LED_Strip({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Диммер для светодиодной ленты  12,24V 15А.png"
+          src="../assets/img/4-light/LED_strip_controller.png"
           alt="Диммер для светодиодной ленты  12,24V 15А"
           className="image_tab"
           onClick="toggleZoom(this)"

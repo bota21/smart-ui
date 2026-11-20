@@ -5,7 +5,7 @@ export default function LED_Strip_Kojimo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/светодиодная лента kojimo.png"
+          src="../assets/img/4-light/LED_strip_Kojimo.png"
           alt="светодиодная лента kojimo"
           className="image_tab"
           onClick="toggleZoom(this)"

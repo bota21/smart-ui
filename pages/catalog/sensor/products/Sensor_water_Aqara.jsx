@@ -5,7 +5,7 @@ export default function Sensor_water_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_протечки_Aqara_Water_Leak_Sensor_T1.png"
+          src="../assets/img/1-sensor/Sensor_water_Aqara_Water_Leak_Sensor_T1.png"
           alt="Датчик протечки Aqara Water Leak Sensor T1"
           className="image_tab"
           onClick="toggleZoom(this)"

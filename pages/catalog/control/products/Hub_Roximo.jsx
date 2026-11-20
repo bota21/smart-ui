@@ -5,7 +5,7 @@ export default function Hub_Roximo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Умный хаб ROXIMO GWIR01.png"
+          src="../assets/img/0-control/Smart_hub_ROXIMO_GWIR01.png"
           alt="Умный хаб ROXIMO GWIR01"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function Lamp_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Cветильник потолочный Aqara Ceiling Light T1M.png"
+          src="../assets/img/4-light/Lamp_Aqara_Ceiling_Light_T1M.png"
           alt="Cветильник потолочный Aqara Ceiling Light T1M"
           className="image_tab"
           onClick="toggleZoom(this)"

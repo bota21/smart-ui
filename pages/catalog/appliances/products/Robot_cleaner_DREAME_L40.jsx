@@ -5,7 +5,7 @@ export default function Robot_cleaner_DREAME_L40({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Робот-пылесос DREAME L40.png"
+          src="../assets/img/7-technology/Robot_vacuum_cleaner_DREAME_L40.png"
           alt="Робот-пылесос DREAME L40"
           className="image_tab"
           onClick="toggleZoom(this)"

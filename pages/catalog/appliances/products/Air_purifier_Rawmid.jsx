@@ -5,7 +5,7 @@ export default function Air_purifier_Rawmid({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Очиститель воздуха Rawmid.png"
+          src="../assets/img/7-technology/Air_purifier_Rawmid.png"
           alt="Очиститель воздуха Rawmid"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function Bulb_E14_6_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Е14/Лампочка Е14 6W 520 Лм Яндекс RGB.png"
+          src="../assets/img/4-light/Е14/Bulb_Yandex_Е14_6W_520lm_RGB.png"
           alt="Лампочка Е14 6W 520 Лм Яндекс RGB"
           className="image_tab"
           onClick="toggleZoom(this)"

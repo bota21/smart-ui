@@ -5,7 +5,7 @@ export default function Control_LED_Strip_RGB({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Контроллер RGB для LED лент 12В, 24В.png"
+          src="../assets/img/4-light/LED_strip_controller_RGB.png"
           alt="Контроллер RGB для LED лент 12В, 24В"
           className="image_tab"
           onClick="toggleZoom(this)"

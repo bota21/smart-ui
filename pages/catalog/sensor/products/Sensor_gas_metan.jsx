@@ -5,7 +5,7 @@ export default function Sensor_gas_metan({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_газа__метан__GS_SGMHM-I1.png"
+          src="../assets/img/1-sensor/Sensor_gas_metan_propan_GS_SGMHM_I1.png"
           alt="Датчик газа (метан) GS SGMHM-I1"
           className="image_tab"
           onClick="toggleZoom(this)"

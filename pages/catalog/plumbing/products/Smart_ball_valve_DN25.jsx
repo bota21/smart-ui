@@ -5,7 +5,7 @@ export default function Smart_ball_valve_DN25({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/Умный шаровой клапан.png"
+          src="../assets/img/6-sanitary/Smart_ball_valve_Tuya.png"
           alt="Умный шаровой клапан"
           className="image_tab"
           onClick="toggleZoom(this)"

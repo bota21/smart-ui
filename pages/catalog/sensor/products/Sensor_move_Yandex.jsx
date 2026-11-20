@@ -5,7 +5,7 @@ export default function Sensor_move_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/датчик_движения.png"
+          src="../assets/img/1-sensor/Sensor_motion_Yandex.png"
           alt="датчик движения"
           className="image_tab"
           onClick="toggleZoom(this)"

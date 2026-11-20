@@ -8,7 +8,7 @@ export default function Sensor_human_presence_Aqara_FP1({
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик присутствия Aqara Human Presence Sensor FP1.png"
+          src="../assets/img/1-sensor/Sensor_presence_Aqara_Human_Presence_Sensor_FP1.png"
           alt="Датчик присутствия Aqara Human Presence Sensor FP1"
           className="image_tab"
           onClick="toggleZoom(this)"

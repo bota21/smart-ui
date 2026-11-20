@@ -5,7 +5,7 @@ export default function Control_heater_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/терморегулятор радиатора акара.png"
+          src="../assets/img/6-sanitary/Radiator_thermostat_Aqara.png"
           alt="терморегулятор радиатора акара"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function Sensor_move_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик движения Aqara Motion Sensor P1 MS-S02.png"
+          src="../assets/img/1-sensor/Sensor_motion_Aqara_P1_MS-S02.png"
           alt="Датчик движения Aqara Motion Sensor P1 MS-S02"
           className="image_tab"
           onClick="toggleZoom(this)"

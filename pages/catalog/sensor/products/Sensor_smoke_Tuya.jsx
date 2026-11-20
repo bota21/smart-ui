@@ -5,7 +5,7 @@ export default function Sensor_smoke_Tuya({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_дыма_Tuya.png"
+          src="../assets/img/1-sensor/Sensor_smoke_Tuya.png"
           alt="Датчик_дыма_Tuya"
           className="image_tab"
           onClick="toggleZoom(this)"

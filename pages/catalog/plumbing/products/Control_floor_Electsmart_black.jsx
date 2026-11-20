@@ -8,7 +8,7 @@ export default function Control_floor_Electsmart_black({
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/терморегулятор Electsmart .png"
+          src="../assets/img/6-sanitary/Thermostat_Electsmart.png"
           alt="терморегулятор Electsmart "
           className="image_tab"
           onClick="toggleZoom(this)"

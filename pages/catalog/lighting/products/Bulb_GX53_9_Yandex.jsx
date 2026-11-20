@@ -5,7 +5,7 @@ export default function Bulb_GX53_9_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/GX,GU/Лампочка GX53 9W 806 Лм Яндекс RGB.png"
+          src="../assets/img/4-light/GX,GU/Bulb_Yandex_GX53_9W_806lm_RGB.png"
           alt="Лампочка GX53 9W 806 Лм Яндекс RGB"
           className="image_tab"
           onClick="toggleZoom(this)"

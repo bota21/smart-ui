@@ -5,7 +5,7 @@ export default function Control_floor_Celtic_white({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/терморегулятор селтик светлый.png"
+          src="../assets/img/6-sanitary/Thermostat_Celtik_white.png"
           alt="терморегулятор селтик светлый"
           className="image_tab"
           onClick="toggleZoom(this)"

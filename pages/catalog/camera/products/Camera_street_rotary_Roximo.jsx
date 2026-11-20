@@ -5,7 +5,7 @@ export default function Camera_street_rotary_Roximo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/8-camera/видеокамера Roximo wifi.png"
+          src="../assets/img/8-camera/Smart_camera_Roximo_street_rotate.png"
           alt="видеокамера Roximo wifi"
           className="image_tab"
           onClick="toggleZoom(this)"

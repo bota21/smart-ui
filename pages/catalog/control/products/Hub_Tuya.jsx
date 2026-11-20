@@ -5,7 +5,7 @@ export default function Hub_Tuya({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Центр управления Tuya SGW01.png"
+          src="../assets/img/0-control/Smart_hub_Tuya_SGW01.png"
           alt="Центр управления Tuya SGW01"
           className="image_tab"
           onClick="toggleZoom(this)"

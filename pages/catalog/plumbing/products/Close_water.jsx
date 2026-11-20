@@ -5,7 +5,7 @@ export default function Close_water({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/Клапан перекрытия В.png"
+          src="../assets/img/6-sanitary/Valve_water_Tuya.png"
           alt="Клапан перекрытия В"
           className="image_tab"
           onClick="toggleZoom(this)"

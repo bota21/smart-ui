@@ -5,7 +5,7 @@ export default function Smart_mirror_oval({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Зеркало с rgb-подсветкой, часы, подогрев. Овал.png"
+          src="../assets/img/7-technology/Smart_mirror_oval.png"
           alt="Зеркало с rgb-подсветкой, часы, подогрев. Овал"
           className="image_tab"
           onClick="toggleZoom(this)"

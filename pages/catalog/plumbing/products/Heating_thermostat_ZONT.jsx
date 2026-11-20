@@ -5,7 +5,7 @@ export default function Heating_thermostat_ZONT({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/Отопительный термостат ZONT GSM  Wi-Fi H-1V NEW для котлов.png"
+          src="../assets/img/6-sanitary/Heating_thermostat_boiler_ZONT_GSM.png"
           alt="Отопительный термостат ZONT GSM  Wi-Fi H-1V NEW для котлов"
           className="image_tab"
           onClick="toggleZoom(this)"

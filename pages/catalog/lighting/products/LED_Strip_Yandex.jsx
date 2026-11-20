@@ -5,7 +5,7 @@ export default function LED_Strip_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/светодиодная лента.png"
+          src="../assets/img/4-light/LED_strip_Yandex.png"
           alt="светодиодная лента"
           className="image_tab"
           onClick="toggleZoom(this)"

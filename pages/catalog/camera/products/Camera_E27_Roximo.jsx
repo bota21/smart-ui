@@ -5,7 +5,7 @@ export default function Camera_E27_Roximo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/8-camera/видеокамера Roximo лампочка.png"
+          src="../assets/img/8-camera/Smart_camera_Roximo_bulb.png"
           alt="видеокамера Roximo лампочка"
           className="image_tab"
           onClick="toggleZoom(this)"

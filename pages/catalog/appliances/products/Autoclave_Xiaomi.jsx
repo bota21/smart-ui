@@ -5,7 +5,7 @@ export default function Autoclave_Xiaomi({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Автоматическая кормушка Xiaomi для кошек и собак.png"
+          src="../assets/img/7-technology/Automatic feeder_ Xiaomi_cat_dog.png"
           alt="Автоматическая кормушка Xiaomi для кошек и собак"
           className="image_tab"
           onClick="toggleZoom(this)"

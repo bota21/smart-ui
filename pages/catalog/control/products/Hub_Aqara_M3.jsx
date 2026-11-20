@@ -5,7 +5,7 @@ export default function Hub_Aqara_M3({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Хаб Aqara Hub M3 EU.png"
+          src="../assets/img/0-control/Smart_hub_Aqara_Hub_M3_EU.png"
           alt="Хаб Aqara Hub M3 EU"
           className="image_tab"
           onClick="toggleZoom(this)"

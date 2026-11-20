@@ -5,7 +5,7 @@ export default function Close_water_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/привод протечки Aqara.png"
+          src="../assets/img/6-sanitary/Valve_water_Aqara.png"
           alt="привод протечки Aqara"
           className="image_tab"
           onClick="toggleZoom(this)"

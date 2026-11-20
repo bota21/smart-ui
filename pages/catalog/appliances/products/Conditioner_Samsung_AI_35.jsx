@@ -5,7 +5,7 @@ export default function Conditioner_Samsung_AI_35({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Кондиционер Samsung.png"
+          src="../assets/img/7-technology/Conditioner_Samsung.png"
           alt="Кондиционер Samsung"
           className="image_tab"
           onClick="toggleZoom(this)"

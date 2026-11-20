@@ -5,7 +5,7 @@ export default function Cable_LED_Strip_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/светодиодная лента удлинитель.png"
+          src="../assets/img/4-light/LED_strip_extender_Yandex.png"
           alt="светодиодная лента удлинитель"
           className="image_tab"
           onClick="toggleZoom(this)"

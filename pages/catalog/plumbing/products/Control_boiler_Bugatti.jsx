@@ -5,7 +5,7 @@ export default function Control_boiler_Bugatti({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/Модуль управления котлом Wi-Fi Federica Bugatti.png"
+          src="../assets/img/6-sanitary/Boiler_Control_Module_Federica_Bugatti.png"
           alt="/Модуль управления котлом Wi-Fi Federica Bugatti"
           className="image_tab"
           onClick="toggleZoom(this)"

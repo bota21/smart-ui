@@ -5,7 +5,7 @@ export default function Sensor_temperature_Sonoff({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_температуры_и_влажности_Sonoff_SNZB-02D.png"
+          src="../assets/img/1-sensor/Sensor_climate_Sonoff_SNZB-02D.png"
           alt="Датчик температуры и влажности Sonoff SNZB-02D"
           className="image_tab"
           onClick="toggleZoom(this)"

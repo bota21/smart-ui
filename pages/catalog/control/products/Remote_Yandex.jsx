@@ -5,7 +5,7 @@ export default function Remote_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Пульт ДУ Яндекс.png"
+          src="../assets/img/0-control/Smart_remote_Yandex_YNDX-0006.png"
           alt="DU yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

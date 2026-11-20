@@ -5,7 +5,7 @@ export default function Conditioner_Haier_20({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Кондиционер Haier.png"
+          src="../assets/img/7-technology/Conditioner_Haier.png"
           alt="Кондиционер Haier"
           className="image_tab"
           onClick="toggleZoom(this)"

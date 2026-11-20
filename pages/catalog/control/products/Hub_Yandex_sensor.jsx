@@ -5,7 +5,7 @@ export default function Hub_Yandex_sensor({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Умный пульт с датчиком температуры и влажности YNDX-00571.png"
+          src="../assets/img/0-control/Smart_remote_Yandex_YNDX-00571.png"
           alt="hub yandex with sensor"
           className="image_tab"
           onClick="toggleZoom(this)"

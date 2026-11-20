@@ -5,7 +5,7 @@ export default function Midi_station({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/миди.png"
+          src="../assets/img/0-control/Smart_speaker_Yandex_Midi.png"
           alt="midi yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -6,7 +6,7 @@ export default function Control_heater_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/6-sanitary/терморегулятор радиатора Яндекс.png"
+          src="../assets/img/6-sanitary/Radiator_thermostat_Yandex.png"
           alt="терморегулятор радиатора Яндекс"
           className="image_tab"
           onClick="toggleZoom(this)"

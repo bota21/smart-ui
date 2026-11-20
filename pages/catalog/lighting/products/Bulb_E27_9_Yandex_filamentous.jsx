@@ -8,7 +8,7 @@ export default function Bulb_E27_9_Yandex_filamentous({
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Е27/Лампочка Е27 9W Яндекс филаментная белый свет.png"
+          src="../assets/img/4-light/Е27/Bulb_Yandex_Е27_9W_filament_white.png"
           alt="Лампочка Е27 9W Яндекс филаментная белый свет"
           className="image_tab"
           onClick="toggleZoom(this)"

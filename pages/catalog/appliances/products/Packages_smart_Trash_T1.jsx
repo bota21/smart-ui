@@ -5,7 +5,7 @@ export default function Packages_smart_Trash_T1({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Сменные пакеты для Xiaomi Townew Smart Trash Can T1.png"
+          src="../assets/img/7-technology/Bags_Smart_Trash_ Xiaomi_TowNew_Smart_Trash_T1.png"
           alt="Сменные пакеты для Xiaomi Townew Smart Trash Can T1"
           className="image_tab"
           onClick="toggleZoom(this)"

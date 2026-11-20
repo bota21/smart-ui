@@ -5,7 +5,7 @@ export default function Sensor_move_Sber({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик движения Sber.png"
+          src="../assets/img/1-sensor/Sensor_motion_Sber.png"
           alt="Датчик движения Sber"
           className="image_tab"
           onClick="toggleZoom(this)"

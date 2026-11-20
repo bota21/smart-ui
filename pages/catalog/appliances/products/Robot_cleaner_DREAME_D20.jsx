@@ -5,7 +5,7 @@ export default function Robot_cleaner_DREAME_D20({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Робот-пылесос DREAME Robot Vacuum D20 Ultra.png"
+          src="../assets/img/7-technology/Robot_vacuum_cleaner_DREAME_Robot_Vacuum_D20_Ultra.png"
           alt="Робот-пылесос DREAME Robot Vacuum D20 Ultra"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function Sensor_open({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_открытия.png"
+          src="../assets/img/1-sensor/Sensor_open_Tuya.png"
           alt="Датчик открытия дверей"
           className="image_tab"
           onClick="toggleZoom(this)"

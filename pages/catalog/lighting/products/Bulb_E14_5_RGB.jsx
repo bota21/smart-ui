@@ -5,7 +5,7 @@ export default function Bulb_E14_5_RGB({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/Е14/Лампочка Е14 5W Gauss RGB.png"
+          src="../assets/img/4-light/Е14/Bulb_Gauss_Е14_5W_RGB.png"
           alt="Лампочка Е14 5W Gauss RGB"
           className="image_tab"
           onClick="toggleZoom(this)"

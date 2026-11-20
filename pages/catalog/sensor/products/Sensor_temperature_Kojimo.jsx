@@ -5,7 +5,7 @@ export default function Sensor_temperature_Kojimo({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик_температуры_и_влажности_Kojimo.png"
+          src="../assets/img/1-sensor/Sensor_climate_Kojimo.png"
           alt="Датчик температуры и влажности Kojimo"
           className="image_tab"
           onClick="toggleZoom(this)"

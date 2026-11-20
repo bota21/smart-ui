@@ -5,7 +5,7 @@ export default function Mini_3_station({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/мини3.png"
+          src="../assets/img/0-control/Smart_speaker_Yandex_Mini_3.png"
           alt="mini 3 yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

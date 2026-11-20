@@ -5,7 +5,7 @@ export default function Humidifier_Aminix({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Очиститель воздуха Aminix.png"
+          src="../assets/img/7-technology/Air_purifier_Aminix.png"
           alt="Очиститель воздуха Aminix"
           className="image_tab"
           onClick="toggleZoom(this)"

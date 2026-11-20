@@ -5,7 +5,7 @@ export default function Hub_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/0-control/Яндекс центр управления.png"
+          src="../assets/img/0-control/Smart_remote_Yandex_YNDX-00510.png"
           alt="hub yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

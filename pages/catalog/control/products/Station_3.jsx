@@ -6,7 +6,7 @@ export default function Station_3({ activeTab, tabNumber }) {
       >
         <div className="wrapper_for_images">
           <img
-            src="../assets/img/0-control/Станция 3.png"
+            src="../assets/img/0-control/Smart_speaker_Yandex_Station_3.png"
             alt="lite 3 yandex"
             className="image_tab"
             onClick="toggleZoom(this)"

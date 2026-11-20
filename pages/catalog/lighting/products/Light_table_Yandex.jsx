@@ -5,7 +5,7 @@ export default function Light_table_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/4-light/эмби лампа яндекс.png"
+          src="../assets/img/4-light/Embi_Lamp_Yandex.png"
           alt="Light_table_Yandex"
           className="image_tab"
           onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function Autoclave_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Автокормушка Aqara C1 PETC1-M01 400 мл белый.png"
+          src="../assets/img/7-technology/Automatic_feeder_Aqara C1_PETC1_M01.png"
           alt="Автокормушка Aqara C1 PETC1-M01 400 мл белый"
           className="image_tab"
           onClick="toggleZoom(this)"

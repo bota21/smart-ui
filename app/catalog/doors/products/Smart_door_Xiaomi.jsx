@@ -10,7 +10,6 @@ export default function Smart_door_Xiaomi({ activeTab, tabNumber }) {
           src="/assets/img/9-doors/Smart_lock_Xiaomi_XMZNMST10LK.png"
           alt="Замок Xiaomi электромеханический XMZNMST10LK"
           className="image_tab"
-          // onClick={toggleZoom(this)}
         />
         <div className="text_tab">
           <span data-i18n="Smart_Door_Xiaomi_text_1">

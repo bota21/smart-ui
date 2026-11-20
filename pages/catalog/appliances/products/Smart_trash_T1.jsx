@@ -5,7 +5,7 @@ export default function Smart_trash_T1({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Умное мусорное ведро Xiaomi Smart Trash Can T1.png"
+          src="../assets/img/7-technology/Smart_Trash_Xiaomi_Smart_Trash_Can_T1.png"
           alt="Умное мусорное ведро Xiaomi Smart Trash Can T1"
           className="image_tab"
           onClick="toggleZoom(this)"

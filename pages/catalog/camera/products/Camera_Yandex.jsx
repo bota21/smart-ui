@@ -5,7 +5,7 @@ export default function Camera_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/8-camera/Камера видеонаблюдения YNDX-00582GRY.png"
+          src="../assets/img/8-camera/Smart_camera_Yandex_YNDX_00582GRY.png"
           alt="Камера видеонаблюдения YNDX-00582GRY"
           className="image_tab"
           onClick="toggleZoom(this)"

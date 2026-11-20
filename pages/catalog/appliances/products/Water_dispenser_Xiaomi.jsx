@@ -5,7 +5,7 @@ export default function Water_dispenser_Xiaomi({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Автопоилка Xiaomi Smart Pet Water Dispenser 3л.png"
+          src="../assets/img/7-technology/Water_Dispenser_Xiaomi_Smart_Pet Water_Dispenser_3l.png"
           alt="Автопоилка Xiaomi Smart Pet Water Dispenser 3л"
           className="image_tab"
           onClick="toggleZoom(this)"

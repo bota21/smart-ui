@@ -5,7 +5,7 @@ export default function Sensor_air_QingPing({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Монитор качества воздуха QingPing Air Monitor Lite.png"
+          src="../assets/img/1-sensor/Sensor_air_QingPing_Air_Monitor_Lite.png"
           alt="Монитор качества воздуха QingPing Air Monitor Lite"
           className="image_tab"
           onClick="toggleZoom(this)"

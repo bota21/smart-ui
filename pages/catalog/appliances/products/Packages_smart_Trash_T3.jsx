@@ -5,7 +5,7 @@ export default function Packages_smart_Trash_T3({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/7-technology/Сменные картриджи с пакетами для Xiaomi TowNew Smart Trash T3.png"
+          src="../assets/img/7-technology/Bags_Smart_Trash_ Xiaomi_TowNew_Smart_Trash_T3.png"
           alt="Сменные картриджи с пакетами для Xiaomi TowNew Smart Trash T3"
           className="image_tab"
           onClick="toggleZoom(this)"

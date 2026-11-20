@@ -5,7 +5,7 @@ export default function Siren({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Сирена для умного дома GS SRHMP-I1.png"
+          src="../assets/img/1-sensor/Siren_GS_SRHMP_I1.png"
           alt="Сирена для умного дома GS SRHMP-I1"
           className="image_tab"
           onClick="toggleZoom(this)"

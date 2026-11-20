@@ -5,7 +5,7 @@ export default function Sensor_temperature_Yandex({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/1-sensor/Датчик температуры Яндекс YNDX-00523.png"
+          src="../assets/img/1-sensor/Sensor_climate_Yandex_YNDX-00523.png"
           alt="датчик температуры Яндекс"
           className="image_tab"
           onClick="toggleZoom(this)"
