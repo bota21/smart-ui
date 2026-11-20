@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
@@ -13,8 +15,7 @@ export default function Home() {
   }, [lang, t]);
 
   return (
-    <div id="main_content" className="main_content">
-      {/* <!-- HERO --> */}
+    <div>
       <section className="hero">
         <div className="hero-img">
           <img src="/assets/logo/logo-su-2.png" alt="Smart Ui" />
@@ -44,7 +45,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <!-- ПРЕИМУЩЕСТВА --> */}
       <section className="features">
         <div className="feature-card">
           <h3 data-i18n="feature_header_1">Интеграция с Алисой</h3>
@@ -66,7 +66,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <!-- ПАКЕТЫ --> */}
       <section>
         <h2 data-i18n="package_header" className="package-header">
           Наши пакеты
@@ -93,10 +92,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <!-- ФОРМА --> */}
       <ContactForm />
 
-      {/* <!-- КОНТАКТЫ --> */}
       <section id="contacts">
         <div data-i18n="contact_header" className="contact-header">
           Контакты
