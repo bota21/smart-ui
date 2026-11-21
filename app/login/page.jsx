@@ -57,22 +57,43 @@ export default function LoginPage() {
 
       try {
         const {
+          data: { session },
+          error: sessionError,
+        } = await supabase.auth.getSession();
+
+        if (sessionError) {
+          throw sessionError;
+        }
+
+        // Нет сессии — пользователь просто не авторизован.
+        // Это нормальное состояние страницы входа.
+        if (!session?.user) {
+          return;
+        }
+
+        const {
           data: { user },
           error: userError,
         } = await supabase.auth.getUser();
 
-        if (userError) throw userError;
-        if (!user) return;
+        if (userError) {
+          throw userError;
+        }
 
-        if (cancelled) return;
+        if (!user || cancelled) {
+          return;
+        }
 
         await redirectByRole(supabase, user);
       } catch (err) {
         if (!cancelled) {
+          console.error("Ошибка проверки авторизации:", err);
           setError(err.message || "Не удалось проверить авторизацию.");
         }
       } finally {
-        if (!cancelled) setCheckingSession(false);
+        if (!cancelled) {
+          setCheckingSession(false);
+        }
       }
     }
 

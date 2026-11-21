@@ -20,7 +20,6 @@ export default function AdminLoginPage() {
       const supabase = createClient();
 
       try {
-        // Сначала проверяем, существует ли сессия вообще.
         const {
           data: { session },
           error: sessionError,
@@ -28,11 +27,9 @@ export default function AdminLoginPage() {
 
         if (sessionError) throw sessionError;
 
-        // Если пользователь вышел из аккаунта,
-        // просто показываем обычную форму входа.
+        // Отсутствие сессии — нормальное состояние страницы входа.
         if (!session?.user) return;
 
-        // Если сессия есть, проверяем пользователя на сервере Supabase.
         const {
           data: { user },
           error: userError,
