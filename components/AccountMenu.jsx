@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function AccountMenu() {
+  const router = useRouter();
+
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,6 +49,9 @@ export default function AccountMenu() {
         setUser(null);
         setProfile(null);
         setOpen(false);
+
+        router.replace("/login");
+        router.refresh();
       } else {
         loadAccount();
       }
@@ -75,7 +81,7 @@ export default function AccountMenu() {
 
   if (!user) {
     return (
-      <Link href="/admin/login" className="account-login">
+      <Link href="/login" className="account-login">
         Войти
       </Link>
     );

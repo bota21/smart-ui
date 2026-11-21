@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SetupMFA() {
+  const router = useRouter();
+
   const [supabase] = useState(() => createClient());
 
   const [loading, setLoading] = useState(true);
@@ -124,9 +127,16 @@ export default function SetupMFA() {
 
       console.log("Уровень защиты Supabase:", assuranceData);
 
+      if (assuranceData.currentLevel !== "aal2") {
+        throw new Error("Второй фактор не подтверждён. Попробуйте ещё раз.");
+      }
+
       setSuccess(true);
       setMode("success");
       setCode("");
+
+      router.replace("/admin");
+      router.refresh();
     } catch (err) {
       setError(err.message || "Неверный код. Попробуйте ещё раз.");
     } finally {
