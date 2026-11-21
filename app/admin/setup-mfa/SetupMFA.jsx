@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function SetupMFA() {
+export default function SetupMFA({ redirectTo = "/admin" }) {
   const router = useRouter();
 
   const [supabase] = useState(() => createClient());
@@ -135,7 +135,7 @@ export default function SetupMFA() {
       setMode("success");
       setCode("");
 
-      router.replace("/admin");
+      router.replace(redirectTo);
       router.refresh();
     } catch (err) {
       setError(err.message || "Неверный код. Попробуйте ещё раз.");
@@ -190,7 +190,7 @@ export default function SetupMFA() {
       >
         <h1 style={{ color: "#7652d8", textAlign: "center" }}>SmartÜi</h1>
 
-        <h2 style={{ textAlign: "center", fontSize: "21px" }}>
+        <h2 style={{ textAlign: "center", fontSize: "21px", color: "#777" }}>
           Двухфакторная защита
         </h2>
 
@@ -255,7 +255,7 @@ export default function SetupMFA() {
         )}
 
         {mode === "verify" && (
-          <p>
+          <p style={{ color: "#777" }}>
             Приложение-аутентификатор уже подключено. Открой его и введи текущий
             шестизначный код.
           </p>
@@ -265,7 +265,7 @@ export default function SetupMFA() {
           <form onSubmit={verifyCode}>
             <label
               htmlFor="totp-code"
-              style={{ display: "block", marginBottom: "10px" }}
+              style={{ display: "block", marginBottom: "10px", color: "#777" }}
             >
               Шестизначный код
             </label>

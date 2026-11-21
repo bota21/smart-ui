@@ -14,6 +14,7 @@ export default function LoginPage() {
   const [checkingSession, setCheckingSession] = useState(true);
 
   // Определяем роль уже авторизованного пользователя.
+
   async function redirectByRole(supabase, user) {
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
@@ -25,27 +26,25 @@ export default function LoginPage() {
       throw new Error("Не удалось определить роль пользователя.");
     }
 
-    if (profile.role === "client") {
-      router.replace("/profile");
+    if (profile.role !== "admin" && profile.role !== "client") {
+      throw new Error("Для этой учётной записи не назначена допустимая роль.");
+    }
+
+    const { data: assuranceData, error: assuranceError } =
+      await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+
+    if (assuranceError) throw assuranceError;
+
+    if (assuranceData.currentLevel !== "aal2") {
+      router.replace("/mfa");
       return;
     }
 
     if (profile.role === "admin") {
-      const { data: assuranceData, error: assuranceError } =
-        await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-
-      if (assuranceError) throw assuranceError;
-
-      if (assuranceData.currentLevel === "aal2") {
-        router.replace("/admin");
-      } else {
-        router.replace("/admin/setup-mfa");
-      }
-
-      return;
+      router.replace("/admin");
+    } else {
+      router.replace("/");
     }
-
-    throw new Error("Для этой учётной записи не назначена допустимая роль.");
   }
 
   // Проверяем, не вошёл ли пользователь ранее.

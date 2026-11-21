@@ -7,6 +7,35 @@ import { createClient } from "@/lib/supabase/client";
 export default function AdminLoginPage() {
   const router = useRouter();
 
+  async function redirectByRole(supabase, user) {
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profileError || !profile) {
+      throw new Error("Не удалось определить роль пользователя.");
+    }
+
+    if (profile.role !== "admin") {
+      router.replace("/");
+      return;
+    }
+
+    const { data: assuranceData, error: assuranceError } =
+      await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+
+    if (assuranceError) throw assuranceError;
+
+    if (assuranceData.currentLevel !== "aal2") {
+      router.replace("/mfa");
+      return;
+    }
+
+    router.replace("/admin");
+  }
+
   const [email, setEmail] = useState("smart.ui@inbox.ru");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -85,7 +114,7 @@ export default function AdminLoginPage() {
         throw new Error("У этой учётной записи нет прав администратора.");
       }
 
-      router.replace("/admin/setup-mfa");
+      router.replace("/mfa");
       router.refresh();
     } catch (err) {
       setError(err.message || "Не удалось выполнить вход.");

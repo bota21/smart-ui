@@ -17,27 +17,50 @@ export default function AccountMenu() {
     const supabase = createClient();
 
     async function loadAccount() {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
+      try {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
 
-      if (error || !user) {
+        if (error || !user) {
+          setUser(null);
+          setProfile(null);
+          return;
+        }
+
+        const { data: assuranceData, error: assuranceError } =
+          await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+
+        if (assuranceError) throw assuranceError;
+
+        if (assuranceData.currentLevel !== "aal2") {
+          setUser(null);
+          setProfile(null);
+          return;
+        }
+
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("full_name, role")
+          .eq("id", user.id)
+          .single();
+
+        if (profileError || !profile) {
+          setUser(null);
+          setProfile(null);
+          return;
+        }
+
+        setUser(user);
+        setProfile(profile);
+      } catch (err) {
+        console.error("Ошибка загрузки аккаунта:", err);
         setUser(null);
         setProfile(null);
+      } finally {
         setLoading(false);
-        return;
       }
-
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("full_name, role")
-        .eq("id", user.id)
-        .single();
-
-      setUser(user);
-      setProfile(profile);
-      setLoading(false);
     }
 
     loadAccount();
@@ -49,6 +72,7 @@ export default function AccountMenu() {
         setUser(null);
         setProfile(null);
         setOpen(false);
+        setLoading(false);
 
         router.replace("/login");
         router.refresh();
@@ -58,7 +82,7 @@ export default function AccountMenu() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [router]);
 
   async function handleLogout() {
     const supabase = createClient();
@@ -75,6 +99,9 @@ export default function AccountMenu() {
     setUser(null);
     setProfile(null);
     setOpen(false);
+
+    router.replace("/login");
+    router.refresh();
   }
 
   if (loading) return null;
@@ -88,6 +115,7 @@ export default function AccountMenu() {
   }
 
   const isAdmin = profile?.role === "admin";
+
   const displayName =
     profile?.full_name?.trim() || user.email || "Пользователь";
 
