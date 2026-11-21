@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import AccountMenu from "./AccountMenu";
 import Link from "next/link";
 
 export default function Header({ children }) {
@@ -41,16 +42,22 @@ export default function Header({ children }) {
           {/* <div className="logo">SmartÜi</div> */}
         </div>
 
-        <div className="lang-switch">
-          {["ru", "kz", "en"].map((l) => (
-            <button
-              key={l}
-              onClick={() => setLang(l)}
-              className={`lang-switcher-button ${lang === l ? "lang-active" : ""}`}
-            >
-              {l.toUpperCase()}
-            </button>
-          ))}
+        <div className="header-right">
+          <div className="lang-switch">
+            {["ru", "kz", "en"].map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={`lang-switcher-button ${
+                  lang === l ? "lang-active" : ""
+                }`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <AccountMenu />
         </div>
       </header>
       {open ? null : (

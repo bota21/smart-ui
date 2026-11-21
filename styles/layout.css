@@ -227,3 +227,128 @@ footer {
 .whatsapp {
   color: #25d366;
 }
+
+/* Правая часть шапки: язык и аккаунт */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Контейнер аккаунта */
+.account-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Кнопка входа для неавторизованного пользователя */
+.account-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.account-login:hover {
+  background: var(--accent);
+  color: var(--main);
+}
+
+/* Кнопка с именем пользователя */
+.account-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.account-menu-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.account-icon {
+  font-size: 19px;
+}
+
+.account-arrow {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* Выпадающее меню */
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: var(--card-bg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Ссылки и кнопка в выпадающем меню */
+.account-dropdown a,
+.account-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 11px 13px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .header-right {
+    gap: 10px;
+  }
+
+  .account-menu-trigger {
+    gap: 5px;
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .account-dropdown {
+    min-width: 200px;
+  }
+
+  .account-login {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
