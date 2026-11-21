@@ -1,6 +1,8 @@
-import LogoutButton from "./LogoutButton";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import LogoutButton from "./LogoutButton";
+import styles from "./page.module.css";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -14,34 +16,43 @@ export default async function AdminPage() {
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        padding: "48px 24px",
-        background: "#f8f7fc",
-        color: "#242033",
-      }}
-    >
-      <section
-        style={{
-          maxWidth: "900px",
-          margin: "0 auto",
-        }}
-      >
-        <h1>Панель администратора SmartÜi</h1>
+    <main className={styles.page}>
+      <section className={styles.container}>
+        <header className={styles.headerAdmin}>
+          <div>
+            <span className={styles.eyebrow}>SMARTÜI · ADMIN</span>
+            <h1 className={styles.title}>Панель администратора</h1>
+            <p className={styles.subtitle}>
+              Управление системой умного дома и клиентами.
+            </p>
+          </div>
 
-        <p>Добро пожаловать в административную часть SmartÜi.</p>
-
-        <p>
-          Вы вошли как: <strong>{user.email}</strong>
-        </p>
-
-        <p style={{ color: "#16834a" }}>
-          Доступ подтверждён. Двухфакторная защита активна.
-        </p>
-        <div style={{ marginTop: "28px" }}>
           <LogoutButton />
+        </header>
+
+        <div className={styles.accountInfo}>
+          <span className={styles.statusDot} />
+          <span>
+            Вы вошли как <strong>{user.email}</strong>
+          </span>
+          <span className={styles.securityStatus}>2FA активна</span>
         </div>
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Управление</h2>
+
+          <div className={styles.cards}>
+            <Link href="/admin/clients" className={styles.card}>
+              <div className={styles.cardIcon}>♙</div>
+              <h3 className={styles.cardTitle}>Клиенты</h3>
+              <p className={styles.cardDescription}>
+                Добавление клиентов, приглашения и управление доступом к личным
+                кабинетам.
+              </p>
+              <span className={styles.cardLink}>Перейти к клиентам →</span>
+            </Link>
+          </div>
+        </section>
       </section>
     </main>
   );

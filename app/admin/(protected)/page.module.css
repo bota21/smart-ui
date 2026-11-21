@@ -1,0 +1,165 @@
+.page {
+  min-height: 100vh;
+  padding: 48px 24px;
+  background: #f8f7fc;
+  color: #242033;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.headerAdmin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  position: static;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #8060d6;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #777286;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 20px;
+  margin-bottom: 42px;
+  background: #fff;
+  border: 1px solid #eeeaf7;
+  border-radius: 14px;
+  color: #625d70;
+  font-size: 14px;
+}
+
+.accountInfo strong {
+  color: #242033;
+}
+
+.statusDot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #20a36b;
+}
+
+.securityStatus {
+  margin-left: auto;
+  color: #16834a;
+  font-weight: 600;
+}
+
+.sectionTitle {
+  margin: 0 0 20px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  padding: 26px;
+  background: #fff;
+  border: 1px solid #eee9fa;
+  border-radius: 18px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(40, 20, 80, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #c9b9f2;
+  box-shadow: 0 12px 30px rgba(40, 20, 80, 0.09);
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: #f1ecfc;
+  color: #7652d8;
+  font-size: 25px;
+}
+
+.cardTitle {
+  margin: 0 0 10px;
+  color: #7652d8;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.cardDescription {
+  margin: 0 0 22px;
+  color: #777286;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.cardLink {
+  margin-top: auto;
+  color: #7652d8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 30px 16px;
+  }
+
+  .accountInfo {
+    align-items: flex-start;
+  }
+
+  .securityStatus {
+    width: 100%;
+    margin-left: 19px;
+  }
+
+  .card {
+    min-height: 220px;
+  }
+}
