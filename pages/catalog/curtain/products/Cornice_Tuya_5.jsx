@@ -5,7 +5,7 @@ export default function Cornice_Tuya_5({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/карниз Tuya.png"
+          src="../assets/img/5-cornice/Cornice_Tuya.png"
           alt="карниз 5м"
           className="image_tab"
           onClick="toggleZoom(this)"
@@ -36,7 +36,7 @@ export default function Cornice_Tuya_5({ activeTab, tabNumber }) {
         </div>
         <div className="wrapper_for_images_many">
           <img
-            src="../assets/img/5-cornice/Комплект карниза Tuya.png"
+            src="../assets/img/5-cornice/Cornice_Tuya_set.png"
             alt="Комплект карниза Tuya"
             className="images_in_wrapper"
             onClick="toggleZoom(this)"

@@ -5,7 +5,7 @@ export default function Cornice_Yandex_3({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Электрокарниз Яндекс 1.8.png"
+          src="../assets/img/5-cornice/Cornice_Yandex_1.8.png"
           alt="Электрокарниз Яндекс 1.8"
           className="image_tab"
           onClick="toggleZoom(this)"

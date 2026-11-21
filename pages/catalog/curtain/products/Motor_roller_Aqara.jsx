@@ -6,7 +6,7 @@ export default function Motor_roller_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Мотор для роллштор.png"
+          src="../assets/img/5-cornice/Motor_roller_blinds_Aqara.png"
           alt="Мотор для роллштор"
           className="image_tab"
           onClick="toggleZoom(this)"

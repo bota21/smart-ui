@@ -5,7 +5,7 @@ export default function Driver_curtain_Aqara_track({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Мотор раздвижных штор Aqara Curtain Driver E1.png"
+          src="../assets/img/5-cornice/Curtain_driver_Aqara_Curtain_Driver_E1.png"
           alt="Мотор раздвижных штор Aqara Curtain Driver E1"
           className="image_tab"
           onClick="toggleZoom(this)"

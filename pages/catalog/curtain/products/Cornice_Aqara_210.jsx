@@ -5,7 +5,7 @@ export default function Cornice_Aqara_210({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Электрокарниз Aqara.png"
+          src="../assets/img/5-cornice/Cornice_Aqara.png"
           alt="Электрокарниз Aqara 210"
           className="image_tab"
           onClick="toggleZoom(this)"

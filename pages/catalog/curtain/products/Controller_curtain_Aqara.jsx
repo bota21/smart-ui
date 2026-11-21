@@ -5,7 +5,7 @@ export default function Controller_curtain_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Мотор для раздвижных штор  Aqara Curtain Controller.png"
+          src="../assets/img/5-cornice/Curtain_Controller_Aqara_Curtain_Controller.png"
           alt="/Мотор для раздвижных штор  Aqara Curtain Controller"
           className="image_tab"
           onClick="toggleZoom(this)"

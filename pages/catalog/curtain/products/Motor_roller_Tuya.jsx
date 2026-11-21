@@ -6,7 +6,7 @@ export default function Motor_roller_Tuya({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Мотор для роллштор Tuya.png"
+          src="../assets/img/5-cornice/Curtain_Controller_Tuya.png"
           alt="Мотор для роллштор Tuya"
           className="image_tab"
           onClick="toggleZoom(this)"

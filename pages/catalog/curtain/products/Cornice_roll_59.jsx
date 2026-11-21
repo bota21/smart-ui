@@ -5,7 +5,7 @@ export default function Cornice_roll_59({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/карниз для роллштор.png"
+          src="../assets/img/5-cornice/Curtain_rod_roller_blinds.png"
           alt="карниз для роллштор"
           className="image_tab"
           onClick="toggleZoom(this)"

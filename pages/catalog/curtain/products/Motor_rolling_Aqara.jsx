@@ -6,7 +6,7 @@ export default function Motor_rolling_Aqara({ activeTab, tabNumber }) {
         className={`wrapper_for_smart_home_item ${activeTab === tabNumber ? "active" : ""}`}
       >
         <img
-          src="../assets/img/5-cornice/Мотор для рулонных штор Aqara Curtain Rolling Shutter Motor.png"
+          src="../assets/img/5-cornice/Motor_roller_blinds_Aqara_Curtain_Rolling_Shutter_Motor.png"
           alt="Мотор для рулонных штор Aqara Curtain Rolling Shutter Motor"
           className="image_tab"
           onClick="toggleZoom(this)"
