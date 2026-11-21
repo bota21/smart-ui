@@ -20,54 +20,36 @@ export default function AdminLoginPage() {
       const supabase = createClient();
 
       try {
+        // Сначала проверяем, существует ли сессия вообще.
+        const {
+          data: { session },
+          error: sessionError,
+        } = await supabase.auth.getSession();
+
+        if (sessionError) throw sessionError;
+
+        // Если пользователь вышел из аккаунта,
+        // просто показываем обычную форму входа.
+        if (!session?.user) return;
+
+        // Если сессия есть, проверяем пользователя на сервере Supabase.
         const {
           data: { user },
           error: userError,
         } = await supabase.auth.getUser();
 
         if (userError) throw userError;
-
-        // Нет активной сессии — показываем форму входа.
         if (!user) return;
 
-        // Проверяем роль авторизованного пользователя.
-        const { data: profile, error: profileError } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", user.id)
-          .single();
-
-        if (profileError) throw profileError;
-
         if (cancelled) return;
 
-        // Клиенту административный вход не нужен.
-        if (profile.role !== "admin") {
-          router.replace("/");
-          return;
-        }
-
-        // Проверяем уровень двухфакторной авторизации.
-        const { data: assuranceData, error: assuranceError } =
-          await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-
-        if (assuranceError) throw assuranceError;
-
-        if (cancelled) return;
-
-        if (assuranceData.currentLevel === "aal2") {
-          router.replace("/admin");
-        } else {
-          router.replace("/admin/setup-mfa");
-        }
+        await redirectByRole(supabase, user);
       } catch (err) {
         if (!cancelled) {
-          setError(err.message || "Не удалось проверить текущую сессию.");
+          setError(err.message || "Не удалось проверить авторизацию.");
         }
       } finally {
-        if (!cancelled) {
-          setCheckingSession(false);
-        }
+        if (!cancelled) setCheckingSession(false);
       }
     }
 
