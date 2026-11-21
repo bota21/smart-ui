@@ -38,23 +38,20 @@ export default function Socket_buildIn_1x({ activeTab, tabNumber }) {
           </span>
         </div>
         <div className="wrapper_for_images_many">
-          <img
+          <ZoomableImage
             src="../assets/img/3-socket/Smart_socket_Bseed_1_gold.png"
             alt="Розетка Bseed 1х - gold"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-socket/Smart_socket_Bseed_1_grey.png"
             alt="Розетка Bseed 1х - grey"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-socket/Smart_socket_Bseed_1_black.png"
             alt="Розетка Bseed 1х - black"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">

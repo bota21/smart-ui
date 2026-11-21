@@ -39,35 +39,30 @@ export default function Switch_Roximo_2x({ activeTab, tabNumber }) {
           </span>
         </div>
         <div className="wrapper_for_images_many">
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_ROXIMO_2_gold.png"
             alt="Выключатель ROXIMO 2кл - gold"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_ROXIMO_2_bronze.png"
             alt="Выключатель ROXIMO 2кл - bronza"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_ROXIMO_2_grey.png"
             alt="Выключатель ROXIMO 2кл - grey"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_ROXIMO_2_platinum.png"
             alt="/Выключатель ROXIMO 2кл - platina"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_ROXIMO_2_black.png"
             alt="Выключатель ROXIMO 2кл - black"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">

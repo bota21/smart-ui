@@ -37,23 +37,20 @@ export default function Switch_Bseed_sensor_3x({ activeTab, tabNumber }) {
           </span>
         </div>
         <div className="wrapper_for_images_many">
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_BSEED_sensor_3_gold.png"
             alt="выключатель Bseed сенсорный 3х - gold"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_BSEED_sensor_3_grey.png"
             alt="выключатель Bseed сенсорный 3х - grey"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
-          <img
+          <ZoomableImage
             src="../assets/img/3-Switch/Smart_switch_BSEED_sensor_3_black.png"
             alt="выключатель Bseed сенсорный 3х - black"
             className="images_many"
-            onClick="toggleZoom(this)"
           />
         </div>
         <div className="price_tab">
