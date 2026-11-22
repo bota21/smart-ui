@@ -192,7 +192,7 @@ export default function LoginPage() {
 
         <label
           htmlFor="email"
-          style={{ display: "block", marginBottom: "8px" }}
+          style={{ display: "block", marginBottom: "8px", color: "#777" }}
         >
           Электронная почта
         </label>
@@ -216,7 +216,7 @@ export default function LoginPage() {
 
         <label
           htmlFor="password"
-          style={{ display: "block", marginBottom: "8px" }}
+          style={{ display: "block", marginBottom: "8px", color: "#777" }}
         >
           Пароль
         </label>
@@ -260,6 +260,9 @@ export default function LoginPage() {
         >
           {loading ? "Выполняется вход..." : "Войти"}
         </button>
+        <p style={{ textAlign: "center", marginTop: "20px", color: "#777" }}>
+          Нет аккаунта? <a href="/register">Зарегистрироваться</a>
+        </p>
       </form>
     </main>
   );

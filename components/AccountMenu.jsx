@@ -74,7 +74,6 @@ export default function AccountMenu() {
         setOpen(false);
         setLoading(false);
 
-        router.replace("/login");
         router.refresh();
       } else {
         loadAccount();
