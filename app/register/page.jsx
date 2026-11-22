@@ -65,10 +65,10 @@ export default function RegisterPage() {
 
       if (signUpError) throw signUpError;
 
-      console.log("Ответ Supabase после регистрации:", {
-        user: signUpData?.user,
-        metadata: signUpData?.user?.user_metadata,
-      });
+      //   console.log("Ответ Supabase после регистрации:", {
+      //     user: signUpData?.user,
+      //     metadata: signUpData?.user?.user_metadata,
+      //   });
 
       setEmailSent(true);
     } catch (err) {
