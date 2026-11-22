@@ -3,7 +3,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { useEffect } from "react";
 
-export default function Catalog() {
+export default function CatalogPage() {
   const { t, lang } = useLanguage();
 
   useEffect(() => {

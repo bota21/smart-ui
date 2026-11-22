@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import SetupMFA from "../admin/setup-mfa/SetupMFA";
+import SetupMFA from "../../../../components/authentication/shared/mfa/SetupMFA";
 
 export default async function MFAPage() {
   const supabase = await createClient();

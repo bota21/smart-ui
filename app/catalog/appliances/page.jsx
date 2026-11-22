@@ -36,7 +36,7 @@ import Smart_mirror_round from "./products/Smart_mirror_round";
 import Smart_mirror_rectangle from "./products/Smart_mirror_rectangle";
 import Smart_mirror_oval from "./products/Smart_mirror_oval";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Sensor() {
   const tabs = [

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import styles from "./login.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,8 +13,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [checkingSession, setCheckingSession] = useState(true);
-
-  // Определяем роль уже авторизованного пользователя.
 
   async function redirectByRole(supabase, user) {
     const { data: profile, error: profileError } = await supabase
@@ -47,7 +46,6 @@ export default function LoginPage() {
     }
   }
 
-  // Проверяем, не вошёл ли пользователь ранее.
   useEffect(() => {
     let cancelled = false;
 
@@ -60,28 +58,18 @@ export default function LoginPage() {
           error: sessionError,
         } = await supabase.auth.getSession();
 
-        if (sessionError) {
-          throw sessionError;
-        }
+        if (sessionError) throw sessionError;
 
-        // Нет сессии — пользователь просто не авторизован.
-        // Это нормальное состояние страницы входа.
-        if (!session?.user) {
-          return;
-        }
+        if (!session?.user) return;
 
         const {
           data: { user },
           error: userError,
         } = await supabase.auth.getUser();
 
-        if (userError) {
-          throw userError;
-        }
+        if (userError) throw userError;
 
-        if (!user || cancelled) {
-          return;
-        }
+        if (!user || cancelled) return;
 
         await redirectByRole(supabase, user);
       } catch (err) {
@@ -103,7 +91,6 @@ export default function LoginPage() {
     };
   }, [router]);
 
-  // Выполняем вход и направляем пользователя по его роли.
   async function handleLogin(event) {
     event.preventDefault();
 
@@ -131,69 +118,17 @@ export default function LoginPage() {
   }
 
   if (checkingSession) {
-    return (
-      <main
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#f7f5fc",
-          color: "#7652d8",
-          fontSize: "16px",
-        }}
-      >
-        Проверяем авторизацию...
-      </main>
-    );
+    return <main className={styles.loadingPage}>Проверяем авторизацию...</main>;
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "24px",
-        background: "#f7f5fc",
-      }}
-    >
-      <form
-        onSubmit={handleLogin}
-        style={{
-          width: "100%",
-          maxWidth: "420px",
-          padding: "36px",
-          borderRadius: "20px",
-          background: "#ffffff",
-          boxShadow: "0 12px 40px rgba(40, 20, 80, 0.10)",
-        }}
-      >
-        <h1
-          style={{
-            textAlign: "center",
-            marginBottom: "8px",
-            color: "#7652d8",
-          }}
-        >
-          SmartÜi
-        </h1>
+    <main className={styles.page}>
+      <form onSubmit={handleLogin} className={styles.form}>
+        <h1 className={styles.title}>SmartÜi</h1>
 
-        <p
-          style={{
-            textAlign: "center",
-            marginBottom: "28px",
-            color: "#777",
-          }}
-        >
-          Вход в личный кабинет
-        </p>
+        <p className={styles.subtitle}>Вход в личный кабинет</p>
 
-        <label
-          htmlFor="email"
-          style={{ display: "block", marginBottom: "8px", color: "#777" }}
-        >
+        <label htmlFor="email" className={styles.label}>
           Электронная почта
         </label>
 
@@ -204,20 +139,10 @@ export default function LoginPage() {
           onChange={(event) => setEmail(event.target.value)}
           required
           autoComplete="username"
-          style={{
-            width: "100%",
-            padding: "13px",
-            marginBottom: "18px",
-            border: "1px solid #ddd",
-            borderRadius: "9px",
-            boxSizing: "border-box",
-          }}
+          className={styles.input}
         />
 
-        <label
-          htmlFor="password"
-          style={{ display: "block", marginBottom: "8px", color: "#777" }}
-        >
+        <label htmlFor="password" className={styles.label}>
           Пароль
         </label>
 
@@ -228,39 +153,20 @@ export default function LoginPage() {
           onChange={(event) => setPassword(event.target.value)}
           required
           autoComplete="current-password"
-          style={{
-            width: "100%",
-            padding: "13px",
-            marginBottom: "20px",
-            border: "1px solid #ddd",
-            borderRadius: "9px",
-            boxSizing: "border-box",
-          }}
+          className={styles.input}
         />
 
         {error && (
-          <p role="alert" style={{ color: "#c62828", marginBottom: "16px" }}>
+          <p role="alert" className={styles.error}>
             {error}
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: "100%",
-            padding: "14px",
-            border: "none",
-            borderRadius: "9px",
-            background: "#7652d8",
-            color: "#fff",
-            fontSize: "16px",
-            cursor: loading ? "wait" : "pointer",
-          }}
-        >
+        <button type="submit" disabled={loading} className={styles.button}>
           {loading ? "Выполняется вход..." : "Войти"}
         </button>
-        <p style={{ textAlign: "center", marginTop: "20px", color: "#777" }}>
+
+        <p className={styles.registerText}>
           Нет аккаунта? <a href="/register">Зарегистрироваться</a>
         </p>
       </form>

@@ -32,7 +32,7 @@ import Sensor_Smoke_Aqara from "./products/Sensor_smoke_Aqara";
 import Sensor_Smoke_Tuya from "./products/Sensor_smoke_Tuya";
 import Siren from "./products/Siren";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Sensor() {
   const tabs = [

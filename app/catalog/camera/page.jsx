@@ -11,7 +11,7 @@ import Camera_E27_Roximo from "./products/Camera_E27_Roximo";
 import Camera_4G_Roximo from "./products/Camera_4G_Roximo";
 import Camera_street_rotary_Roximo from "./products/Camera_street_rotary_Roximo";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Camera() {
   const tabs = [

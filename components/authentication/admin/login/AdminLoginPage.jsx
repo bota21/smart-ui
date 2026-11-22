@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import styles from "./admin-login.module.css";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -56,7 +57,6 @@ export default function AdminLoginPage() {
 
         if (sessionError) throw sessionError;
 
-        // Отсутствие сессии — нормальное состояние страницы входа.
         if (!session?.user) return;
 
         const {
@@ -75,7 +75,9 @@ export default function AdminLoginPage() {
           setError(err.message || "Не удалось проверить авторизацию.");
         }
       } finally {
-        if (!cancelled) setCheckingSession(false);
+        if (!cancelled) {
+          setCheckingSession(false);
+        }
       }
     }
 
@@ -124,69 +126,17 @@ export default function AdminLoginPage() {
   }
 
   if (checkingSession) {
-    return (
-      <main
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#f7f5fc",
-          color: "#7652d8",
-          fontSize: "16px",
-        }}
-      >
-        Проверяем авторизацию...
-      </main>
-    );
+    return <main className={styles.loadingPage}>Проверяем авторизацию...</main>;
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "24px",
-        background: "#f7f5fc",
-      }}
-    >
-      <form
-        onSubmit={handleLogin}
-        style={{
-          width: "100%",
-          maxWidth: "420px",
-          padding: "36px",
-          borderRadius: "20px",
-          background: "#ffffff",
-          boxShadow: "0 12px 40px rgba(40, 20, 80, 0.10)",
-        }}
-      >
-        <h1
-          style={{
-            textAlign: "center",
-            marginBottom: "8px",
-            color: "#7652d8",
-          }}
-        >
-          SmartÜi
-        </h1>
+    <main className={styles.page}>
+      <form onSubmit={handleLogin} className={styles.form}>
+        <h1 className={styles.title}>SmartÜi</h1>
 
-        <p
-          style={{
-            textAlign: "center",
-            marginBottom: "28px",
-            color: "#777",
-          }}
-        >
-          Вход администратора
-        </p>
+        <p className={styles.subtitle}>Вход администратора</p>
 
-        <label
-          htmlFor="email"
-          style={{ display: "block", marginBottom: "8px" }}
-        >
+        <label htmlFor="email" className={styles.label}>
           Электронная почта
         </label>
 
@@ -197,20 +147,10 @@ export default function AdminLoginPage() {
           onChange={(event) => setEmail(event.target.value)}
           required
           autoComplete="username"
-          style={{
-            width: "100%",
-            padding: "13px",
-            marginBottom: "18px",
-            border: "1px solid #ddd",
-            borderRadius: "9px",
-            boxSizing: "border-box",
-          }}
+          className={styles.input}
         />
 
-        <label
-          htmlFor="password"
-          style={{ display: "block", marginBottom: "8px" }}
-        >
+        <label htmlFor="password" className={styles.label}>
           Пароль
         </label>
 
@@ -221,34 +161,12 @@ export default function AdminLoginPage() {
           onChange={(event) => setPassword(event.target.value)}
           required
           autoComplete="current-password"
-          style={{
-            width: "100%",
-            padding: "13px",
-            marginBottom: "20px",
-            border: "1px solid #ddd",
-            borderRadius: "9px",
-            boxSizing: "border-box",
-          }}
+          className={styles.input}
         />
 
-        {error && (
-          <p style={{ color: "#c62828", marginBottom: "16px" }}>{error}</p>
-        )}
+        {error && <p className={styles.error}>{error}</p>}
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: "100%",
-            padding: "14px",
-            border: "none",
-            borderRadius: "9px",
-            background: "#7652d8",
-            color: "#fff",
-            fontSize: "16px",
-            cursor: loading ? "wait" : "pointer",
-          }}
-        >
+        <button type="submit" disabled={loading} className={styles.button}>
           {loading ? "Выполняется вход..." : "Войти"}
         </button>
       </form>

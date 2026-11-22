@@ -1,0 +1,90 @@
+.loadingPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f5fc;
+  color: #7652d8;
+  font-size: 16px;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f7f5fc;
+}
+
+.form {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(40, 20, 80, 0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 8px;
+  color: #7652d8;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 28px;
+  color: #777;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: #777;
+}
+
+.input {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 18px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+
+.error {
+  color: #c62828;
+  margin-bottom: 16px;
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #7652d8;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.registerText {
+  text-align: center;
+  margin-top: 20px;
+  color: #777;
+}
+
+.registerText a {
+  color: #7652d8;
+  text-decoration: none;
+}
+
+.registerText a:hover {
+  text-decoration: underline;
+}

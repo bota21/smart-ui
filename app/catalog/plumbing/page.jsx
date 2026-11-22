@@ -22,7 +22,7 @@ import Boiler_THERMEX_Boss from "./products/Boiler_THERMEX_Boss";
 import Boiler_THERMEX_Sonne_white from "./products/Boiler_THERMEX_Sonne_white";
 import Heating_thermostat_ZONT from "./products/Heating_thermostat_ZONT";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Plumbing() {
   const tabs = [

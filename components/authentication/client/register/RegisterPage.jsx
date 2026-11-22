@@ -50,25 +50,19 @@ export default function RegisterPage() {
         email: email.trim().toLowerCase(),
       });
 
-      const { data: signUpData, error: signUpError } =
-        await supabase.auth.signUp({
-          email: email.trim().toLowerCase(),
-          password,
-          options: {
-            data: {
-              full_name: fullName,
-              phone: normalizedPhone,
-            },
-            emailRedirectTo: `${window.location.origin}/auth/callback?next=/mfa`,
+      const { error: signUpError } = await supabase.auth.signUp({
+        email: email.trim().toLowerCase(),
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+            phone: normalizedPhone,
           },
-        });
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/mfa`,
+        },
+      });
 
       if (signUpError) throw signUpError;
-
-      //   console.log("Ответ Supabase после регистрации:", {
-      //     user: signUpData?.user,
-      //     metadata: signUpData?.user?.user_metadata,
-      //   });
 
       setEmailSent(true);
     } catch (err) {
@@ -81,12 +75,10 @@ export default function RegisterPage() {
   const handleChange = (e) => {
     let digits = e.target.value.replace(/\D/g, "");
 
-    // если ввели 7 или 8 в начале — убираем
     if (digits.startsWith("7") || digits.startsWith("8")) {
       digits = digits.slice(1);
     }
 
-    // ограничиваем строго 10 цифрами
     digits = digits.slice(0, 10);
 
     let formatted = "+7";
@@ -146,27 +138,14 @@ export default function RegisterPage() {
 
           <label>
             Номер телефона
-            {/* <input
-              type="tel"
-              autoComplete="tel"
-              placeholder="+7 700 123 45 67"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            /> */}
             <input
               type="tel"
               name="phone"
               placeholder="+7 777 123 45 67"
               value={phone}
-              onChange={(e) => {
-                handleChange(e);
-                // setPhoneError("");
-              }}
+              onChange={handleChange}
               required
-              //   className={phoneError ? "input-error" : ""}
             />
-            {/* {phoneError && <div className="error-text">{phoneError}</div>} */}
           </label>
 
           <label>

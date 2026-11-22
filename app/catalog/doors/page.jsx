@@ -9,7 +9,7 @@ import Smart_door_Aqara_A100 from "./products/Smart_door_Aqara_A100";
 import Smart_door_Aqara_D100 from "./products/Smart_door_Aqara_D100";
 import Smart_door_Aqara_N100 from "./products/Smart_door_Aqara_N100";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 const tabs = [
   {

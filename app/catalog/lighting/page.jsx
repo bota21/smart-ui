@@ -25,7 +25,7 @@ import Bulb_E27_11_Yandex_RGB from "./products/Bulb_E27_11_Yandex_RGB";
 import Bulb_GU10_6_Yandex from "./products/Bulb_GU10_6_Yandex";
 import Bulb_GX53_9_Yandex from "./products/Bulb_GX53_9_Yandex";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Lighting() {
   const tabs = [

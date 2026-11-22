@@ -20,7 +20,7 @@ import Motor_roller_Aqara from "./products/Motor_roller_Aqara";
 import Cornice_roll_59 from "./products/Cornice_roll_59";
 import Motor_rolling_Aqara from "./products/Motor_rolling_Aqara";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Sensor() {
   const tabs = [

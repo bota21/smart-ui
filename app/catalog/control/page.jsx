@@ -21,7 +21,7 @@ import Hub_Roximo from "./products/Hub_Roximo";
 import Hub_Tuya from "./products/Hub_Tuya";
 import Module_Mini_3_Pro from "./products/Module_Mini_3_Pro";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Control() {
   const tabs = [

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import ContactForm from "@/components/ContactForm";
 
-export default function Home() {
+export default function HomePage() {
   const { t, lang } = useLanguage();
 
   useEffect(() => {

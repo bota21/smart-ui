@@ -39,7 +39,7 @@ import Smart_Din_40A from "./products/Smart_Din_40A";
 import Smart_Din_Moes_16A from "./products/Smart_Din_Moes_16A";
 import Smart_Din_Tuya_63A from "./products/Smart_Din_Tuya_63A";
 
-import CatalogFooter from "@/components/CatalogFooter";
+import CatalogFooter from "@/app/catalog/CatalogFooter";
 
 export default function Sockets_and_Switches() {
   const tabs = [
