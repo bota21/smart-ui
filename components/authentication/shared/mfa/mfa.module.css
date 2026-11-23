@@ -108,6 +108,10 @@
   text-align: left;
 }
 
+.checkboxMfa {
+  width: 15px;
+}
+
 .checkboxLabel input {
   accent-color: #7652d8;
 }

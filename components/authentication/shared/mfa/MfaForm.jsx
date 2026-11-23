@@ -82,6 +82,7 @@ export default function MfaForm() {
 
           <label className={styles.checkboxLabel}>
             <input
+              className={styles.checkboxMfa}
               type="checkbox"
               checked={trustDevice}
               onChange={(e) => setTrustDevice(e.target.checked)}
