@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
 import { authClient } from "@/lib/client-auth";
 import styles from "./settings.module.css";
 
@@ -10,6 +11,7 @@ export default function SettingsPage() {
 
   const [activeSection, setActiveSection] = useState("security");
 
+  // Смена пароля
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,6 +20,32 @@ export default function SettingsPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [passwordSuccess, setPasswordSuccess] = useState("");
+
+  // Двухфакторная защита
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
+  const [twoFactorPassword, setTwoFactorPassword] = useState("");
+  const [twoFactorCode, setTwoFactorCode] = useState("");
+  const [twoFactorUri, setTwoFactorUri] = useState("");
+  const [twoFactorLoading, setTwoFactorLoading] = useState(false);
+  const [twoFactorError, setTwoFactorError] = useState("");
+  const [twoFactorSuccess, setTwoFactorSuccess] = useState("");
+
+  // Отключение 2FA
+  const [disablePassword, setDisablePassword] = useState("");
+  const [disableLoading, setDisableLoading] = useState(false);
+  const [disableError, setDisableError] = useState("");
+
+  // Резервные коды
+  const [backupPassword, setBackupPassword] = useState("");
+  const [backupCodes, setBackupCodes] = useState([]);
+  const [backupCodesSaved, setBackupCodesSaved] = useState(false);
+  const [backupLoading, setBackupLoading] = useState(false);
+  const [backupError, setBackupError] = useState("");
+  const [backupSuccess, setBackupSuccess] = useState("");
+
+  useEffect(() => {
+    setTwoFactorEnabled(Boolean(user?.twoFactorEnabled));
+  }, [user?.twoFactorEnabled]);
 
   if (isPending) {
     return <main className={styles.page}>Загрузка настроек...</main>;
@@ -85,7 +113,6 @@ export default function SettingsPage() {
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-
       setPasswordSuccess("Пароль успешно изменён.");
     } catch {
       setPasswordError(
@@ -94,6 +121,164 @@ export default function SettingsPage() {
     } finally {
       setIsSaving(false);
     }
+  }
+
+  async function handleEnableTwoFactor(event) {
+    event.preventDefault();
+
+    setTwoFactorError("");
+    setTwoFactorSuccess("");
+    setTwoFactorLoading(true);
+
+    try {
+      const { data, error } = await authClient.twoFactor.enable({
+        password: twoFactorPassword,
+        method: "totp",
+      });
+
+      if (error) {
+        setTwoFactorError(
+          error.message ||
+            "Не удалось подключить двухфакторную защиту. Проверьте пароль.",
+        );
+        return;
+      }
+
+      if (!data?.totpURI || !Array.isArray(data?.backupCodes)) {
+        setTwoFactorError("Сервер вернул неполные данные. Попробуйте ещё раз.");
+        return;
+      }
+
+      setTwoFactorUri(data.totpURI);
+      setBackupCodes(data.backupCodes);
+      setBackupCodesSaved(false);
+      setTwoFactorCode("");
+      setTwoFactorPassword("");
+    } catch {
+      setTwoFactorError(
+        "Не удалось подключить двухфакторную защиту. Попробуйте ещё раз.",
+      );
+    } finally {
+      setTwoFactorLoading(false);
+    }
+  }
+
+  async function handleVerifyTwoFactor(event) {
+    event.preventDefault();
+
+    setTwoFactorError("");
+    setTwoFactorSuccess("");
+
+    if (!/^\d{6}$/.test(twoFactorCode)) {
+      setTwoFactorError("Введите шестизначный код из приложения.");
+      return;
+    }
+
+    setTwoFactorLoading(true);
+
+    try {
+      const { error } = await authClient.twoFactor.verifyTotp({
+        code: twoFactorCode,
+      });
+
+      if (error) {
+        setTwoFactorError(
+          error.message ||
+            "Код не подошёл. Проверьте его и попробуйте ещё раз.",
+        );
+        return;
+      }
+
+      setTwoFactorEnabled(true);
+      setTwoFactorUri("");
+      setTwoFactorCode("");
+      setTwoFactorSuccess(
+        "Двухфакторная защита подключена. Сохраните резервные коды ниже.",
+      );
+    } catch {
+      setTwoFactorError("Не удалось подтвердить код. Попробуйте ещё раз.");
+    } finally {
+      setTwoFactorLoading(false);
+    }
+  }
+
+  async function handleDisableTwoFactor(event) {
+    event.preventDefault();
+
+    setDisableError("");
+    setTwoFactorSuccess("");
+    setDisableLoading(true);
+
+    try {
+      const { error } = await authClient.twoFactor.disable({
+        password: disablePassword,
+      });
+
+      if (error) {
+        setDisableError(
+          error.message ||
+            "Не удалось отключить защиту. Проверьте правильность пароля.",
+        );
+        return;
+      }
+
+      setTwoFactorEnabled(false);
+      setDisablePassword("");
+      setBackupCodes([]);
+      setBackupCodesSaved(false);
+      setBackupPassword("");
+      setTwoFactorSuccess("Двухфакторная защита отключена.");
+    } catch {
+      setDisableError("Не удалось отключить защиту. Попробуйте ещё раз.");
+    } finally {
+      setDisableLoading(false);
+    }
+  }
+
+  async function handleRegenerateBackupCodes(event) {
+    event.preventDefault();
+
+    setBackupError("");
+    setBackupSuccess("");
+    setBackupLoading(true);
+
+    try {
+      const { data, error } = await authClient.twoFactor.generateBackupCodes({
+        password: backupPassword,
+      });
+
+      if (error) {
+        setBackupError(
+          error.message ||
+            "Не удалось создать новые резервные коды. Проверьте пароль.",
+        );
+        return;
+      }
+
+      if (!Array.isArray(data?.backupCodes) || data.backupCodes.length === 0) {
+        setBackupError(
+          "Не удалось получить резервные коды. Попробуйте ещё раз.",
+        );
+        return;
+      }
+
+      setBackupCodes(data.backupCodes);
+      setBackupCodesSaved(false);
+      setBackupPassword("");
+      setBackupSuccess(
+        "Созданы новые резервные коды. Предыдущие коды больше не действуют.",
+      );
+    } catch {
+      setBackupError("Не удалось создать резервные коды. Попробуйте ещё раз.");
+    } finally {
+      setBackupLoading(false);
+    }
+  }
+
+  function handleConfirmBackupCodesSaved() {
+    setBackupCodes([]);
+    setBackupCodesSaved(false);
+    setBackupSuccess("Резервные коды скрыты. Храните их в надёжном месте.");
   }
 
   return (
@@ -147,18 +332,16 @@ export default function SettingsPage() {
                   <div className={styles.infoText}>
                     <h3>Двухфакторная аутентификация</h3>
                     <p>
-                      {user.twoFactorEnabled
+                      {twoFactorEnabled
                         ? "Дополнительная защита активирована."
                         : "Дополнительная защита не подключена."}
                     </p>
                     <span
                       className={
-                        user.twoFactorEnabled
-                          ? styles.status
-                          : styles.statusWarning
+                        twoFactorEnabled ? styles.status : styles.statusWarning
                       }
                     >
-                      {user.twoFactorEnabled ? "Включена" : "Выключена"}
+                      {twoFactorEnabled ? "Включена" : "Выключена"}
                     </span>
                   </div>
                 </div>
@@ -282,11 +465,292 @@ export default function SettingsPage() {
               <>
                 <h2>Двухфакторная защита</h2>
                 <p className={styles.sectionDescription}>
-                  Управление дополнительной проверкой при входе.
+                  Дополнительная проверка при входе защищает аккаунт, даже если
+                  кто-то узнает ваш пароль.
                 </p>
-                <div className={styles.placeholder}>
-                  Раздел будет реализован следующим этапом.
+
+                <div className={styles.twoFactorStatus}>
+                  <span className={styles.twoFactorStatusIcon}>🔐</span>
+                  <div>
+                    <strong>
+                      {twoFactorEnabled
+                        ? "Защита включена"
+                        : "Защита выключена"}
+                    </strong>
+                    <p>
+                      {twoFactorEnabled
+                        ? "Для входа требуется дополнительный код из приложения-аутентификатора."
+                        : "Подключите приложение-аутентификатор для дополнительной защиты."}
+                    </p>
+                  </div>
+                  <span
+                    className={
+                      twoFactorEnabled ? styles.status : styles.statusWarning
+                    }
+                  >
+                    {twoFactorEnabled ? "Активна" : "Не активна"}
+                  </span>
                 </div>
+
+                {!twoFactorEnabled && !twoFactorUri && (
+                  <div className={styles.twoFactorPanel}>
+                    <h3>Подключение двухфакторной защиты</h3>
+                    <p>
+                      Введите пароль от аккаунта. Затем мы покажем QR-код,
+                      который нужно будет отсканировать
+                      приложением-аутентификатором.
+                    </p>
+
+                    <form
+                      className={styles.twoFactorForm}
+                      onSubmit={handleEnableTwoFactor}
+                    >
+                      <div className={styles.formField}>
+                        <label htmlFor="twoFactorPassword">
+                          Текущий пароль
+                        </label>
+                        <input
+                          id="twoFactorPassword"
+                          type="password"
+                          autoComplete="current-password"
+                          value={twoFactorPassword}
+                          onChange={(event) =>
+                            setTwoFactorPassword(event.target.value)
+                          }
+                          required
+                        />
+                      </div>
+
+                      {twoFactorError && (
+                        <div className={styles.formError} role="alert">
+                          {twoFactorError}
+                        </div>
+                      )}
+
+                      <button
+                        className={styles.submitButton}
+                        type="submit"
+                        disabled={twoFactorLoading}
+                      >
+                        {twoFactorLoading ? "Подготовка..." : "Продолжить"}
+                      </button>
+                    </form>
+                  </div>
+                )}
+
+                {!twoFactorEnabled && twoFactorUri && (
+                  <div className={styles.twoFactorPanel}>
+                    <h3>Шаг 1. Отсканируйте QR-код</h3>
+                    <p>
+                      Откройте приложение-аутентификатор на телефоне и
+                      отсканируйте этот QR-код.
+                    </p>
+
+                    <div className={styles.qrContainer}>
+                      <QRCode value={twoFactorUri} size={200} />
+                    </div>
+
+                    <h3>Шаг 2. Подтвердите подключение</h3>
+                    <p>
+                      Введите шестизначный код, который отображается в
+                      приложении.
+                    </p>
+
+                    <form
+                      className={styles.twoFactorForm}
+                      onSubmit={handleVerifyTwoFactor}
+                    >
+                      <div className={styles.formField}>
+                        <label htmlFor="twoFactorCode">Код из приложения</label>
+                        <input
+                          id="twoFactorCode"
+                          type="text"
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
+                          maxLength={6}
+                          placeholder="000000"
+                          value={twoFactorCode}
+                          onChange={(event) =>
+                            setTwoFactorCode(
+                              event.target.value.replace(/\D/g, "").slice(0, 6),
+                            )
+                          }
+                          required
+                        />
+                      </div>
+
+                      {twoFactorError && (
+                        <div className={styles.formError} role="alert">
+                          {twoFactorError}
+                        </div>
+                      )}
+
+                      <button
+                        className={styles.submitButton}
+                        type="submit"
+                        disabled={
+                          twoFactorLoading || twoFactorCode.length !== 6
+                        }
+                      >
+                        {twoFactorLoading
+                          ? "Проверка..."
+                          : "Подтвердить и включить"}
+                      </button>
+                    </form>
+                  </div>
+                )}
+
+                {twoFactorEnabled && (
+                  <>
+                    <div className={styles.twoFactorPanel}>
+                      <h3>Резервные коды</h3>
+                      <p>
+                        Резервные коды позволяют войти в аккаунт, если у вас нет
+                        доступа к приложению-аутентификатору. Каждый код можно
+                        использовать только один раз.
+                      </p>
+
+                      {!backupCodes.length && (
+                        <form
+                          className={styles.twoFactorForm}
+                          onSubmit={handleRegenerateBackupCodes}
+                        >
+                          <div className={styles.formField}>
+                            <label htmlFor="backupPassword">
+                              Подтвердите пароль
+                            </label>
+                            <input
+                              id="backupPassword"
+                              type="password"
+                              autoComplete="current-password"
+                              value={backupPassword}
+                              onChange={(event) =>
+                                setBackupPassword(event.target.value)
+                              }
+                              required
+                            />
+                          </div>
+
+                          {backupError && (
+                            <div className={styles.formError} role="alert">
+                              {backupError}
+                            </div>
+                          )}
+
+                          {backupSuccess && (
+                            <div className={styles.formSuccess} role="status">
+                              {backupSuccess}
+                            </div>
+                          )}
+
+                          <button
+                            className={styles.secondaryButton}
+                            type="submit"
+                            disabled={backupLoading}
+                          >
+                            {backupLoading
+                              ? "Создание кодов..."
+                              : "Создать новые резервные коды"}
+                          </button>
+                        </form>
+                      )}
+
+                      {backupCodes.length > 0 && (
+                        <div className={styles.backupCodesBlock}>
+                          <div className={styles.backupWarning}>
+                            Сохраните эти коды сейчас. После закрытия этого
+                            блока посмотреть их повторно будет невозможно. При
+                            перевыпуске старые коды уже недействительны.
+                          </div>
+
+                          <div className={styles.backupCodesGrid}>
+                            {backupCodes.map((code, index) => (
+                              <code
+                                className={styles.backupCode}
+                                key={`${code}-${index}`}
+                              >
+                                {code}
+                              </code>
+                            ))}
+                          </div>
+
+                          <label className={styles.confirmCodes}>
+                            <input
+                              type="checkbox"
+                              checked={backupCodesSaved}
+                              onChange={(event) =>
+                                setBackupCodesSaved(event.target.checked)
+                              }
+                            />
+                            <span>
+                              Я сохранила резервные коды в надёжном месте
+                            </span>
+                          </label>
+
+                          <button
+                            className={styles.submitButton}
+                            type="button"
+                            disabled={!backupCodesSaved}
+                            onClick={handleConfirmBackupCodesSaved}
+                          >
+                            Готово, я сохранила коды
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className={styles.twoFactorPanel}>
+                      <h3>Отключение двухфакторной защиты</h3>
+                      <p>
+                        Для отключения дополнительной защиты потребуется
+                        подтвердить текущий пароль.
+                      </p>
+
+                      <form
+                        className={styles.twoFactorForm}
+                        onSubmit={handleDisableTwoFactor}
+                      >
+                        <div className={styles.formField}>
+                          <label htmlFor="disablePassword">
+                            Текущий пароль
+                          </label>
+                          <input
+                            id="disablePassword"
+                            type="password"
+                            autoComplete="current-password"
+                            value={disablePassword}
+                            onChange={(event) =>
+                              setDisablePassword(event.target.value)
+                            }
+                            required
+                          />
+                        </div>
+
+                        {disableError && (
+                          <div className={styles.formError} role="alert">
+                            {disableError}
+                          </div>
+                        )}
+
+                        <button
+                          className={styles.dangerButton}
+                          type="submit"
+                          disabled={disableLoading}
+                        >
+                          {disableLoading
+                            ? "Отключение..."
+                            : "Отключить двухфакторную защиту"}
+                        </button>
+                      </form>
+                    </div>
+                  </>
+                )}
+
+                {twoFactorSuccess && (
+                  <div className={styles.formSuccess} role="status">
+                    {twoFactorSuccess}
+                  </div>
+                )}
               </>
             )}
 

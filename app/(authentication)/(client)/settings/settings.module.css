@@ -342,3 +342,227 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Двухфакторная защита */
+
+.twoFactorStatus {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 18px;
+  border: 1px solid #e8e1f2;
+  border-radius: 12px;
+  background: #faf9fc;
+}
+
+.twoFactorStatusIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #f0ebfa;
+  font-size: 20px;
+}
+
+.twoFactorStatus > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.twoFactorStatus strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #302947;
+  font-size: 14px;
+}
+
+.twoFactorStatus p {
+  margin: 0;
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.twoFactorPanel {
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.twoFactorPanel h3 {
+  margin: 0 0 10px;
+  color: #302947;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.twoFactorPanel p {
+  margin: 0 0 18px;
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.twoFactorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 440px;
+}
+
+.qrContainer {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: 20px auto 28px;
+  padding: 18px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.qrContainer svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.secondaryButton,
+.dangerButton {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+}
+
+.secondaryButton {
+  border-color: #ded7eb;
+  background: #f7f4fc;
+  color: #6846bd;
+}
+
+.secondaryButton:hover:not(:disabled) {
+  border-color: #c9bce2;
+  background: #f0ebfa;
+}
+
+.dangerButton {
+  border-color: #f0d4d4;
+  background: #fff6f6;
+  color: #b43e3e;
+}
+
+.dangerButton:hover:not(:disabled) {
+  border-color: #e8bcbc;
+  background: #ffeded;
+}
+
+.secondaryButton:disabled,
+.dangerButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.backupCodesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.backupWarning {
+  padding: 14px;
+  border: 1px solid #f0dfb9;
+  border-radius: 9px;
+  background: #fffaf0;
+  color: #856321;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.backupCodesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.backupCode {
+  display: block;
+  padding: 12px 10px;
+  border: 1px solid #e8e1f2;
+  border-radius: 8px;
+  background: #faf9fc;
+  color: #302947;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.confirmCodes {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #625b70;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.confirmCodes input {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin: 1px 0 0;
+  accent-color: #6846bd;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .twoFactorStatus {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .twoFactorStatus > span:last-child {
+    margin-left: 58px;
+  }
+
+  .twoFactorPanel {
+    padding: 17px;
+  }
+
+  .twoFactorForm {
+    max-width: 100%;
+  }
+
+  .secondaryButton,
+  .dangerButton {
+    width: 100%;
+  }
+
+  .backupCodesGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .backupCode {
+    padding: 11px 6px;
+    font-size: 12px;
+  }
+}
