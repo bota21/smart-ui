@@ -112,6 +112,23 @@
   border: 1px solid #e8e8f0;
 }
 
+.forgotPasswordWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.forgotPassword {
+  color: #7652d8;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
 .footer {
   margin: 24px 0 0;
   color: #858094;

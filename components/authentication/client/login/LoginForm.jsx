@@ -88,6 +88,11 @@ export default function LoginForm() {
           className={styles.input}
         />
 
+        <div className={styles.forgotPasswordWrapper}>
+          <Link href="/forgot-password" className={styles.forgotPassword}>
+            Забыли пароль?
+          </Link>
+        </div>
         {error && (
           <p role="alert" className={styles.error}>
             {error}
