@@ -1,0 +1,209 @@
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.userMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 9px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.userButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #7651d5;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.userButtonName {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chevron {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 3000;
+  width: 245px;
+  padding: 10px;
+  border: 1px solid #e8e5ef;
+  border-radius: 14px;
+  background: white;
+  color: #29263a;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+  animation: menuAppear 0.18s ease;
+}
+
+.dropdownUser {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 10px;
+  overflow: hidden;
+}
+
+.dropdownUser strong {
+  overflow: hidden;
+  color: #29263a;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownUser span {
+  overflow: hidden;
+  color: #888496;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divider {
+  height: 1px;
+  margin: 6px 0;
+  background: #eeeaf4;
+}
+
+.dropdownLink,
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 11px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #393548;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdownLink:hover {
+  background: #f5f2fb;
+}
+
+.menuIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  font-size: 19px;
+}
+
+.logoutButton {
+  color: #d63b50;
+}
+
+.logoutButton:hover {
+  background: #fff1f2;
+}
+
+.logoutButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loginButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 17px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 9px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.loginButton:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@keyframes menuAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .headerActions {
+    gap: 8px;
+  }
+
+  .userButton {
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .userButtonName {
+    display: none;
+  }
+
+  .dropdown {
+    width: 225px;
+  }
+
+  .loginButton {
+    padding: 0 10px;
+    font-size: 13px;
+  }
+}

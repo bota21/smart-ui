@@ -8,6 +8,20 @@
       "when": 1795351805772,
       "tag": "0000_public_queen_noir",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795356524035,
+      "tag": "0001_unknown_monster_badoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795449248032,
+      "tag": "0002_careless_owl",
+      "breakpoints": true
     }
   ]
 }
