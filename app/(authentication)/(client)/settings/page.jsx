@@ -5,6 +5,8 @@ import QRCode from "react-qr-code";
 import { authClient } from "@/lib/client-auth";
 import styles from "./settings.module.css";
 
+import SessionsManager from "./SessionsManager";
+
 export default function SettingsPage() {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
@@ -760,9 +762,7 @@ export default function SettingsPage() {
                 <p className={styles.sectionDescription}>
                   Просмотр устройств, на которых выполнен вход в аккаунт.
                 </p>
-                <div className={styles.placeholder}>
-                  Раздел будет реализован следующим этапом.
-                </div>
+                <SessionsManager />
               </>
             )}
 

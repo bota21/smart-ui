@@ -1,0 +1,285 @@
+.sessionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sessionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sessionsHeader h3 {
+  margin: 0 0 7px;
+  color: #302947;
+  font-size: 16px;
+}
+
+.sessionsHeader p {
+  margin: 0;
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sessionsCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: #f0ebfa;
+  color: #6846bd;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sessionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sessionCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.deviceIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #f4f0fb;
+  font-size: 21px;
+}
+
+.sessionDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.deviceHeading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.deviceHeading h4 {
+  margin: 0;
+  color: #302947;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.currentBadge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #edf8f1;
+  color: #27845b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sessionMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #777185;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.sessionActions {
+  margin-top: 14px;
+}
+
+.revokeButton,
+.dangerButton,
+.cancelButton,
+.secondaryButton {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+}
+
+.revokeButton {
+  border: 1px solid #ded7eb;
+  background: #f7f4fc;
+  color: #6846bd;
+}
+
+.revokeButton:hover {
+  border-color: #c9bce2;
+  background: #f0ebfa;
+}
+
+.dangerButton {
+  border: 1px solid #f0d4d4;
+  background: #fff6f6;
+  color: #b43e3e;
+}
+
+.dangerButton:hover:not(:disabled) {
+  border-color: #e8bcbc;
+  background: #ffeded;
+}
+
+.cancelButton {
+  border: 1px solid #ded8e9;
+  background: #fff;
+  color: #625b70;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #f7f4fc;
+}
+
+.secondaryButton {
+  align-self: flex-start;
+  border: 1px solid #ded7eb;
+  background: #f7f4fc;
+  color: #6846bd;
+}
+
+.secondaryButton:hover {
+  background: #f0ebfa;
+}
+
+.dangerButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.confirmActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.confirmActions span {
+  width: 100%;
+  color: #625b70;
+  font-size: 12px;
+}
+
+.revokeAllSection {
+  padding: 20px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #faf9fc;
+}
+
+.revokeAllSection h3 {
+  margin: 0 0 8px;
+  color: #302947;
+  font-size: 15px;
+}
+
+.revokeAllSection p {
+  margin: 0 0 16px;
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.confirmAll strong {
+  display: block;
+  color: #302947;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.confirmAll p {
+  margin-top: 8px;
+}
+
+.emptyState,
+.message {
+  padding: 22px;
+  border: 1px dashed #ded7eb;
+  border-radius: 12px;
+  background: #faf9fc;
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.error,
+.success {
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.error {
+  border: 1px solid #f1d0d0;
+  background: #fff6f6;
+  color: #b43e3e;
+}
+
+.success {
+  border: 1px solid #cce9d8;
+  background: #f3fbf6;
+  color: #27845b;
+}
+
+@media (max-width: 600px) {
+  .sessionCard {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .deviceIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 19px;
+  }
+
+  .deviceHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .revokeAllSection {
+    padding: 16px;
+  }
+
+  .confirmActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .confirmActions button {
+    width: 100%;
+  }
+}
