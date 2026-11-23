@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.27",
+    "@better-auth/passkey": "^1.7.27",
     "@neondatabase/serverless": "^1.2.1",
     "better-auth": "^1.7.27",
     "drizzle-kit": "^0.31.11",
