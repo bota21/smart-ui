@@ -185,6 +185,58 @@
   cursor: pointer;
 }
 
+.backupActions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.saveConfirm {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 22px;
+  color: #514a62;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.saveConfirm input {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  accent-color: #7652d8;
+}
+
+.backupBox {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid #e9e2f8;
+  border-radius: 13px;
+  background: #faf8ff;
+  text-align: left;
+}
+
+.backupBox h2 {
+  margin: 0 0 8px;
+  color: #302947;
+  font-size: 16px;
+}
+
+.backupBox p {
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (max-width: 480px) {
   .card {
     padding: 30px 20px;

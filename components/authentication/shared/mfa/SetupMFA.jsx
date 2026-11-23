@@ -8,6 +8,7 @@ import styles from "./mfa.module.css";
 
 export default function SetupMFA() {
   const router = useRouter();
+
   const [password, setPassword] = useState("");
   const [totpURI, setTotpURI] = useState("");
   const [code, setCode] = useState("");
@@ -15,6 +16,7 @@ export default function SetupMFA() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   async function handleEnable(event) {
     event.preventDefault();
@@ -55,6 +57,12 @@ export default function SetupMFA() {
         throw new Error(result.error.message || "Неверный код.");
       }
 
+      if (!backupCodes.length) {
+        throw new Error(
+          "Резервные коды не получены. Не закрывайте страницу и обратитесь в поддержку.",
+        );
+      }
+
       setCompleted(true);
     } catch (err) {
       setError(err.message || "Не удалось подтвердить код.");
@@ -63,9 +71,44 @@ export default function SetupMFA() {
     }
   }
 
-  function continueToAccount() {
-    router.replace("/");
+  function downloadBackupCodes() {
+    const content = [
+      "SmartÜi — резервные коды двухфакторной аутентификации",
+      "",
+      "Каждый код можно использовать только один раз.",
+      "Храните этот файл в безопасном месте.",
+      "",
+      ...backupCodes,
+    ].join("\n");
 
+    const blob = new Blob([content], {
+      type: "text/plain;charset=utf-8",
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "smartui-backup-codes.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function copyBackupCodes() {
+    try {
+      await navigator.clipboard.writeText(backupCodes.join("\n"));
+    } catch {
+      setError("Не удалось скопировать коды. Скачайте файл.");
+    }
+  }
+
+  function continueToAccount() {
+    if (!saved || !backupCodes.length) return;
+
+    router.replace("/");
     router.refresh();
   }
 
@@ -74,38 +117,62 @@ export default function SetupMFA() {
       <main className={styles.page}>
         <section className={styles.card}>
           <div className={styles.successIcon}>✓</div>
+
           <h1 className={styles.title}>Защита подключена</h1>
+
           <p className={styles.description}>
-            Двухфакторная аутентификация успешно активирована.
+            Двухфакторная аутентификация успешно активирована. Теперь сохраните
+            резервные коды для восстановления доступа.
           </p>
 
-          {backupCodes.length > 0 && (
-            <div className={styles.backupBox}>
-              <h2>Резервные коды</h2>
-              <p>
-                Сохраните их в надёжном месте. Каждый код можно использовать
-                только один раз.
-              </p>
-              <div className={styles.codes}>
-                {backupCodes.map((item, index) => (
-                  <code key={index}>{item}</code>
-                ))}
-              </div>
+          <div className={styles.backupBox}>
+            <h2>Ваши резервные коды</h2>
+
+            <p>
+              Каждый код можно использовать только один раз. После использования
+              он перестанет действовать.
+            </p>
+
+            <div className={styles.codes}>
+              {backupCodes.map((item, index) => (
+                <code key={index}>{item}</code>
+              ))}
+            </div>
+
+            <div className={styles.backupActions}>
               <button
                 type="button"
                 className={styles.secondaryButton}
-                onClick={() =>
-                  navigator.clipboard.writeText(backupCodes.join("\n"))
-                }
+                onClick={downloadBackupCodes}
               >
-                Скопировать коды
+                Скачать резервные коды (.txt)
+              </button>
+
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                onClick={copyBackupCodes}
+              >
+                Скопировать все коды
               </button>
             </div>
-          )}
+          </div>
+
+          <label className={styles.saveConfirm}>
+            <input
+              type="checkbox"
+              checked={saved}
+              onChange={(event) => setSaved(event.target.checked)}
+            />
+            <span>Я сохранил резервные коды в надёжном месте</span>
+          </label>
+
+          {error && <p className={styles.error}>{error}</p>}
 
           <button
             type="button"
             className={styles.button}
+            disabled={!saved || !backupCodes.length}
             onClick={continueToAccount}
           >
             Продолжить
@@ -119,7 +186,9 @@ export default function SetupMFA() {
     <main className={styles.page}>
       <section className={styles.card}>
         <div className={styles.logo}>SmartÜi</div>
+
         <h1 className={styles.title}>Защитите свой аккаунт</h1>
+
         <p className={styles.description}>
           Настройте двухфакторную аутентификацию для дополнительной защиты
           вашего аккаунта.
@@ -130,6 +199,7 @@ export default function SetupMFA() {
             <label className={styles.label} htmlFor="mfa-password">
               Подтвердите пароль
             </label>
+
             <input
               id="mfa-password"
               className={styles.input}
@@ -153,13 +223,13 @@ export default function SetupMFA() {
             </div>
 
             <p className={styles.description}>
-              Откройте Google Authenticator, Microsoft Authenticator или другое
-              приложение-аутентификатор и отсканируйте QR-код.
+              Откройте приложение-аутентификатор и отсканируйте QR-код.
             </p>
 
             <label className={styles.label} htmlFor="mfa-code">
               Код из приложения
             </label>
+
             <input
               id="mfa-code"
               className={styles.input}
