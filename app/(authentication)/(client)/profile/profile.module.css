@@ -1,0 +1,167 @@
+.page {
+  min-height: 70vh;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card {
+  width: 100%;
+  max-width: 850px;
+  padding: 45px 50px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.07);
+  box-sizing: border-box;
+}
+
+.avatar {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e9edf5;
+  color: #263b60;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 30px;
+  color: #202938;
+  text-align: left;
+}
+
+.subtitle {
+  margin: 0 0 36px;
+  color: #737d8d;
+  font-size: 15px;
+  text-align: left;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid #edf0f4;
+  box-sizing: border-box;
+}
+
+.field span {
+  color: #596579;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.field strong {
+  color: #263142;
+  font-size: 16px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.field input,
+.field textarea {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 15px;
+  border: 1px solid #dfe4ec;
+  border-radius: 9px;
+  outline: none;
+  color: #263142;
+  font-size: 16px;
+  font-family: inherit;
+  background: #fff;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #263b60;
+  box-shadow: 0 0 0 3px rgba(38, 59, 96, 0.08);
+}
+
+.field textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.saveButton {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #263b60;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.saveButton:hover {
+  opacity: 0.9;
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error,
+.success {
+  margin: 0;
+  font-size: 14px;
+}
+
+.error {
+  color: #c0392b;
+}
+
+.success {
+  color: #218653;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 30px 15px;
+  }
+
+  .card {
+    padding: 28px 22px;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .subtitle {
+    margin-bottom: 28px;
+  }
+
+  .form {
+    gap: 20px;
+  }
+}
