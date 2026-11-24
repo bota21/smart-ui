@@ -68,7 +68,7 @@ export default function RegisterForm() {
         phoneNumber: phone,
         email: cleanEmail,
         password,
-        callbackURL: "/mfa",
+        callbackURL: "/profile",
       });
 
       if (result.error) {
