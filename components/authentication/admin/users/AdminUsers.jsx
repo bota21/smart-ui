@@ -37,6 +37,9 @@ function UsersTable({
   onDelete,
   canDelete,
   currentUserId,
+  currentUserRole,
+  onChangeRole,
+  canChangeRole,
 }) {
   if (users.length === 0) {
     return <div className={styles.empty}>{emptyText}</div>;
@@ -111,13 +114,31 @@ function UsersTable({
 
               <td>
                 <div className={styles.actions}>
-                  <button
-                    type="button"
-                    className={styles.editButton}
-                    onClick={() => onEdit(user)}
-                  >
-                    Редактировать
-                  </button>
+                  {(currentUserRole === "superadmin" ||
+                    user.role === "user") && (
+                    <button
+                      type="button"
+                      className={styles.editButton}
+                      onClick={() => onEdit(user)}
+                    >
+                      Редактировать
+                    </button>
+                  )}
+
+                  {canChangeRole &&
+                    user.id !== currentUserId &&
+                    user.role !== "superadmin" &&
+                    user.emailVerified && (
+                      <button
+                        type="button"
+                        className={styles.editButton}
+                        onClick={() => onChangeRole(user)}
+                      >
+                        {user.role === "user"
+                          ? "Назначить админом"
+                          : "Снять роль"}
+                      </button>
+                    )}
 
                   {canDelete &&
                     user.id !== currentUserId &&
@@ -145,6 +166,7 @@ export default function AdminUsers({ currentUser }) {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   const [deleteError, setDeleteError] = useState("");
   const [deletingUser, setDeletingUser] = useState(null);
   const [deleting, setDeleting] = useState(false);
@@ -154,6 +176,10 @@ export default function AdminUsers({ currentUser }) {
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const [roleTarget, setRoleTarget] = useState(null);
+  const [roleSaving, setRoleSaving] = useState(false);
+  const [roleError, setRoleError] = useState("");
 
   const loadUsers = useCallback(async () => {
     setLoading(true);
@@ -343,6 +369,66 @@ export default function AdminUsers({ currentUser }) {
     }
   }
 
+  function openRoleConfirmation(user) {
+    setRoleError("");
+    setSuccessMessage("");
+    setRoleTarget(user);
+  }
+
+  function closeRoleConfirmation() {
+    if (roleSaving) return;
+
+    setRoleTarget(null);
+    setRoleError("");
+  }
+
+  async function confirmRoleChange() {
+    if (!roleTarget || roleSaving) return;
+
+    const nextRole = roleTarget.role === "user" ? "admin" : "user";
+
+    setRoleSaving(true);
+    setRoleError("");
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch(
+        `/api/admin/users/${encodeURIComponent(roleTarget.id)}/role`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ role: nextRole }),
+        },
+      );
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось изменить роль.");
+      }
+
+      setUsers((previous) =>
+        previous.map((user) =>
+          user.id === roleTarget.id ? { ...user, ...data.user } : user,
+        ),
+      );
+
+      setRoleTarget(null);
+      setSuccessMessage("Роль пользователя успешно обновлена.");
+
+      setTimeout(() => setSuccessMessage(""), 4000);
+    } catch (err) {
+      setRoleError(err.message || "Ошибка при изменении роли.");
+    } finally {
+      setRoleSaving(false);
+    }
+  }
+
+  const nextRoleLabel =
+    roleTarget?.role === "user" ? "Администратор" : "Пользователь";
+
   return (
     <main className={styles.page}>
       <div className={styles.container}>
@@ -440,8 +526,11 @@ export default function AdminUsers({ currentUser }) {
                   emptyText="Администраторы не найдены."
                   onEdit={openEditor}
                   onDelete={openDeleteConfirmation}
+                  onChangeRole={openRoleConfirmation}
                   canDelete={currentUser.role === "superadmin"}
+                  canChangeRole={currentUser.role === "superadmin"}
                   currentUserId={currentUser.id}
+                  currentUserRole={currentUser.role}
                 />
               </section>
 
@@ -456,8 +545,11 @@ export default function AdminUsers({ currentUser }) {
                   emptyText="Пользователи не найдены."
                   onEdit={openEditor}
                   onDelete={openDeleteConfirmation}
+                  onChangeRole={openRoleConfirmation}
                   canDelete={currentUser.role === "superadmin"}
+                  canChangeRole={currentUser.role === "superadmin"}
                   currentUserId={currentUser.id}
+                  currentUserRole={currentUser.role}
                 />
               </section>
             </>
@@ -642,6 +734,87 @@ export default function AdminUsers({ currentUser }) {
                 disabled={deleting}
               >
                 {deleting ? "Удаление..." : "Да, удалить"}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {roleTarget && (
+        <div
+          className={styles.modalOverlay}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closeRoleConfirmation();
+            }
+          }}
+        >
+          <section
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="change-role-title"
+          >
+            <div className={styles.modalHeader}>
+              <div>
+                <span className={styles.eyebrow}>УПРАВЛЕНИЕ РОЛЯМИ</span>
+                <h2 id="change-role-title">Изменить роль пользователя?</h2>
+              </div>
+
+              <button
+                type="button"
+                className={styles.closeButton}
+                onClick={closeRoleConfirmation}
+                disabled={roleSaving}
+                aria-label="Закрыть"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className={styles.deleteUserInfo}>
+              <strong>
+                {[roleTarget.firstName, roleTarget.lastName]
+                  .filter(Boolean)
+                  .join(" ") ||
+                  roleTarget.name ||
+                  "Без имени"}
+              </strong>
+              <span>{roleTarget.email}</span>
+            </div>
+
+            <div className={styles.readOnlyInfo}>
+              <span>Текущая роль</span>
+              <strong>{roleLabels[roleTarget.role]}</strong>
+              <span>Новая роль</span>
+              <strong>{nextRoleLabel}</strong>
+            </div>
+
+            <p>
+              {roleTarget.role === "user"
+                ? "Пользователь получит доступ к административной панели и возможность редактировать обычные аккаунты."
+                : "Пользователь потеряет доступ к административной панели и станет обычным пользователем."}
+            </p>
+
+            {roleError && <div className={styles.formError}>{roleError}</div>}
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={closeRoleConfirmation}
+                disabled={roleSaving}
+              >
+                Отмена
+              </button>
+
+              <button
+                type="button"
+                className={styles.saveButton}
+                onClick={confirmRoleChange}
+                disabled={roleSaving}
+              >
+                {roleSaving ? "Сохранение..." : "Подтвердить"}
               </button>
             </div>
           </section>
