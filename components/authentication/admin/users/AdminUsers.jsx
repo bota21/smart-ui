@@ -9,6 +9,13 @@ const roleLabels = {
   superadmin: "Главный администратор",
 };
 
+const emptyForm = {
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  address: "",
+};
+
 function formatDate(value) {
   if (!value) return "—";
 
@@ -23,7 +30,7 @@ function formatDate(value) {
   }).format(date);
 }
 
-function UsersTable({ users, emptyText }) {
+function UsersTable({ users, emptyText, onEdit }) {
   if (users.length === 0) {
     return <div className={styles.empty}>{emptyText}</div>;
   }
@@ -38,6 +45,7 @@ function UsersTable({ users, emptyText }) {
             <th>Роль</th>
             <th>Почта</th>
             <th>Регистрация</th>
+            <th>Действия</th>
           </tr>
         </thead>
 
@@ -93,6 +101,16 @@ function UsersTable({ users, emptyText }) {
               </td>
 
               <td className={styles.date}>{formatDate(user.createdAt)}</td>
+
+              <td>
+                <button
+                  type="button"
+                  className={styles.editButton}
+                  onClick={() => onEdit(user)}
+                >
+                  Редактировать
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -106,6 +124,12 @@ export default function AdminUsers({ currentUser }) {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [editingUser, setEditingUser] = useState(null);
+  const [form, setForm] = useState(emptyForm);
+  const [saving, setSaving] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const loadUsers = useCallback(async () => {
     setLoading(true);
@@ -164,6 +188,88 @@ export default function AdminUsers({ currentUser }) {
   const administratorsCount = users.filter((user) =>
     ["admin", "superadmin"].includes(user.role),
   ).length;
+
+  function openEditor(user) {
+    setEditingUser(user);
+    setForm({
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      phoneNumber: user.phoneNumber || "",
+      address: user.address || "",
+    });
+    setFormError("");
+    setSuccessMessage("");
+  }
+
+  function closeEditor() {
+    if (saving) return;
+
+    setEditingUser(null);
+    setForm(emptyForm);
+    setFormError("");
+  }
+
+  function updateField(event) {
+    const { name, value } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
+
+  async function saveUser(event) {
+    event.preventDefault();
+
+    if (!editingUser || saving) return;
+
+    setSaving(true);
+    setFormError("");
+
+    const firstName = form.firstName.trim();
+    const lastName = form.lastName.trim();
+
+    try {
+      const response = await fetch(
+        `/api/admin/users/${encodeURIComponent(editingUser.id)}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            name: [firstName, lastName].filter(Boolean).join(" "),
+            phoneNumber: form.phoneNumber.trim(),
+            address: form.address.trim(),
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось сохранить изменения.");
+      }
+
+      setUsers((previous) =>
+        previous.map((user) =>
+          user.id === editingUser.id ? { ...user, ...data.user } : user,
+        ),
+      );
+
+      setEditingUser(null);
+      setForm(emptyForm);
+      setSuccessMessage("Данные пользователя успешно обновлены.");
+
+      setTimeout(() => setSuccessMessage(""), 4000);
+    } catch (err) {
+      setFormError(err.message || "Произошла ошибка при сохранении.");
+    } finally {
+      setSaving(false);
+    }
+  }
 
   return (
     <main className={styles.page}>
@@ -234,6 +340,10 @@ export default function AdminUsers({ currentUser }) {
             </span>
           </div>
 
+          {successMessage && (
+            <div className={styles.successMessage}>{successMessage}</div>
+          )}
+
           {error ? (
             <div className={styles.error}>
               {error}
@@ -254,6 +364,7 @@ export default function AdminUsers({ currentUser }) {
                 <UsersTable
                   users={administrators}
                   emptyText="Администраторы не найдены."
+                  onEdit={openEditor}
                 />
               </section>
 
@@ -266,6 +377,7 @@ export default function AdminUsers({ currentUser }) {
                 <UsersTable
                   users={regularUsers}
                   emptyText="Пользователи не найдены."
+                  onEdit={openEditor}
                 />
               </section>
             </>
@@ -276,6 +388,113 @@ export default function AdminUsers({ currentUser }) {
           </p>
         </section>
       </div>
+
+      {editingUser && (
+        <div
+          className={styles.modalOverlay}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeEditor();
+          }}
+        >
+          <section
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="edit-user-title"
+          >
+            <div className={styles.modalHeader}>
+              <div>
+                <span className={styles.eyebrow}>УПРАВЛЕНИЕ АККАУНТОМ</span>
+                <h2 id="edit-user-title">Редактирование пользователя</h2>
+              </div>
+
+              <button
+                type="button"
+                className={styles.closeButton}
+                onClick={closeEditor}
+                disabled={saving}
+                aria-label="Закрыть"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className={styles.readOnlyInfo}>
+              <span>Электронная почта</span>
+              <strong>{editingUser.email}</strong>
+              <span>Роль</span>
+              <strong>
+                {roleLabels[editingUser.role] || editingUser.role}
+              </strong>
+            </div>
+
+            <form className={styles.editForm} onSubmit={saveUser}>
+              <label>
+                Имя
+                <input
+                  name="firstName"
+                  value={form.firstName}
+                  onChange={updateField}
+                  maxLength={100}
+                />
+              </label>
+
+              <label>
+                Фамилия
+                <input
+                  name="lastName"
+                  value={form.lastName}
+                  onChange={updateField}
+                  maxLength={100}
+                />
+              </label>
+
+              <label>
+                Телефон
+                <input
+                  name="phoneNumber"
+                  type="tel"
+                  value={form.phoneNumber}
+                  onChange={updateField}
+                  maxLength={30}
+                />
+              </label>
+
+              <label>
+                Адрес
+                <textarea
+                  name="address"
+                  value={form.address}
+                  onChange={updateField}
+                  rows={3}
+                  maxLength={500}
+                />
+              </label>
+
+              {formError && <div className={styles.formError}>{formError}</div>}
+
+              <div className={styles.modalActions}>
+                <button
+                  type="button"
+                  className={styles.cancelButton}
+                  onClick={closeEditor}
+                  disabled={saving}
+                >
+                  Отмена
+                </button>
+
+                <button
+                  type="submit"
+                  className={styles.saveButton}
+                  disabled={saving}
+                >
+                  {saving ? "Сохранение..." : "Сохранить изменения"}
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      )}
     </main>
   );
 }
