@@ -17,7 +17,9 @@ function MfaContent() {
     initialSessionChecked.current = true;
 
     if (session?.user?.twoFactorEnabled) {
-      router.replace(session.user.role === "admin" ? "/admin" : "/");
+      router.replace(
+        ["admin", "superadmin"].includes(session.user.role) ? "/admin" : "/",
+      );
     }
   }, [session, isPending, router]);
 

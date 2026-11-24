@@ -16,7 +16,7 @@ export default function LoginForm() {
   const [passkeyLoading, setPasskeyLoading] = useState(false);
 
   function redirectAfterLogin(user) {
-    if (user?.role === "admin") {
+    if (["admin", "superadmin"].includes(user?.role)) {
       router.replace("/admin");
     } else {
       router.replace("/");

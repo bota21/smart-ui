@@ -7,7 +7,7 @@ import styles from "./admin-login.module.css";
 
 export default function AdminLoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState("smart.ui@inbox.ru");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ export default function AdminLoginForm() {
         return;
       }
 
-      if (result.data?.user?.role !== "admin") {
+      if (!["admin", "superadmin"].includes(result.data?.user?.role)) {
         await authClient.signOut();
         throw new Error("У этой учётной записи нет прав администратора.");
       }
