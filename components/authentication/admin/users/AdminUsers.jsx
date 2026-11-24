@@ -146,6 +146,8 @@ export default function AdminUsers({ currentUser }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [deleteError, setDeleteError] = useState("");
+  const [deletingUser, setDeletingUser] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const [editingUser, setEditingUser] = useState(null);
   const [form, setForm] = useState(emptyForm);
@@ -293,19 +295,28 @@ export default function AdminUsers({ currentUser }) {
     }
   }
 
-  async function deleteUser(user) {
-    const confirmed = window.confirm(
-      `Вы действительно хотите удалить аккаунт ${user.email}?\n\nЭто действие нельзя отменить.`,
-    );
+  function openDeleteConfirmation(user) {
+    setDeleteError("");
+    setDeletingUser(user);
+  }
 
-    if (!confirmed) return;
+  function closeDeleteConfirmation() {
+    if (deleting) return;
 
+    setDeletingUser(null);
+    setDeleteError("");
+  }
+
+  async function confirmDeleteUser() {
+    if (!deletingUser || deleting) return;
+
+    setDeleting(true);
     setDeleteError("");
     setSuccessMessage("");
 
     try {
       const response = await fetch(
-        `/api/admin/users/${encodeURIComponent(user.id)}`,
+        `/api/admin/users/${encodeURIComponent(deletingUser.id)}`,
         {
           method: "DELETE",
         },
@@ -317,12 +328,18 @@ export default function AdminUsers({ currentUser }) {
         throw new Error(data.error || "Не удалось удалить пользователя.");
       }
 
-      setUsers((previous) => previous.filter((item) => item.id !== user.id));
+      setUsers((previous) =>
+        previous.filter((item) => item.id !== deletingUser.id),
+      );
 
+      setDeletingUser(null);
       setSuccessMessage("Пользователь успешно удалён.");
+
       setTimeout(() => setSuccessMessage(""), 4000);
     } catch (err) {
       setDeleteError(err.message || "Ошибка при удалении пользователя.");
+    } finally {
+      setDeleting(false);
     }
   }
 
@@ -422,7 +439,7 @@ export default function AdminUsers({ currentUser }) {
                   users={administrators}
                   emptyText="Администраторы не найдены."
                   onEdit={openEditor}
-                  onDelete={deleteUser}
+                  onDelete={openDeleteConfirmation}
                   canDelete={currentUser.role === "superadmin"}
                   currentUserId={currentUser.id}
                 />
@@ -438,7 +455,7 @@ export default function AdminUsers({ currentUser }) {
                   users={regularUsers}
                   emptyText="Пользователи не найдены."
                   onEdit={openEditor}
-                  onDelete={deleteUser}
+                  onDelete={openDeleteConfirmation}
                   canDelete={currentUser.role === "superadmin"}
                   currentUserId={currentUser.id}
                 />
@@ -555,6 +572,78 @@ export default function AdminUsers({ currentUser }) {
                 </button>
               </div>
             </form>
+          </section>
+        </div>
+      )}
+
+      {deletingUser && (
+        <div
+          className={styles.modalOverlay}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closeDeleteConfirmation();
+            }
+          }}
+        >
+          <section
+            className={`${styles.modal} ${styles.deleteModal}`}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-user-title"
+            aria-describedby="delete-user-description"
+          >
+            <div className={styles.deleteIcon}>!</div>
+
+            <div className={styles.deleteContent}>
+              <span className={styles.eyebrow}>УДАЛЕНИЕ АККАУНТА</span>
+
+              <h2 id="delete-user-title">Удалить пользователя?</h2>
+
+              <p id="delete-user-description">
+                Ты собираешься удалить аккаунт:
+              </p>
+
+              <div className={styles.deleteUserInfo}>
+                <strong>
+                  {[deletingUser.firstName, deletingUser.lastName]
+                    .filter(Boolean)
+                    .join(" ") ||
+                    deletingUser.name ||
+                    "Без имени"}
+                </strong>
+
+                <span>{deletingUser.email}</span>
+              </div>
+
+              <p className={styles.deleteWarning}>
+                Это действие нельзя отменить. Данные аккаунта, связанные сессии
+                и способы аутентификации будут удалены.
+              </p>
+            </div>
+
+            {deleteError && (
+              <div className={styles.formError}>{deleteError}</div>
+            )}
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={closeDeleteConfirmation}
+                disabled={deleting}
+              >
+                Отмена
+              </button>
+
+              <button
+                type="button"
+                className={styles.confirmDeleteButton}
+                onClick={confirmDeleteUser}
+                disabled={deleting}
+              >
+                {deleting ? "Удаление..." : "Да, удалить"}
+              </button>
+            </div>
           </section>
         </div>
       )}
