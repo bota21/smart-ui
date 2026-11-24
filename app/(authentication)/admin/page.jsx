@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { getAuthContext } from "@/lib/auth-guard";
+import AdminUsers from "@/components/authentication/admin/users/AdminUsers";
 
 export default async function AdminPage() {
   const context = await getAuthContext();
@@ -14,14 +15,12 @@ export default async function AdminPage() {
   }
 
   return (
-    <main>
-      <h1>Панель администратора</h1>
-
-      <p>Добро пожаловать, {context.user.name || context.user.email}.</p>
-
-      {context.role === "superadmin" && (
-        <p>Вы вошли как главный администратор.</p>
-      )}
-    </main>
+    <AdminUsers
+      currentUser={{
+        name: context.user.name,
+        email: context.user.email,
+        role: context.role,
+      }}
+    />
   );
 }

@@ -1,0 +1,423 @@
+.page {
+  min-height: 75vh;
+  padding: 48px 24px 80px;
+  background: #f8f7fb;
+}
+
+.container {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  position: static;
+}
+
+.eyebrow {
+  color: #8060c5;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.header h1 {
+  margin: 10px 0;
+  color: #302947;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.header p,
+.sectionHeader p {
+  margin: 0;
+  color: #777185;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.currentUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.avatar,
+.userAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f0ebfa;
+  color: #6846bd;
+  font-weight: 700;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+}
+
+.currentUserInfo,
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.currentUserInfo strong,
+.userInfo strong {
+  color: #302947;
+  font-size: 13px;
+}
+
+.currentUserInfo small,
+.userInfo small {
+  color: #888194;
+  font-size: 12px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid #eeeaf5;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(40, 25, 70, 0.03);
+}
+
+.statCard span {
+  color: #777185;
+  font-size: 13px;
+}
+
+.statCard strong {
+  color: #302947;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.usersSection {
+  padding: 26px;
+  border: 1px solid #eeeaf5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(40, 25, 70, 0.04);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sectionHeader h2 {
+  margin: 0 0 7px;
+  color: #302947;
+  font-size: 21px;
+}
+
+.refreshButton {
+  min-height: 40px;
+  padding: 0 17px;
+  border: 1px solid #ded7eb;
+  border-radius: 9px;
+  background: #f7f4fc;
+  color: #6846bd;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.refreshButton:hover {
+  background: #f0ebfa;
+}
+
+.refreshButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.search {
+  width: 100%;
+  max-width: 440px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #ded8e9;
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: #302947;
+  font: inherit;
+  font-size: 13px;
+}
+
+.search:focus {
+  border-color: #8060c5;
+  box-shadow: 0 0 0 3px rgba(128, 96, 197, 0.1);
+}
+
+.resultCount {
+  flex-shrink: 0;
+  color: #888194;
+  font-size: 12px;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table th {
+  padding: 14px 13px;
+  border-bottom: 1px solid #eeeaf5;
+  background: #faf9fc;
+  color: #777185;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 15px 13px;
+  border-bottom: 1px solid #f0edf4;
+  color: #625b70;
+  font-size: 13px;
+}
+
+.table tbody tr:hover {
+  background: #fcfbfe;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 230px;
+}
+
+.userAvatar {
+  width: 38px;
+  height: 38px;
+  font-size: 13px;
+}
+
+.role {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.role.user {
+  background: #f1f0f4;
+  color: #706b7c;
+}
+
+.role.admin {
+  background: #edf2ff;
+  color: #4967b2;
+}
+
+.role.superadmin {
+  background: #f0ebfa;
+  color: #6846bd;
+}
+
+.verified,
+.unverified {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.verified {
+  color: #27845b;
+}
+
+.unverified {
+  color: #b7791f;
+}
+
+.date {
+  color: #888194 !important;
+  font-size: 12px !important;
+}
+
+.empty {
+  padding: 50px 20px;
+  color: #888194;
+  font-size: 14px;
+  text-align: center;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px;
+  border: 1px solid #f1d0d0;
+  border-radius: 9px;
+  background: #fff6f6;
+  color: #b43e3e;
+  font-size: 13px;
+}
+
+.error button {
+  border: none;
+  background: transparent;
+  color: #6846bd;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.footerNote {
+  margin: 18px 0 0;
+  color: #9993a5;
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 32px 16px 56px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header h1 {
+    font-size: 25px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .statCard {
+    padding: 17px;
+  }
+
+  .statCard strong {
+    font-size: 25px;
+  }
+
+  .usersSection {
+    padding: 18px;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+  }
+
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search {
+    max-width: none;
+    box-sizing: border-box;
+  }
+
+  .resultCount {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 420px) {
+  .currentUser {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+  }
+
+  .refreshButton {
+    width: 100%;
+  }
+}
+
+.tableSection {
+  margin-top: 30px;
+}
+
+.tableSection + .tableSection {
+  padding-top: 26px;
+  border-top: 1px solid #eeeaf5;
+}
+
+.tableSectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tableSectionHeader h3 {
+  margin: 0;
+  color: #302947;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.tableSectionHeader span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 7px;
+  border-radius: 8px;
+  background: #f0ebfa;
+  color: #6846bd;
+  font-size: 12px;
+  font-weight: 600;
+}
