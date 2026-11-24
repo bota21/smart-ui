@@ -30,7 +30,14 @@ function formatDate(value) {
   }).format(date);
 }
 
-function UsersTable({ users, emptyText, onEdit }) {
+function UsersTable({
+  users,
+  emptyText,
+  onEdit,
+  onDelete,
+  canDelete,
+  currentUserId,
+}) {
   if (users.length === 0) {
     return <div className={styles.empty}>{emptyText}</div>;
   }
@@ -103,13 +110,27 @@ function UsersTable({ users, emptyText, onEdit }) {
               <td className={styles.date}>{formatDate(user.createdAt)}</td>
 
               <td>
-                <button
-                  type="button"
-                  className={styles.editButton}
-                  onClick={() => onEdit(user)}
-                >
-                  Редактировать
-                </button>
+                <div className={styles.actions}>
+                  <button
+                    type="button"
+                    className={styles.editButton}
+                    onClick={() => onEdit(user)}
+                  >
+                    Редактировать
+                  </button>
+
+                  {canDelete &&
+                    user.id !== currentUserId &&
+                    user.role !== "superadmin" && (
+                      <button
+                        type="button"
+                        className={styles.deleteButton}
+                        onClick={() => onDelete(user)}
+                      >
+                        Удалить
+                      </button>
+                    )}
+                </div>
               </td>
             </tr>
           ))}
@@ -124,6 +145,7 @@ export default function AdminUsers({ currentUser }) {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
 
   const [editingUser, setEditingUser] = useState(null);
   const [form, setForm] = useState(emptyForm);
@@ -141,7 +163,7 @@ export default function AdminUsers({ currentUser }) {
         cache: "no-store",
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(data.error || "Не удалось загрузить пользователей.");
@@ -247,7 +269,7 @@ export default function AdminUsers({ currentUser }) {
         },
       );
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(data.error || "Не удалось сохранить изменения.");
@@ -268,6 +290,39 @@ export default function AdminUsers({ currentUser }) {
       setFormError(err.message || "Произошла ошибка при сохранении.");
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function deleteUser(user) {
+    const confirmed = window.confirm(
+      `Вы действительно хотите удалить аккаунт ${user.email}?\n\nЭто действие нельзя отменить.`,
+    );
+
+    if (!confirmed) return;
+
+    setDeleteError("");
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch(
+        `/api/admin/users/${encodeURIComponent(user.id)}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось удалить пользователя.");
+      }
+
+      setUsers((previous) => previous.filter((item) => item.id !== user.id));
+
+      setSuccessMessage("Пользователь успешно удалён.");
+      setTimeout(() => setSuccessMessage(""), 4000);
+    } catch (err) {
+      setDeleteError(err.message || "Ошибка при удалении пользователя.");
     }
   }
 
@@ -344,6 +399,8 @@ export default function AdminUsers({ currentUser }) {
             <div className={styles.successMessage}>{successMessage}</div>
           )}
 
+          {deleteError && <div className={styles.error}>{deleteError}</div>}
+
           {error ? (
             <div className={styles.error}>
               {error}
@@ -365,6 +422,9 @@ export default function AdminUsers({ currentUser }) {
                   users={administrators}
                   emptyText="Администраторы не найдены."
                   onEdit={openEditor}
+                  onDelete={deleteUser}
+                  canDelete={currentUser.role === "superadmin"}
+                  currentUserId={currentUser.id}
                 />
               </section>
 
@@ -378,6 +438,9 @@ export default function AdminUsers({ currentUser }) {
                   users={regularUsers}
                   emptyText="Пользователи не найдены."
                   onEdit={openEditor}
+                  onDelete={deleteUser}
+                  canDelete={currentUser.role === "superadmin"}
+                  currentUserId={currentUser.id}
                 />
               </section>
             </>

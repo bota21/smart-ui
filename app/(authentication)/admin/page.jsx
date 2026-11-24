@@ -17,6 +17,7 @@ export default async function AdminPage() {
   return (
     <AdminUsers
       currentUser={{
+        id: context.user.id,
         name: context.user.name,
         email: context.user.email,
         role: context.role,

@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { user as userTable } from "@/lib/db/schema";
 
 export async function PATCH(request, { params }) {
-  const { response } = await requireRole(["admin", "superadmin"]);
+  const { context, response } = await requireRole(["admin", "superadmin"]);
 
   if (response) {
     return response;
@@ -15,6 +15,30 @@ export async function PATCH(request, { params }) {
   try {
     const { id } = await params;
     const body = await request.json();
+
+    const [targetUser] = await db
+      .select({
+        id: userTable.id,
+        role: userTable.role,
+      })
+      .from(userTable)
+      .where(eq(userTable.id, id))
+      .limit(1);
+
+    if (!targetUser) {
+      return NextResponse.json(
+        { error: "Пользователь не найден." },
+        { status: 404 },
+      );
+    }
+
+    // Обычный администратор может редактировать только обычных пользователей.
+    if (context.role === "admin" && targetUser.role !== "user") {
+      return NextResponse.json(
+        { error: "Недостаточно прав для редактирования этого аккаунта." },
+        { status: 403 },
+      );
+    }
 
     const allowedFields = [
       "name",
@@ -28,8 +52,14 @@ export async function PATCH(request, { params }) {
 
     for (const field of allowedFields) {
       if (Object.hasOwn(body, field)) {
-        updates[field] =
-          typeof body[field] === "string" ? body[field].trim() : body[field];
+        if (typeof body[field] !== "string") {
+          return NextResponse.json(
+            { error: `Некорректное значение поля ${field}.` },
+            { status: 400 },
+          );
+        }
+
+        updates[field] = body[field].trim();
       }
     }
 
@@ -37,21 +67,6 @@ export async function PATCH(request, { params }) {
       return NextResponse.json(
         { error: "Нет данных для обновления." },
         { status: 400 },
-      );
-    }
-
-    const [targetUser] = await db
-      .select({
-        id: userTable.id,
-      })
-      .from(userTable)
-      .where(eq(userTable.id, id))
-      .limit(1);
-
-    if (!targetUser) {
-      return NextResponse.json(
-        { error: "Пользователь не найден." },
-        { status: 404 },
       );
     }
 
@@ -77,6 +92,66 @@ export async function PATCH(request, { params }) {
 
     return NextResponse.json(
       { error: "Не удалось обновить данные пользователя." },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(request, { params }) {
+  // Удалять аккаунты может только суперадминистратор.
+  const { context, response } = await requireRole(["superadmin"]);
+
+  if (response) {
+    return response;
+  }
+
+  try {
+    const { id } = await params;
+
+    // Защита от удаления собственного аккаунта.
+    if (id === context.user.id) {
+      return NextResponse.json(
+        { error: "Нельзя удалить собственный аккаунт." },
+        { status: 403 },
+      );
+    }
+
+    const [targetUser] = await db
+      .select({
+        id: userTable.id,
+        role: userTable.role,
+      })
+      .from(userTable)
+      .where(eq(userTable.id, id))
+      .limit(1);
+
+    if (!targetUser) {
+      return NextResponse.json(
+        { error: "Пользователь не найден." },
+        { status: 404 },
+      );
+    }
+
+    // Нельзя удалить другой аккаунт суперадминистратора.
+    if (targetUser.role === "superadmin") {
+      return NextResponse.json(
+        { error: "Нельзя удалить аккаунт главного администратора." },
+        { status: 403 },
+      );
+    }
+
+    await db.delete(userTable).where(eq(userTable.id, id));
+
+    return NextResponse.json({
+      success: true,
+      message: "Пользователь успешно удалён.",
+      deletedUserId: id,
+    });
+  } catch (error) {
+    console.error("Admin user deletion error:", error);
+
+    return NextResponse.json(
+      { error: "Не удалось удалить пользователя." },
       { status: 500 },
     );
   }
