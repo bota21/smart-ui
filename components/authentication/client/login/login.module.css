@@ -155,3 +155,49 @@
     font-size: 23px;
   }
 }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0;
+  color: #9993a8;
+  font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e8e3f0;
+}
+
+.passkeyButton {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 18px;
+  border: 1px solid #dcd3f0;
+  border-radius: 11px;
+  background: #fff;
+  color: #7048cf;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.passkeyButton:hover {
+  background: #f7f3ff;
+  border-color: #9875e8;
+  transform: translateY(-1px);
+}
+
+.passkeyButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

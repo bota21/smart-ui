@@ -13,6 +13,17 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [passkeyLoading, setPasskeyLoading] = useState(false);
+
+  function redirectAfterLogin(user) {
+    if (user?.role === "admin") {
+      router.replace("/admin");
+    } else {
+      router.replace("/");
+    }
+
+    router.refresh();
+  }
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -30,26 +41,45 @@ export default function LoginForm() {
         throw new Error(result.error.message || "Не удалось выполнить вход.");
       }
 
-      // Если Better Auth запросил второй фактор,
-      // переходим на страницу MFA.
       if (result.data?.twoFactorRedirect) {
         router.replace("/mfa");
         return;
       }
 
-      const role = result.data?.user?.role;
-
-      if (role === "admin") {
-        router.replace("/admin");
-      } else {
-        router.replace("/");
-      }
-
-      router.refresh();
+      redirectAfterLogin(result.data?.user);
     } catch (err) {
       setError(err.message || "Не удалось выполнить вход.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handlePasskeyLogin() {
+    setError("");
+    setPasskeyLoading(true);
+
+    try {
+      const result = await authClient.signIn.passkey();
+
+      const passkeyError = result.error || result.data?.error;
+
+      if (passkeyError) {
+        throw new Error(
+          passkeyError.message || "Не удалось войти с помощью ключа доступа.",
+        );
+      }
+
+      if (!result.data?.user) {
+        throw new Error("Не удалось получить данные пользователя.");
+      }
+
+      redirectAfterLogin(result.data.user);
+    } catch (err) {
+      setError(
+        err.message || "Не удалось выполнить вход с помощью ключа доступа.",
+      );
+    } finally {
+      setPasskeyLoading(false);
     }
   }
 
@@ -93,14 +123,34 @@ export default function LoginForm() {
             Забыли пароль?
           </Link>
         </div>
+
         {error && (
           <p role="alert" className={styles.error}>
             {error}
           </p>
         )}
 
-        <button type="submit" disabled={loading} className={styles.button}>
+        <button
+          type="submit"
+          disabled={loading || passkeyLoading}
+          className={styles.button}
+        >
           {loading ? "Выполняется вход..." : "Войти"}
+        </button>
+
+        <div className={styles.divider}>
+          <span>или</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handlePasskeyLogin}
+          disabled={loading || passkeyLoading}
+          className={styles.passkeyButton}
+        >
+          {passkeyLoading
+            ? "Ожидание подтверждения..."
+            : "Войти с помощью ключа доступа"}
         </button>
 
         <p className={styles.registerText}>

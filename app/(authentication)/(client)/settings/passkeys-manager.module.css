@@ -1,0 +1,346 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #e8e1f2;
+  border-radius: 12px;
+  background: #faf9fc;
+}
+
+.introIcon,
+.deviceIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #f0ebfa;
+  font-size: 21px;
+}
+
+.intro h3,
+.addPanel h3,
+.listHeader h3 {
+  margin: 0 0 8px;
+  color: #302947;
+  font-size: 16px;
+}
+
+.intro p,
+.addPanel p,
+.listHeader p {
+  margin: 0;
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.addPanel {
+  padding: 22px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.addForm {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.addForm input,
+.editForm input {
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid #ded8e9;
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: #302947;
+  font: inherit;
+  font-size: 13px;
+}
+
+.addForm input {
+  flex: 1;
+}
+
+.addForm input:focus,
+.editForm input:focus {
+  border-color: #8060c5;
+  box-shadow: 0 0 0 3px rgba(128, 96, 197, 0.12);
+}
+
+.primaryButton,
+.cancelButton,
+.dangerButton {
+  min-height: 40px;
+  padding: 0 15px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.primaryButton {
+  border: 1px solid #6846bd;
+  background: #6846bd;
+  color: #fff;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: #5738a8;
+}
+
+.cancelButton {
+  border: 1px solid #ded8e9;
+  background: #fff;
+  color: #625b70;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #f7f4fc;
+}
+
+.dangerButton {
+  border: 1px solid #f0d4d4;
+  background: #fff6f6;
+  color: #b43e3e;
+}
+
+.dangerButton:hover:not(:disabled) {
+  background: #ffeded;
+}
+
+.primaryButton:disabled,
+.cancelButton:disabled,
+.dangerButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hint {
+  display: block;
+  margin-top: 12px;
+  color: #888194;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: #f0ebfa;
+  color: #6846bd;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 18px;
+  border: 1px solid #eeeaf5;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+}
+
+.details h4 {
+  margin: 2px 0 9px;
+  color: #302947;
+  font-size: 14px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #777185;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.textButton,
+.deleteButton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.textButton {
+  color: #6846bd;
+}
+
+.textButton:hover {
+  text-decoration: underline;
+}
+
+.deleteButton {
+  color: #b43e3e;
+}
+
+.deleteButton:hover {
+  text-decoration: underline;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editForm input {
+  width: 100%;
+}
+
+.confirmDelete {
+  margin-top: 12px;
+}
+
+.confirmDelete p {
+  margin: 0;
+  color: #625b70;
+  font-size: 13px;
+}
+
+.emptyState,
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 30px 20px;
+  border: 1px dashed #ded7eb;
+  border-radius: 12px;
+  background: #faf9fc;
+  color: #777185;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.emptyState strong {
+  color: #302947;
+  font-size: 14px;
+}
+
+.emptyState p {
+  max-width: 340px;
+  margin: 0;
+}
+
+.emptyIcon {
+  font-size: 27px;
+}
+
+.error,
+.success {
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.error {
+  border: 1px solid #f1d0d0;
+  background: #fff6f6;
+  color: #b43e3e;
+}
+
+.success {
+  border: 1px solid #cce9d8;
+  background: #f3fbf6;
+  color: #27845b;
+}
+
+@media (max-width: 600px) {
+  .addForm {
+    flex-direction: column;
+  }
+
+  .addForm .primaryButton {
+    width: 100%;
+  }
+
+  .addPanel {
+    padding: 17px;
+  }
+
+  .card {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .deviceIcon,
+  .introIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 19px;
+  }
+
+  .actions {
+    align-items: flex-start;
+  }
+
+  .editForm .actions,
+  .confirmDelete .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .editForm .actions button,
+  .confirmDelete .actions button {
+    width: 100%;
+  }
+}

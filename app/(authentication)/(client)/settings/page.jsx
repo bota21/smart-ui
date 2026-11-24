@@ -6,6 +6,7 @@ import { authClient } from "@/lib/client-auth";
 import styles from "./settings.module.css";
 
 import SessionsManager from "./SessionsManager";
+import PasskeysManager from "./PasskeysManager";
 
 export default function SettingsPage() {
   const { data: session, isPending } = authClient.useSession();
@@ -773,9 +774,7 @@ export default function SettingsPage() {
                   Вход с помощью биометрии, PIN-кода устройства или ключа
                   безопасности.
                 </p>
-                <div className={styles.placeholder}>
-                  Подключение входа без пароля будет реализовано отдельно.
-                </div>
+                <PasskeysManager />
               </>
             )}
           </section>
