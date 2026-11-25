@@ -19,6 +19,8 @@ export default function Header({ children }) {
   const { data: session, isPending } = authClient.useSession();
 
   const user = session?.user;
+  const userRole = user?.role;
+  const canAccessAdmin = ["admin", "superadmin"].includes(userRole);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -171,6 +173,20 @@ export default function Header({ children }) {
                         <span className={styles.menuIcon}>⚙</span>
                         Настройки
                       </Link>
+                      {canAccessAdmin && (
+                        <>
+                          <div className={styles.divider} />
+
+                          <Link
+                            href="/admin"
+                            className={styles.dropdownLink}
+                            onClick={() => setUserMenuOpen(false)}
+                          >
+                            <span className={styles.menuIcon}>♙</span>
+                            Панель администратора
+                          </Link>
+                        </>
+                      )}
 
                       <div className={styles.divider} />
 
