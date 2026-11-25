@@ -1,3 +1,4 @@
+import "@/styles/tokens.css";
 import "@/styles/style.css";
 import "@/styles/layout.css";
 import "@/styles/catalog.css";

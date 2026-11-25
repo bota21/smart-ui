@@ -1,20 +1,12 @@
-:root {
-  --main: #0f172a;
-  --accent: #38bdf8;
-  --bg: #f8fafc;
-  --text: #f8fafc;
-  --card-bg: #1e293b;
-}
-body {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  background: var(--bg);
-  color: var(--main);
-}
+/* ========================================
+   ОСНОВНАЯ РАСКЛАДКА
+======================================== */
 
 body {
-  background: var(--bg-gradient);
-  color: var(--text);
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--main);
 }
 
 header {
@@ -23,47 +15,23 @@ header {
   align-items: center;
   padding: 20px 40px;
   background: var(--main);
-  color: white;
+  color: var(--white);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.lang-switcher-button {
-  margin-left: 10px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--main);
-  border: none;
-  font-size: 16px;
-}
-.lang-active {
-  color: var(--accent);
+footer {
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  font-style: oblique;
 }
 
 .menu_logo_wrapper {
   display: flex;
 }
-footer {
-  padding: 20px;
-  background: var(--card-bg);
-  border-radius: 0 0 24px 24px;
-  font-style: oblique;
-}
 
-@media (max-width: 768px) {
-  header {
-    padding: 20px;
-  }
-
-  footer {
-    font-size: 12px;
-  }
-}
-/* ===============================
-   BURGER MENU
-=============================== */
 .main_content {
   display: block;
 }
@@ -72,33 +40,45 @@ footer {
   display: none;
 }
 
-.burger-menu {
-  width: 28px;
-  height: 22px;
+/* ========================================
+   ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА
+======================================== */
 
+.lang-switcher-button {
+  margin-left: 10px;
+  border: none;
+  background: var(--main);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-active {
+  color: var(--accent);
+}
+
+/* ========================================
+   БУРГЕР-МЕНЮ
+======================================== */
+
+.burger-menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  width: 28px;
+  height: 22px;
+  margin: 0 15px;
   cursor: pointer;
-
-  margin-left: 15px;
-  margin-right: 15px;
 }
 
 .burger-menu span {
-  height: 3px;
   width: 100%;
-
-  background: var(--primary);
-
+  height: 3px;
   border-radius: 2px;
-
-  transition: all 0.3s ease;
   background: var(--bg);
+  transition: var(--transition-normal);
 }
-
-/* Animation */
 
 .burger-menu.active span:nth-child(1) {
   transform: rotate(45deg) translateY(8px);
@@ -112,112 +92,114 @@ footer {
   transform: rotate(-45deg) translateY(-8px);
 }
 
-/* ===============================
-   MOBILE MENU
-=============================== */
+/* ========================================
+   МОБИЛЬНОЕ МЕНЮ
+======================================== */
 
 .mobile-menu {
   position: fixed;
-
   top: 110px;
   left: 0;
-
-  width: 100%;
-  height: 100vh;
-
-  background: var(--bg-card);
-
-  box-shadow: var(--shadow-soft);
-
-  padding: 15px;
+  z-index: 2000;
 
   display: none;
   flex-direction: column;
   gap: 12px;
 
-  z-index: 2000;
+  width: 100%;
+  height: 100vh;
+  padding: 15px;
+
   background: var(--bg);
+  box-shadow: var(--shadow-soft);
 }
-
-.mobile-menu a {
-  text-decoration: none;
-  color: var(--card-bg);
-
-  font-weight: 500;
-  padding: 8px;
-
-  border-radius: 8px;
-  cursor: pointer;
-
-  transition: 0.2s;
-}
-
-.mobile-menu a:hover {
-  background: var(--main);
-  color: var(--primary);
-}
-
-/* Active */
 
 .mobile-menu.active {
   display: flex;
 }
 
-/* Меню связаться */
-/* .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-} */
+.mobile-menu a {
+  padding: 8px;
+  border-radius: var(--radius-sm);
+
+  color: var(--card-bg);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: var(--transition-fast);
+}
+
+.mobile-menu a:hover {
+  background: var(--main);
+  color: var(--white);
+}
+
+/* ========================================
+   ПЛАВАЮЩАЯ КНОПКА СВЯЗИ
+======================================== */
+
 .floating-contact {
   position: fixed;
-  bottom: 20px;
   right: 20px;
+  bottom: 20px;
   z-index: 999;
 }
+
 .floating-btn {
-  background: var(--accent);
-  color: white;
   padding: 14px 18px;
-  border-radius: 50px;
-  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-pill);
+
+  background: var(--accent);
+  color: var(--white);
+
+  font-family: inherit;
+  font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: 0.3s;
+
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-normal);
+}
+
+.floating-btn:hover {
+  transform: translateY(-2px);
+}
+
+.floating-menu {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .floating-menu.is-open {
   display: flex;
 }
 
-.floating-btn {
-  border: none;
-  font-family: inherit;
-  font-size: 14px;
-}
-
-.floating-btn:hover {
-  transform: translateY(-2px);
-}
-.floating-menu {
-  display: none;
-  flex-direction: column;
-  margin-bottom: 10px;
-  gap: 10px;
-}
 .floating-menu a {
   display: flex;
   padding: 12px 18px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
+
   background: var(--accent);
-  color: white;
+  color: var(--white);
+
   font-weight: 600;
   text-align: center;
-  transition: 0.3s;
+  text-decoration: none;
+
+  transition: var(--transition-normal);
 }
+
 .floating-menu a:hover {
-  background: #0ea5e9;
+  background: var(--accent-hover);
 }
+
+/* ========================================
+   ИКОНКИ КОНТАКТОВ
+======================================== */
 
 .icon {
   width: 20px;
@@ -227,7 +209,7 @@ footer {
 }
 
 .call {
-  color: #1e293b;
+  color: var(--card-bg);
 }
 
 .telegram {
@@ -238,12 +220,31 @@ footer {
   color: #25d366;
 }
 
+/* ========================================
+   СОСТОЯНИЕ ПЕРЕНАПРАВЛЕНИЯ АВТОРИЗАЦИИ
+======================================== */
+
 .auth-redirect-loading {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 60vh;
   padding: 24px;
-  color: var(--text-color, #555);
+
+  color: var(--text-color);
   font-size: 15px;
+}
+
+/* ========================================
+   АДАПТИВНОСТЬ
+======================================== */
+
+@media (max-width: 768px) {
+  header {
+    padding: 20px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
 }
