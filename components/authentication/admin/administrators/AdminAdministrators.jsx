@@ -474,7 +474,7 @@ export default function AdminAdministrators({ currentUser }) {
                             className={styles.editButton}
                             onClick={() => {
                               setShowCandidates(false);
-                              openRoleConfirmation(user);
+                              openRoleConfirmation({ ...user, role: "user" });
                             }}
                           >
                             Назначить
