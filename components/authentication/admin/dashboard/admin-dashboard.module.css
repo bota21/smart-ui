@@ -1,7 +1,7 @@
 .dashboard {
   min-height: 75vh;
   padding: 48px 24px 80px;
-  background: #f8f7fb;
+  background: var(--gray-100);
 }
 
 .header {
@@ -12,14 +12,14 @@
 
 .header h2 {
   margin: 0 0 10px;
-  color: #302947;
+  color: var(--purple-950);
   font-size: 30px;
   font-weight: 700;
 }
 
 .header p {
   margin: 0;
-  color: #777185;
+  color: var(--gray-600);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -40,20 +40,20 @@
   gap: 16px;
   min-height: 120px;
   padding: 22px;
-  border: 1px solid #eeeaf5;
+  border: 1px solid var(--gray-200);
   border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 4px 18px rgba(40, 25, 70, 0.03);
+  background: var(--white);
+  box-shadow: var(--shadow-admin);
 }
 
 .label {
-  color: #777185;
+  color: var(--gray-600);
   font-size: 13px;
   line-height: 1.5;
 }
 
 .value {
-  color: #302947;
+  color: var(--purple-950);
   font-size: 32px;
   font-weight: 700;
   line-height: 1;
@@ -64,15 +64,15 @@
   max-width: 1250px;
   margin: 0 auto;
   padding: 26px;
-  border: 1px solid #eeeaf5;
+  border: 1px solid var(--gray-200);
   border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 4px 18px rgba(40, 25, 70, 0.04);
+  background: var(--white);
+  box-shadow: var(--shadow-admin);
 }
 
 .management h2 {
   margin: 0 0 18px;
-  color: #302947;
+  color: var(--purple-950);
   font-size: 21px;
 }
 
@@ -82,21 +82,21 @@
   justify-content: space-between;
   gap: 16px;
   padding: 16px;
-  border: 1px solid #eeeaf5;
+  border: 1px solid var(--gray-200);
   border-radius: 10px;
-  background: #faf9fc;
-  color: #6846bd;
+  background: var(--purple-50);
+  color: var(--purple-900);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
+    background var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .managementLink:hover {
-  border-color: #ded7eb;
-  background: #f0ebfa;
+  border-color: var(--purple-400);
+  background: var(--purple-200);
 }
 
 @media (max-width: 760px) {

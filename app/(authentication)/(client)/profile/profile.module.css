@@ -10,9 +10,9 @@
   width: 100%;
   max-width: 850px;
   padding: 45px 50px;
-  background: #fff;
+  background: var(--white);
   border-radius: 18px;
-  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-soft);
   box-sizing: border-box;
 }
 
@@ -23,8 +23,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #e9edf5;
-  color: #263b60;
+  background: var(--profile-bg);
+  color: var(--profile-accent);
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 24px;
@@ -33,13 +33,13 @@
 .title {
   margin: 0 0 10px;
   font-size: 30px;
-  color: #202938;
+  color: var(--profile-text);
   text-align: left;
 }
 
 .subtitle {
   margin: 0 0 36px;
-  color: #737d8d;
+  color: var(--profile-muted);
   font-size: 15px;
   text-align: left;
 }
@@ -59,18 +59,18 @@
   align-items: stretch;
   gap: 10px;
   padding: 0 0 20px;
-  border-bottom: 1px solid #edf0f4;
+  border-bottom: 1px solid var(--profile-border);
   box-sizing: border-box;
 }
 
 .field span {
-  color: #596579;
+  color: var(--gray-700);
   font-size: 14px;
   font-weight: 500;
 }
 
 .field strong {
-  color: #263142;
+  color: var(--profile-text);
   font-size: 16px;
   font-weight: 500;
   overflow-wrap: anywhere;
@@ -82,23 +82,23 @@
   width: 100%;
   min-height: 50px;
   padding: 13px 15px;
-  border: 1px solid #dfe4ec;
+  border: 1px solid var(--profile-border);
   border-radius: 9px;
   outline: none;
-  color: #263142;
+  color: var(--profile-text);
   font-size: 16px;
   font-family: inherit;
-  background: #fff;
+  background: var(--white);
   box-sizing: border-box;
   transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .field input:focus,
 .field textarea:focus {
-  border-color: #263b60;
-  box-shadow: 0 0 0 3px rgba(38, 59, 96, 0.08);
+  border-color: var(--profile-accent);
+  box-shadow: 0 0 0 3px var(--shadow-auth);
 }
 
 .field textarea {
@@ -113,12 +113,12 @@
   padding: 14px 20px;
   border: none;
   border-radius: 9px;
-  background: #263b60;
-  color: #fff;
+  background: var(--profile-accent);
+  color: var(--white);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity var(--transition-fast);
 }
 
 .saveButton:hover {
@@ -137,11 +137,11 @@
 }
 
 .error {
-  color: #c0392b;
+  color: var(--danger-text);
 }
 
 .success {
-  color: #218653;
+  color: var(--success-text);
 }
 
 @media (max-width: 600px) {

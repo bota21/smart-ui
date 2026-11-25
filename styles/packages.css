@@ -120,7 +120,7 @@
 
   text-decoration: none;
 
-  color: #e5e7eb;
+  color: var(-text-on-dark);
 
   font-size: 15px;
 

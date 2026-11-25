@@ -18,14 +18,14 @@
   border: none;
   border-radius: 10px;
   background: transparent;
-  color: white;
+  color: var(--white);
   font: inherit;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background var(--transition-fast);
 }
 
 .userButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--white-overlay-soft);
 }
 
 .avatar {
@@ -36,8 +36,8 @@
   height: 34px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #7651d5;
-  color: white;
+  background: var(--purple-800);
+  color: var(--white);
   font-size: 13px;
   font-weight: 700;
 }
@@ -57,7 +57,7 @@
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-fast);
 }
 
 .chevronOpen {
@@ -71,11 +71,11 @@
   z-index: 3000;
   width: 245px;
   padding: 10px;
-  border: 1px solid #e8e5ef;
+  border: 1px solid var(--gray-300);
   border-radius: 14px;
-  background: white;
-  color: #29263a;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+  background: var(--white);
+  color: var(--gray-900);
+  box-shadow: var(--shadow-card);
   animation: menuAppear 0.18s ease;
 }
 
@@ -89,7 +89,7 @@
 
 .dropdownUser strong {
   overflow: hidden;
-  color: #29263a;
+  color: var(--gray-900);
   font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -97,7 +97,7 @@
 
 .dropdownUser span {
   overflow: hidden;
-  color: #888496;
+  color: var(--gray-500);
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -106,7 +106,7 @@
 .divider {
   height: 1px;
   margin: 6px 0;
-  background: #eeeaf4;
+  background: var(--gray-200);
 }
 
 .dropdownLink,
@@ -119,17 +119,17 @@
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: #393548;
+  color: var(--gray-800);
   font-family: inherit;
   font-size: 14px;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background var(--transition-fast);
 }
 
 .dropdownLink:hover {
-  background: #f5f2fb;
+  background: var(--purple-100);
 }
 
 .menuIcon {
@@ -141,11 +141,11 @@
 }
 
 .logoutButton {
-  color: #d63b50;
+  color: var(--danger);
 }
 
 .logoutButton:hover {
-  background: #fff1f2;
+  background: var(--danger-light);
 }
 
 .logoutButton:disabled {
@@ -159,9 +159,9 @@
   justify-content: center;
   min-height: 36px;
   padding: 0 17px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--white-overlay-strong);
   border-radius: 9px;
-  color: white;
+  color: var(--white);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -169,7 +169,7 @@
 }
 
 .loginButton:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--white-overlay-medium);
 }
 
 @keyframes menuAppear {
@@ -223,19 +223,19 @@
   gap: 7px;
   min-width: 54px;
   padding: 8px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--white-overlay-border);
   border-radius: 9px;
   background: transparent;
-  color: white;
+  color: var(--white);
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background var(--transition-fast);
 }
 
 .languageButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--white-overlay-soft);
 }
 
 .languageChevron {
@@ -244,7 +244,7 @@
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-fast);
 }
 
 .languageChevronOpen {
@@ -258,10 +258,10 @@
   z-index: 3000;
   width: 170px;
   padding: 6px;
-  border: 1px solid #e8e5ef;
+  border: 1px solid var(--gray-300);
   border-radius: 12px;
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
   animation: menuAppear 0.18s ease;
 }
 
@@ -274,21 +274,21 @@
   border: none;
   border-radius: 7px;
   background: transparent;
-  color: #393548;
+  color: var(--gray-800);
   font-family: inherit;
   font-size: 13px;
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background var(--transition-fast);
 }
 
 .languageOption:hover {
-  background: #f5f2fb;
+  background: var(--purple-100);
 }
 
 .languageOptionActive {
-  background: #f1edfa;
-  color: #7651d5;
+  background: var(--purple-200);
+  color: var(--purple-800);
   font-weight: 700;
 }
 

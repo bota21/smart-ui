@@ -9,9 +9,9 @@
   align-items: flex-start;
   gap: 16px;
   padding: 20px;
-  border: 1px solid #e8e1f2;
+  border: 1px solid var(--purple-300);
   border-radius: 12px;
-  background: #faf9fc;
+  background: var(--purple-50);
 }
 
 .introIcon,
@@ -23,7 +23,7 @@
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background: #f0ebfa;
+  background: var(--purple-200);
   font-size: 21px;
 }
 
@@ -31,7 +31,7 @@
 .addPanel h3,
 .listHeader h3 {
   margin: 0 0 8px;
-  color: #302947;
+  color: var(--purple-950);
   font-size: 16px;
 }
 
@@ -39,16 +39,16 @@
 .addPanel p,
 .listHeader p {
   margin: 0;
-  color: #777185;
+  color: var(--gray-600);
   font-size: 13px;
   line-height: 1.6;
 }
 
 .addPanel {
   padding: 22px;
-  border: 1px solid #eeeaf5;
+  border: 1px solid var(--gray-200);
   border-radius: 12px;
-  background: #fff;
+  background: var(--white);
 }
 
 .addForm {
@@ -62,11 +62,11 @@
   min-width: 0;
   min-height: 44px;
   padding: 0 13px;
-  border: 1px solid #ded8e9;
+  border: 1px solid var(--gray-300);
   border-radius: 9px;
   outline: none;
-  background: #fff;
-  color: #302947;
+  background: var(--white);
+  color: var(--purple-950);
   font: inherit;
   font-size: 13px;
 }
@@ -77,8 +77,8 @@
 
 .addForm input:focus,
 .editForm input:focus {
-  border-color: #8060c5;
-  box-shadow: 0 0 0 3px rgba(128, 96, 197, 0.12);
+  border-color: var(--purple-700);
+  box-shadow: 0 0 0 3px var(--shadow-auth);
 }
 
 .primaryButton,
@@ -92,38 +92,38 @@
   font-weight: 600;
   cursor: pointer;
   transition:
-    background 0.2s,
-    opacity 0.2s;
+    background var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .primaryButton {
-  border: 1px solid #6846bd;
-  background: #6846bd;
-  color: #fff;
+  border: 1px solid var(--purple-900);
+  background: var(--purple-900);
+  color: var(--white);
 }
 
 .primaryButton:hover:not(:disabled) {
-  background: #5738a8;
+  background: var(--purple-900);
 }
 
 .cancelButton {
-  border: 1px solid #ded8e9;
-  background: #fff;
-  color: #625b70;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--gray-700);
 }
 
 .cancelButton:hover:not(:disabled) {
-  background: #f7f4fc;
+  background: var(--purple-200);
 }
 
 .dangerButton {
-  border: 1px solid #f0d4d4;
-  background: #fff6f6;
-  color: #b43e3e;
+  border: 1px solid var(--danger-border);
+  background: var(--danger-light);
+  color: var(--danger-text);
 }
 
 .dangerButton:hover:not(:disabled) {
-  background: #ffeded;
+  background: var(--danger-light);
 }
 
 .primaryButton:disabled,
@@ -136,7 +136,7 @@
 .hint {
   display: block;
   margin-top: 12px;
-  color: #888194;
+  color: var(--gray-500);
   font-size: 12px;
   line-height: 1.5;
 }
@@ -156,8 +156,8 @@
   height: 34px;
   padding: 0 10px;
   border-radius: 10px;
-  background: #f0ebfa;
-  color: #6846bd;
+  background: var(--purple-200);
+  color: var(--purple-900);
   font-size: 14px;
   font-weight: 700;
 }
@@ -173,9 +173,9 @@
   align-items: flex-start;
   gap: 15px;
   padding: 18px;
-  border: 1px solid #eeeaf5;
+  border: 1px solid var(--gray-200);
   border-radius: 12px;
-  background: #fff;
+  background: var(--white);
 }
 
 .details {
@@ -185,7 +185,7 @@
 
 .details h4 {
   margin: 2px 0 9px;
-  color: #302947;
+  color: var(--purple-950);
   font-size: 14px;
 }
 
@@ -193,7 +193,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  color: #777185;
+  color: var(--gray-600);
   font-size: 12px;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -219,7 +219,7 @@
 }
 
 .textButton {
-  color: #6846bd;
+  color: var(--purple-900);
 }
 
 .textButton:hover {
@@ -227,7 +227,7 @@
 }
 
 .deleteButton {
-  color: #b43e3e;
+  color: var(--danger-text);
 }
 
 .deleteButton:hover {
@@ -250,7 +250,7 @@
 
 .confirmDelete p {
   margin: 0;
-  color: #625b70;
+  color: var(--gray-700);
   font-size: 13px;
 }
 
@@ -261,17 +261,17 @@
   align-items: center;
   gap: 10px;
   padding: 30px 20px;
-  border: 1px dashed #ded7eb;
+  border: 1px dashed var(--purple-400);
   border-radius: 12px;
-  background: #faf9fc;
-  color: #777185;
+  background: var(--purple-50);
+  color: var(--gray-600);
   text-align: center;
   font-size: 13px;
   line-height: 1.6;
 }
 
 .emptyState strong {
-  color: #302947;
+  color: var(--purple-950);
   font-size: 14px;
 }
 
@@ -293,15 +293,15 @@
 }
 
 .error {
-  border: 1px solid #f1d0d0;
-  background: #fff6f6;
-  color: #b43e3e;
+  border: 1px solid var(--danger-border);
+  background: var(--danger-light);
+  color: var(--danger-text);
 }
 
 .success {
-  border: 1px solid #cce9d8;
-  background: #f3fbf6;
-  color: #27845b;
+  border: 1px solid var(--success-border);
+  background: var(--success-light);
+  color: var(--success-text);
 }
 
 @media (max-width: 600px) {

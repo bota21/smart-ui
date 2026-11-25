@@ -4,17 +4,17 @@
   align-items: center;
   justify-content: center;
   padding: 30px 20px;
-  background: #f7f5fc;
+  background: var(--purple-100);
 }
 
 .card {
   width: 100%;
   max-width: 470px;
   padding: 42px;
-  border: 1px solid #eeeaf7;
+  border: 1px solid var(--gray-200);
   border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 12px 45px rgba(65, 45, 110, 0.08);
+  background: var(--white);
+  box-shadow: var(--shadow-auth);
   text-align: center;
 }
 
@@ -26,20 +26,20 @@
   justify-content: center;
   margin: 0 auto 22px;
   border-radius: 50%;
-  background: #f0eaff;
-  color: #7652d8;
+  background: var(--purple-200);
+  color: var(--purple-800);
   font-size: 30px;
 }
 
 .title {
   margin: 0;
-  color: #252039;
+  color: var(--purple-dark);
   font-size: 25px;
 }
 
 .description {
   margin: 15px 0;
-  color: #858094;
+  color: var(--gray-500);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -47,10 +47,10 @@
 .email {
   margin: 20px 0;
   padding: 13px;
-  border: 1px solid #e9e2f8;
+  border: 1px solid var(--purple-300);
   border-radius: 10px;
-  background: #faf8ff;
-  color: #7652d8;
+  background: var(--purple-50);
+  color: var(--purple-800);
   font-size: 14px;
   font-weight: 600;
   overflow-wrap: anywhere;
@@ -58,7 +58,7 @@
 
 .hint {
   margin: 0 0 22px;
-  color: #858094;
+  color: var(--gray-500);
   font-size: 13px;
   line-height: 1.6;
 }
@@ -68,8 +68,8 @@
   min-height: 49px;
   border: 0;
   border-radius: 11px;
-  background: linear-gradient(110deg, #9875e8, #7048cf);
-  color: #fff;
+  background: linear-gradient(110deg, var(--purple-600), var(--purple-800));
+  color: var(--white);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -83,7 +83,7 @@
 .link {
   display: inline-block;
   margin-top: 22px;
-  color: #7652d8;
+  color: var(--purple-800);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -94,12 +94,12 @@
 }
 
 .success {
-  color: #239653;
+  color: var(--success-text);
   font-size: 13px;
 }
 
 .error {
-  color: #d33c55;
+  color: var(--danger);
   font-size: 13px;
 }
 

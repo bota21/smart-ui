@@ -1,32 +1,102 @@
 :root {
+  /* Основная палитра сайта */
   --main: #0f172a;
   --accent: #38bdf8;
   --accent-hover: #0ea5e9;
-
   --bg: #f8fafc;
   --card-bg: #1e293b;
 
+  /* Базовые цвета */
+  --white: #ffffff;
+  --black: #000000;
   --text: #f8fafc;
   --text-color: #555555;
   --text-dark: #0f172a;
-
-  --white: #ffffff;
-  --black: #000000;
-
-  --danger: #e74c3c;
-  --success: #16a34a;
-  --warning: #d97706;
   --border: #cccccc;
 
+  /* Фиолетовая палитра авторизации и админки */
+  --purple-50: #faf9fc;
+  --purple-100: #f7f5fc;
+  --purple-150: #f5f2fb;
+  --purple-200: #f0ebfa;
+  --purple-300: #e8e1f2;
+  --purple-400: #ded7eb;
+  --purple-500: #c5b3ed;
+  --purple-600: #9875e8;
+  --purple-700: #8060c5;
+  --purple-800: #7652d8;
+  --purple-900: #6846bd;
+  --purple-950: #302947;
+  --purple-dark: #252039;
+
+  /* Дополнительные нейтральные оттенки */
+  --gray-50: #fcfbfe;
+  --gray-100: #f8f7fb;
+  --gray-150: #f1f0f4;
+  --gray-200: #eeeaf5;
+  --gray-300: #ded8e9;
+  --gray-400: #aaa7b5;
+  --gray-500: #888194;
+  --gray-600: #777185;
+  --gray-700: #625b70;
+  --gray-800: #393548;
+  --gray-900: #29263a;
+  --text-on-dark: #e5e7eb;
+
+  /* Профиль пользователя */
+  --profile-bg: #e9edf5;
+  --profile-accent: #263b60;
+  --profile-text: #202938;
+  --profile-muted: #737d8d;
+  --profile-border: #dfe4ec;
+
+  /* Состояния */
+  --danger: #e74c3c;
+  --danger-text: #b43e3e;
+  --danger-light: #fff6f6;
+  --danger-border: #f1d0d0;
+
+  --success: #16a34a;
+  --success-text: #27845b;
+  --success-light: #f3fbf6;
+  --success-border: #cce9d8;
+
+  --warning: #d97706;
+  --warning-text: #b7791f;
+  --warning-light: #fffaf0;
+  --warning-border: #f0dfb9;
+
+  --info: #4967b2;
+  --info-light: #edf2ff;
+
+  /* Контактные иконки */
+  --telegram: #229ed9;
+  --whatsapp: #25d366;
+
+  /* Прозрачные цвета */
+  --overlay: rgba(31, 24, 45, 0.48);
+  --overlay-strong: rgba(15, 23, 42, 0.7);
+  --white-overlay-soft: rgba(255, 255, 255, 0.08);
+  --white-overlay-medium: rgba(255, 255, 255, 0.12);
+  --white-overlay-border: rgba(255, 255, 255, 0.25);
+  --white-overlay-strong: rgba(255, 255, 255, 0.55);
+  --black-overlay-soft: rgba(0, 0, 0, 0.07);
+
+  /* Тени */
   --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.12);
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-modal: 0 20px 50px rgba(0, 0, 0, 0.4);
+  --shadow-auth: 0 12px 45px rgba(65, 45, 110, 0.08);
+  --shadow-admin: 0 4px 18px rgba(40, 25, 70, 0.04);
 
+  /* Скругления */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 24px;
   --radius-pill: 50px;
 
+  /* Анимации */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
 

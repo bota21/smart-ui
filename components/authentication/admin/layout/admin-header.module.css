@@ -3,8 +3,8 @@
   width: 100%;
   padding: 30px 24px 0;
   box-sizing: border-box;
-  background: #302947;
-  color: #fff;
+  background: var(--purple-950);
+  color: var(--white);
 }
 
 .container {
@@ -26,7 +26,7 @@
 }
 
 .eyebrow {
-  color: #c5b3ed;
+  color: var(--purple-500);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -34,14 +34,14 @@
 
 .heading h1 {
   margin: 10px 0;
-  color: #fff;
+  color: var(--white);
   font-size: 29px;
   font-weight: 700;
 }
 
 .heading p {
   margin: 0;
-  color: #d0cbdc;
+  color: var(--gray-300);
   font-size: 13px;
   line-height: 1.6;
 }
@@ -52,10 +52,9 @@
   gap: 12px;
   flex-shrink: 0;
   padding: 12px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--white-overlay-medium);
   border-radius: 12px;
-  /* background: rgba(255, 255, 255, 0.08); */
-  background: #fff;
+  background: var(--white);
 }
 
 .avatar {
@@ -66,8 +65,8 @@
   height: 42px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #e9e0fa;
-  color: #6846bd;
+  background: var(--purple-200);
+  color: var(--purple-900);
   font-size: 15px;
   font-weight: 700;
 }
@@ -85,12 +84,12 @@
   font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #302947;
+  color: var(--purple-950);
 }
 
 .userInfo small {
   font-size: 11px;
-  color: #888194;
+  color: var(--gray-500);
 }
 
 .navigation {
@@ -98,7 +97,7 @@
   align-items: center;
   gap: 28px;
   min-height: 52px;
-  border-top: 1px solid rgba(255, 255, 255, 0.13);
+  border-top: 1px solid var(--white-overlay-medium);
 }
 
 .navLink {
@@ -107,22 +106,22 @@
   align-self: stretch;
   padding: 0 3px;
   border-bottom: 3px solid transparent;
-  color: #d0cbdc;
+  color: var(--gray-300);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .navLink:hover {
-  color: #fff;
+  color: var(--white);
 }
 
 .navLink.active {
-  border-bottom-color: #b69ae9;
-  color: #fff;
+  border-bottom-color: var(--purple-500);
+  color: var(--white);
 }
 
 @media (max-width: 760px) {

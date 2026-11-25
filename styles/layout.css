@@ -213,11 +213,11 @@ footer {
 }
 
 .telegram {
-  color: #229ed9;
+  color: var(--telegram);
 }
 
 .whatsapp {
-  color: #25d366;
+  color: var(--whatsapp);
 }
 
 /* ========================================
