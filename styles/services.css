@@ -79,7 +79,7 @@
 .card_wrapper_content {
   font-size: 17px;
   line-height: 1.7;
-  color: var(-text-on-dark);
+  color: var(--text-on-dark);
 
   margin-bottom: 25px;
 }
