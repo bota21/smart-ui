@@ -19,6 +19,8 @@ export async function PATCH(request, { params }) {
     const [targetUser] = await db
       .select({
         id: userTable.id,
+        email: userTable.email,
+        emailVerified: userTable.emailVerified,
         role: userTable.role,
       })
       .from(userTable)
@@ -119,6 +121,8 @@ export async function DELETE(request, { params }) {
     const [targetUser] = await db
       .select({
         id: userTable.id,
+        email: userTable.email,
+        emailVerified: userTable.emailVerified,
         role: userTable.role,
       })
       .from(userTable)
@@ -133,7 +137,15 @@ export async function DELETE(request, { params }) {
     }
 
     // Нельзя удалить другой аккаунт суперадминистратора.
-    if (targetUser.role === "superadmin") {
+    const superadminEmail = process.env.SUPERADMIN_EMAIL?.trim().toLowerCase();
+
+    const isProtectedSuperadmin =
+      targetUser.role === "superadmin" ||
+      (Boolean(superadminEmail) &&
+        targetUser.emailVerified &&
+        targetUser.email.toLowerCase() === superadminEmail);
+
+    if (isProtectedSuperadmin) {
       return NextResponse.json(
         { error: "Нельзя удалить аккаунт главного администратора." },
         { status: 403 },
