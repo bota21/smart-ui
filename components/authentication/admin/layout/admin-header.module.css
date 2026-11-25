@@ -1,0 +1,161 @@
+.header {
+  position: static;
+  width: 100%;
+  padding: 30px 24px 0;
+  box-sizing: border-box;
+  background: #302947;
+  color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding-bottom: 28px;
+}
+
+.heading {
+  min-width: 0;
+}
+
+.eyebrow {
+  color: #c5b3ed;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.heading h1 {
+  margin: 10px 0;
+  color: #fff;
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.heading p {
+  margin: 0;
+  color: #d0cbdc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.currentUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  /* background: rgba(255, 255, 255, 0.08); */
+  background: #fff;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e9e0fa;
+  color: #6846bd;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.userInfo strong {
+  max-width: 220px;
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #302947;
+}
+
+.userInfo small {
+  font-size: 11px;
+  color: #888194;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 52px;
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 3px;
+  border-bottom: 3px solid transparent;
+  color: #d0cbdc;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+.navLink.active {
+  border-bottom-color: #b69ae9;
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .header {
+    padding: 26px 16px 0;
+  }
+
+  .top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .heading h1 {
+    font-size: 25px;
+  }
+
+  .currentUser {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navigation {
+    gap: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .heading h1 {
+    font-size: 22px;
+  }
+
+  .heading p {
+    font-size: 12px;
+  }
+}

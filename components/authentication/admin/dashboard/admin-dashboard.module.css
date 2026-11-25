@@ -1,0 +1,138 @@
+.dashboard {
+  min-height: 75vh;
+  padding: 48px 24px 80px;
+  background: #f8f7fb;
+}
+
+.header {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto 32px;
+}
+
+.header h1 {
+  margin: 0 0 10px;
+  color: #302947;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.header p {
+  margin: 0;
+  color: #777185;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.statistics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto 28px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 120px;
+  padding: 22px;
+  border: 1px solid #eeeaf5;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(40, 25, 70, 0.03);
+}
+
+.label {
+  color: #777185;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.value {
+  color: #302947;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.management {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 26px;
+  border: 1px solid #eeeaf5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(40, 25, 70, 0.04);
+}
+
+.management h2 {
+  margin: 0 0 18px;
+  color: #302947;
+  font-size: 21px;
+}
+
+.managementLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #eeeaf5;
+  border-radius: 10px;
+  background: #faf9fc;
+  color: #6846bd;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.managementLink:hover {
+  border-color: #ded7eb;
+  background: #f0ebfa;
+}
+
+@media (max-width: 760px) {
+  .dashboard {
+    padding: 32px 16px 56px;
+  }
+
+  .header h1 {
+    font-size: 25px;
+  }
+
+  .statistics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    min-height: 105px;
+    padding: 17px;
+  }
+
+  .value {
+    font-size: 27px;
+  }
+
+  .management {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: auto;
+  }
+}

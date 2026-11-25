@@ -432,24 +432,6 @@ export default function AdminUsers({ currentUser }) {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <header className={styles.header}>
-          <div>
-            <span className={styles.eyebrow}>SMARTÜI CONTROL PANEL</span>
-            <h1>Панель администратора</h1>
-            <p>Управление пользователями и аккаунтами платформы SmartÜi.</p>
-          </div>
-
-          <div className={styles.currentUser}>
-            <span className={styles.avatar}>
-              {(currentUser.name || currentUser.email || "A")[0].toUpperCase()}
-            </span>
-            <span className={styles.currentUserInfo}>
-              <strong>{currentUser.name || currentUser.email}</strong>
-              <small>{roleLabels[currentUser.role]}</small>
-            </span>
-          </div>
-        </header>
-
         <section className={styles.stats}>
           <article className={styles.statCard}>
             <span>Всего пользователей</span>
