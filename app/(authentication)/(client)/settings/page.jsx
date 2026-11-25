@@ -13,6 +13,7 @@ export default function SettingsPage() {
   const user = session?.user;
 
   const [activeSection, setActiveSection] = useState("security");
+  const [passkeysCount, setPasskeysCount] = useState(null);
 
   // Смена пароля
   const [currentPassword, setCurrentPassword] = useState("");
@@ -49,6 +50,32 @@ export default function SettingsPage() {
   useEffect(() => {
     setTwoFactorEnabled(Boolean(user?.twoFactorEnabled));
   }, [user?.twoFactorEnabled]);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    let isMounted = true;
+
+    async function loadPasskeysCount() {
+      try {
+        const { data, error } = await authClient.passkey.listUserPasskeys();
+
+        if (!isMounted || error) return;
+
+        setPasskeysCount(Array.isArray(data) ? data.length : 0);
+      } catch {
+        if (isMounted) {
+          setPasskeysCount(null);
+        }
+      }
+    }
+
+    loadPasskeysCount();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [user?.id]);
 
   if (isPending) {
     return <main className={styles.page}>Загрузка настроек...</main>;
@@ -326,11 +353,25 @@ export default function SettingsPage() {
                   <div className={styles.infoText}>
                     <h3>Электронная почта</h3>
                     <p>{user.email}</p>
-                    <span className={styles.status}>Почта подтверждена</span>
+                    <span
+                      className={
+                        user.emailVerified
+                          ? styles.status
+                          : styles.statusWarning
+                      }
+                    >
+                      {user.emailVerified
+                        ? "Почта подтверждена"
+                        : "Почта не подтверждена"}
+                    </span>
                   </div>
                 </div>
 
-                <div className={styles.infoCard}>
+                <button
+                  type="button"
+                  className={`${styles.infoCard} ${styles.infoCardAction}`}
+                  onClick={() => setActiveSection("twoFactor")}
+                >
                   <div className={styles.infoIcon}>🔐</div>
                   <div className={styles.infoText}>
                     <h3>Двухфакторная аутентификация</h3>
@@ -347,15 +388,55 @@ export default function SettingsPage() {
                       {twoFactorEnabled ? "Включена" : "Выключена"}
                     </span>
                   </div>
-                </div>
+                </button>
 
-                <div className={styles.infoCard}>
+                <button
+                  type="button"
+                  className={`${styles.infoCard} ${styles.infoCardAction}`}
+                  onClick={() => setActiveSection("passkeys")}
+                >
+                  <div className={styles.infoIcon}>👆</div>
+                  <div className={styles.infoText}>
+                    <h3>Вход без пароля</h3>
+                    <p>
+                      {passkeysCount === null
+                        ? "Проверяем подключённые ключи доступа..."
+                        : passkeysCount > 0
+                          ? `Зарегистрировано ключей доступа: ${passkeysCount}.`
+                          : "Ключи доступа пока не подключены."}
+                    </p>
+                    <span
+                      className={
+                        passkeysCount === null
+                          ? styles.statusWarning
+                          : passkeysCount > 0
+                            ? styles.status
+                            : styles.statusWarning
+                      }
+                    >
+                      {passkeysCount === null
+                        ? "Статус не определён"
+                        : passkeysCount > 0
+                          ? "Подключено"
+                          : "Не подключено"}
+                    </span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  className={`${styles.infoCard} ${styles.infoCardAction}`}
+                  onClick={() => setActiveSection("password")}
+                >
                   <div className={styles.infoIcon}>🔑</div>
                   <div className={styles.infoText}>
                     <h3>Пароль</h3>
                     <p>Изменение пароля и управление доступом к аккаунту.</p>
+                    <span className={styles.status}>
+                      Перейти к изменению пароля
+                    </span>
                   </div>
-                </div>
+                </button>
               </>
             )}
 
