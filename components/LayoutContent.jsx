@@ -1,16 +1,21 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+
+import { usePathname } from "next/navigation";
 import Header from "./Header";
 import FloatingContacts from "./FloatingContacts";
 
+const publicPages = ["/", "/catalog", "/packages", "/services", "/portfolio"];
+
 export default function LayoutContent({ children }) {
-  const { t } = useLanguage();
+  const pathname = usePathname();
+
+  const showFloatingContacts = publicPages.includes(pathname);
 
   return (
     <>
       <Header>{children}</Header>
 
-      <FloatingContacts />
+      {showFloatingContacts && <FloatingContacts />}
     </>
   );
 }

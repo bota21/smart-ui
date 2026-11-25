@@ -186,6 +186,16 @@ footer {
   transition: 0.3s;
 }
 
+.floating-menu.is-open {
+  display: flex;
+}
+
+.floating-btn {
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
 .floating-btn:hover {
   transform: translateY(-2px);
 }

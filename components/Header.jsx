@@ -7,12 +7,20 @@ import { useLanguage } from "@/context/LanguageContext";
 import { authClient } from "@/lib/client-auth";
 import styles from "./user-menu.module.css";
 
+const languages = [
+  { code: "ru", label: "Русский" },
+  { code: "kz", label: "Қазақша" },
+  { code: "en", label: "English" },
+];
+
 export default function Header({ children }) {
   const [open, setOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
 
   const userMenuRef = useRef(null);
+  const languageMenuRef = useRef(null);
   const router = useRouter();
 
   const { t, setLang, lang } = useLanguage();
@@ -22,16 +30,27 @@ export default function Header({ children }) {
   const userRole = user?.role;
   const canAccessAdmin = ["admin", "superadmin"].includes(userRole);
 
+  const currentLanguage =
+    languages.find((language) => language.code === lang) || languages[0];
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
         setUserMenuOpen(false);
+      }
+
+      if (
+        languageMenuRef.current &&
+        !languageMenuRef.current.contains(event.target)
+      ) {
+        setLanguageMenuOpen(false);
       }
     }
 
     function handleEscape(event) {
       if (event.key === "Escape") {
         setUserMenuOpen(false);
+        setLanguageMenuOpen(false);
       }
     }
 
@@ -43,6 +62,11 @@ export default function Header({ children }) {
       document.removeEventListener("keydown", handleEscape);
     };
   }, []);
+
+  function handleLanguageChange(language) {
+    setLang(language);
+    setLanguageMenuOpen(false);
+  }
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -60,6 +84,7 @@ export default function Header({ children }) {
 
   const userName = user?.name || user?.email || "Пользователь";
   const userEmail = user?.email || "";
+
   const initials = userName
     .split(" ")
     .filter(Boolean)
@@ -72,7 +97,6 @@ export default function Header({ children }) {
       <header>
         <div className="menu_logo_wrapper">
           <div
-            // type="button"
             className={`burger-menu ${open ? "active" : ""}`}
             onClick={() => setOpen((value) => !value)}
             aria-label="Открыть меню"
@@ -107,19 +131,48 @@ export default function Header({ children }) {
         </div>
 
         <div className={styles.headerActions}>
-          <div className="lang-switch">
-            {["ru", "kz", "en"].map((language) => (
-              <button
-                key={language}
-                type="button"
-                onClick={() => setLang(language)}
-                className={`lang-switcher-button ${
-                  lang === language ? "lang-active" : ""
+          <div className={styles.languageMenu} ref={languageMenuRef}>
+            <button
+              type="button"
+              className={styles.languageButton}
+              onClick={() => setLanguageMenuOpen((value) => !value)}
+              aria-expanded={languageMenuOpen}
+              aria-haspopup="true"
+              aria-label={`Текущий язык: ${currentLanguage.label}`}
+            >
+              <span>{currentLanguage.code.toUpperCase()}</span>
+
+              <svg
+                className={`${styles.languageChevron} ${
+                  languageMenuOpen ? styles.languageChevronOpen : ""
                 }`}
+                viewBox="0 0 20 20"
+                aria-hidden="true"
               >
-                {language.toUpperCase()}
-              </button>
-            ))}
+                <path d="m5 7.5 5 5 5-5" />
+              </svg>
+            </button>
+
+            {languageMenuOpen && (
+              <div className={styles.languageDropdown}>
+                {languages.map((language) => (
+                  <button
+                    key={language.code}
+                    type="button"
+                    className={`${styles.languageOption} ${
+                      lang === language.code ? styles.languageOptionActive : ""
+                    }`}
+                    onClick={() => handleLanguageChange(language.code)}
+                    aria-current={lang === language.code ? "true" : undefined}
+                  >
+                    <span>{language.label}</span>
+                    <span className={styles.languageCode}>
+                      {language.code.toUpperCase()}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {!isPending && (
@@ -173,6 +226,7 @@ export default function Header({ children }) {
                         <span className={styles.menuIcon}>⚙</span>
                         Настройки
                       </Link>
+
                       {canAccessAdmin && (
                         <>
                           <div className={styles.divider} />

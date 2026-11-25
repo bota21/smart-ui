@@ -170,7 +170,6 @@ function ActivityDetails({ activity }) {
         </div>
       );
     }
-    console.log("changes", changes);
 
     return (
       <div className={styles.detailsContent}>
