@@ -237,3 +237,13 @@ footer {
 .whatsapp {
   color: #25d366;
 }
+
+.auth-redirect-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 24px;
+  color: var(--text-color, #555);
+  font-size: 15px;
+}
