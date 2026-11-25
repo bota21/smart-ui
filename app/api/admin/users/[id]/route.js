@@ -9,28 +9,19 @@ import { user as userTable } from "@/lib/db/schema";
 export async function PATCH(request, { params }) {
   const { context, response } = await requireRole(["admin", "superadmin"]);
 
-  if (response) {
-    return response;
-  }
+  if (response) return response;
 
   try {
     const { id } = await params;
     const body = await request.json();
 
-    const allowedFields = [
-      "name",
-      "firstName",
-      "lastName",
-      "phoneNumber",
-      "address",
-    ];
+    const allowedFields = ["firstName", "lastName", "phoneNumber", "address"];
 
     const [targetUser] = await db
       .select({
         id: userTable.id,
         email: userTable.email,
         role: userTable.role,
-        name: userTable.name,
         firstName: userTable.firstName,
         lastName: userTable.lastName,
         phoneNumber: userTable.phoneNumber,
@@ -55,12 +46,10 @@ export async function PATCH(request, { params }) {
     }
 
     const updates = {};
-    const changedFields = [];
+    const changes = [];
 
     for (const field of allowedFields) {
-      if (!Object.hasOwn(body, field)) {
-        continue;
-      }
+      if (!Object.hasOwn(body, field)) continue;
 
       if (typeof body[field] !== "string") {
         return NextResponse.json(
@@ -69,20 +58,33 @@ export async function PATCH(request, { params }) {
         );
       }
 
-      const newValue = body[field].trim();
       const oldValue = targetUser[field] ?? "";
+      const newValue = body[field].trim();
 
-      if (newValue !== oldValue) {
+      if (oldValue !== newValue) {
         updates[field] = newValue;
-        changedFields.push(field);
+
+        changes.push({
+          field,
+          oldValue,
+          newValue,
+        });
       }
     }
 
-    if (changedFields.length === 0) {
+    if (changes.length === 0) {
       return NextResponse.json({
         message: "Данные пользователя не изменились.",
         user: targetUser,
       });
+    }
+
+    // Отображаемое имя формируется из имени и фамилии.
+    if ("firstName" in updates || "lastName" in updates) {
+      const firstName = updates.firstName ?? targetUser.firstName ?? "";
+      const lastName = updates.lastName ?? targetUser.lastName ?? "";
+
+      updates.name = [firstName, lastName].filter(Boolean).join(" ");
     }
 
     const [updatedUser] = await db
@@ -103,9 +105,7 @@ export async function PATCH(request, { params }) {
       action: "user_updated",
       targetUserId: targetUser.id,
       targetEmail: targetUser.email,
-      details: {
-        changedFields,
-      },
+      details: { changes },
     });
 
     return NextResponse.json({
@@ -125,9 +125,7 @@ export async function PATCH(request, { params }) {
 export async function DELETE(request, { params }) {
   const { context, response } = await requireRole(["superadmin"]);
 
-  if (response) {
-    return response;
-  }
+  if (response) return response;
 
   try {
     const { id } = await params;

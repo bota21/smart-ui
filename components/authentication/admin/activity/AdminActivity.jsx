@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+
 import styles from "./admin-activity.module.css";
 
 const actionLabels = {
@@ -13,17 +14,23 @@ const actionLabels = {
 const actionFilters = [
   { value: "all", label: "Все действия" },
   { value: "user_role_assigned", label: "Назначение администратора" },
-  { value: "user_role_removed", label: "Снятие роли администратора" },
+  { value: "user_role_removed", label: "Снятие роли" },
   { value: "user_updated", label: "Редактирование пользователя" },
   { value: "user_deleted", label: "Удаление пользователя" },
 ];
 
 const fieldLabels = {
-  name: "Отображаемое имя",
   firstName: "Имя",
   lastName: "Фамилия",
   phoneNumber: "Телефон",
   address: "Адрес",
+  name: "Отображаемое имя",
+};
+
+const roleLabels = {
+  user: "Пользователь",
+  admin: "Администратор",
+  superadmin: "Суперадминистратор",
 };
 
 function formatDate(value) {
@@ -40,6 +47,14 @@ function formatDate(value) {
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
+}
+
+function formatValue(value) {
+  if (value === null || value === undefined || value === "") {
+    return "Не указано";
+  }
+
+  return String(value);
 }
 
 function getInitial(value) {
@@ -61,22 +76,56 @@ function getActionClass(action) {
   }
 }
 
+function getActivityChanges(activity) {
+  const details = activity.details || {};
+
+  if (Array.isArray(details.changes)) {
+    return details.changes.map((change, index) => ({
+      id: `${change.field}-${index}`,
+      field: change.field,
+      label: fieldLabels[change.field] || change.field,
+      oldValue: formatValue(change.oldValue),
+      newValue: formatValue(change.newValue),
+      hasValues: true,
+    }));
+  }
+
+  // Поддержка записей, созданных до изменения формата журнала.
+  if (Array.isArray(details.changedFields)) {
+    return details.changedFields.map((field, index) => ({
+      id: `${field}-${index}`,
+      field,
+      label: fieldLabels[field] || field,
+      hasValues: false,
+    }));
+  }
+
+  return [];
+}
+
 function getActionDescription(activity) {
   switch (activity.action) {
     case "user_role_assigned":
       return "Пользователю назначена роль администратора";
+
     case "user_role_removed":
       return "У пользователя снята роль администратора";
-    case "user_updated": {
-      const fields = activity.details?.changedFields || [];
-      const labels = fields.map((field) => fieldLabels[field] || field);
 
-      return labels.length
-        ? `Изменены поля: ${labels.join(", ")}`
-        : "Изменены данные пользователя";
+    case "user_updated": {
+      const changes = getActivityChanges(activity);
+
+      if (changes.length > 0) {
+        return `Изменены поля: ${changes
+          .map((change) => change.label)
+          .join(", ")}`;
+      }
+
+      return "Изменены данные пользователя";
     }
+
     case "user_deleted":
       return "Аккаунт пользователя удалён";
+
     default:
       return "Административное действие";
   }
@@ -85,49 +134,64 @@ function getActionDescription(activity) {
 function ActivityDetails({ activity }) {
   const details = activity.details || {};
 
-  if (activity.action === "user_role_assigned") {
-    return (
-      <div className={styles.detailsContent}>
-        <span>
-          Предыдущая роль: <strong>{details.previousRole || "—"}</strong>
-        </span>
-        <span>
-          Новая роль: <strong>{details.newRole || "—"}</strong>
-        </span>
-      </div>
-    );
-  }
+  if (
+    activity.action === "user_role_assigned" ||
+    activity.action === "user_role_removed"
+  ) {
+    const previousRole =
+      details.previousRole ||
+      (activity.action === "user_role_removed" ? "admin" : "user");
 
-  if (activity.action === "user_role_removed") {
+    const newRole =
+      details.newRole ||
+      (activity.action === "user_role_removed" ? "user" : "admin");
+
     return (
       <div className={styles.detailsContent}>
         <span>
-          Предыдущая роль: <strong>{details.previousRole || "admin"}</strong>
+          Предыдущая роль:{" "}
+          <strong>{roleLabels[previousRole] || previousRole}</strong>
         </span>
+
         <span>
-          Новая роль: <strong>{details.newRole || "user"}</strong>
+          Новая роль: <strong>{roleLabels[newRole] || newRole}</strong>
         </span>
       </div>
     );
   }
 
   if (activity.action === "user_updated") {
-    const fields = details.changedFields || [];
+    const changes = getActivityChanges(activity);
+
+    if (changes.length === 0) {
+      return (
+        <div className={styles.detailsContent}>
+          <span>Дополнительные сведения отсутствуют.</span>
+        </div>
+      );
+    }
+    console.log("changes", changes);
 
     return (
       <div className={styles.detailsContent}>
         <span>Изменённые поля:</span>
-        <div className={styles.fieldList}>
-          {fields.length > 0 ? (
-            fields.map((field) => (
-              <span className={styles.fieldTag} key={field}>
-                {fieldLabels[field] || field}
+
+        {changes.map((change) => (
+          <div className={styles.detailBlock} key={change.id}>
+            <strong>{change.label}</strong>
+
+            {change.hasValues ? (
+              <span>
+                {change.oldValue} → {change.newValue}
               </span>
-            ))
-          ) : (
-            <span>Нет дополнительных сведений</span>
-          )}
-        </div>
+            ) : (
+              <small>
+                Поле было изменено. Старое и новое значения в этой записи не
+                сохранены.
+              </small>
+            )}
+          </div>
+        ))}
       </div>
     );
   }
@@ -135,12 +199,18 @@ function ActivityDetails({ activity }) {
   if (activity.action === "user_deleted") {
     return (
       <div className={styles.detailsContent}>
-        <span>Удалённый аккаунт: {activity.targetEmail || "—"}</span>
+        <span>
+          Удалённый аккаунт: <strong>{activity.targetEmail || "—"}</strong>
+        </span>
       </div>
     );
   }
 
-  return <span>Дополнительные сведения отсутствуют.</span>;
+  return (
+    <div className={styles.detailsContent}>
+      <span>Дополнительные сведения отсутствуют.</span>
+    </div>
+  );
 }
 
 function ActivityTable({ activities, onDetails }) {
@@ -179,6 +249,7 @@ function ActivityTable({ activities, onDetails }) {
                   <span className={styles.avatar}>
                     {getInitial(activity.actorName || activity.actorEmail)}
                   </span>
+
                   <span className={styles.personInfo}>
                     <strong>{activity.actorName || "Администратор"}</strong>
                     <small>{activity.actorEmail}</small>
@@ -188,7 +259,9 @@ function ActivityTable({ activities, onDetails }) {
 
               <td>
                 <span
-                  className={`${styles.actionBadge} ${getActionClass(activity.action)}`}
+                  className={`${styles.actionBadge} ${getActionClass(
+                    activity.action,
+                  )}`}
                 >
                   {actionLabels[activity.action] || activity.action}
                 </span>
@@ -241,7 +314,7 @@ export default function AdminActivity() {
         throw new Error(data.error || "Не удалось загрузить журнал действий.");
       }
 
-      setActivities(data.activities || []);
+      setActivities(Array.isArray(data.activities) ? data.activities : []);
     } catch (err) {
       setError(err.message || "Произошла ошибка при загрузке журнала.");
     } finally {
@@ -330,7 +403,9 @@ export default function AdminActivity() {
           <div className={styles.sectionHeader}>
             <div>
               <span className={styles.eyebrow}>КОНТРОЛЬ И БЕЗОПАСНОСТЬ</span>
+
               <h2>Журнал административных действий</h2>
+
               <p>
                 История изменений, выполненных администраторами платформы
                 SmartÜi.
@@ -415,6 +490,7 @@ export default function AdminActivity() {
             <div className={styles.modalHeader}>
               <div>
                 <span className={styles.eyebrow}>ПОДРОБНОСТИ СОБЫТИЯ</span>
+
                 <h2 id="activity-details-title">
                   {actionLabels[selectedActivity.action] ||
                     "Административное действие"}
