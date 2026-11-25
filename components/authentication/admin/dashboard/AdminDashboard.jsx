@@ -33,8 +33,8 @@ export default function AdminDashboard({ stats }) {
     <main className={styles.dashboard}>
       <div className={styles.header}>
         <div>
-          <h1>Панель администратора</h1>
-          <p>Общая статистика и управление платформой.</p>
+          <h2>Общая статистика</h2>
+          <p>Основные показатели платформы SmartÜi.</p>
         </div>
       </div>
 

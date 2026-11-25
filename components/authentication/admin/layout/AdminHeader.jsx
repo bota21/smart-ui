@@ -11,14 +11,10 @@ const roleLabels = {
 };
 
 const navigation = [
-  {
-    label: "Обзор",
-    href: "/admin",
-  },
-  {
-    label: "Пользователи",
-    href: "/admin/users",
-  },
+  { label: "Обзор", href: "/admin" },
+  { label: "Пользователи", href: "/admin/users" },
+  { label: "Администраторы", href: "/admin/administrators" },
+  { label: "Журнал действий", href: "/admin/activity" },
 ];
 
 export default function AdminHeader({ currentUser }) {

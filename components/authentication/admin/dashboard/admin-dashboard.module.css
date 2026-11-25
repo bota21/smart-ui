@@ -10,7 +10,7 @@
   margin: 0 auto 32px;
 }
 
-.header h1 {
+.header h2 {
   margin: 0 0 10px;
   color: #302947;
   font-size: 30px;
@@ -104,7 +104,7 @@
     padding: 32px 16px 56px;
   }
 
-  .header h1 {
+  .header h2 {
     font-size: 25px;
   }
 

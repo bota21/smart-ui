@@ -3,12 +3,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./admin-users.module.css";
 
-const roleLabels = {
-  user: "Пользователь",
-  admin: "Администратор",
-  superadmin: "Главный администратор",
-};
-
 const emptyForm = {
   firstName: "",
   lastName: "",
@@ -30,19 +24,9 @@ function formatDate(value) {
   }).format(date);
 }
 
-function UsersTable({
-  users,
-  emptyText,
-  onEdit,
-  onDelete,
-  canDelete,
-  currentUserId,
-  currentUserRole,
-  onChangeRole,
-  canChangeRole,
-}) {
+function UsersTable({ users, onEdit, onDelete, canDelete }) {
   if (users.length === 0) {
-    return <div className={styles.empty}>{emptyText}</div>;
+    return <div className={styles.empty}>Пользователи не найдены.</div>;
   }
 
   return (
@@ -52,7 +36,6 @@ function UsersTable({
           <tr>
             <th>Пользователь</th>
             <th>Телефон</th>
-            <th>Роль</th>
             <th>Почта</th>
             <th>Регистрация</th>
             <th>Действия</th>
@@ -88,20 +71,6 @@ function UsersTable({
 
               <td>
                 <span
-                  className={`${styles.role} ${
-                    user.role === "superadmin"
-                      ? styles.superadmin
-                      : user.role === "admin"
-                        ? styles.admin
-                        : styles.user
-                  }`}
-                >
-                  {roleLabels[user.role] || user.role}
-                </span>
-              </td>
-
-              <td>
-                <span
                   className={
                     user.emailVerified ? styles.verified : styles.unverified
                   }
@@ -114,43 +83,23 @@ function UsersTable({
 
               <td>
                 <div className={styles.actions}>
-                  {(currentUserRole === "superadmin" ||
-                    user.role === "user") && (
+                  <button
+                    type="button"
+                    className={styles.editButton}
+                    onClick={() => onEdit(user)}
+                  >
+                    Редактировать
+                  </button>
+
+                  {canDelete && (
                     <button
                       type="button"
-                      className={styles.editButton}
-                      onClick={() => onEdit(user)}
+                      className={styles.deleteButton}
+                      onClick={() => onDelete(user)}
                     >
-                      Редактировать
+                      Удалить
                     </button>
                   )}
-
-                  {canChangeRole &&
-                    user.id !== currentUserId &&
-                    user.role !== "superadmin" &&
-                    user.emailVerified && (
-                      <button
-                        type="button"
-                        className={styles.editButton}
-                        onClick={() => onChangeRole(user)}
-                      >
-                        {user.role === "user"
-                          ? "Назначить админом"
-                          : "Снять роль"}
-                      </button>
-                    )}
-
-                  {canDelete &&
-                    user.id !== currentUserId &&
-                    user.role !== "superadmin" && (
-                      <button
-                        type="button"
-                        className={styles.deleteButton}
-                        onClick={() => onDelete(user)}
-                      >
-                        Удалить
-                      </button>
-                    )}
                 </div>
               </td>
             </tr>
@@ -176,10 +125,6 @@ export default function AdminUsers({ currentUser }) {
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
-  const [roleTarget, setRoleTarget] = useState(null);
-  const [roleSaving, setRoleSaving] = useState(false);
-  const [roleError, setRoleError] = useState("");
 
   const loadUsers = useCallback(async () => {
     setLoading(true);
@@ -227,26 +172,20 @@ export default function AdminUsers({ currentUser }) {
     });
   }, [users, search]);
 
-  const regularUsers = filteredUsers.filter((user) => user.role === "user");
+  const verifiedUsers = users.filter((user) => user.emailVerified).length;
 
-  const administrators = filteredUsers.filter((user) =>
-    ["admin", "superadmin"].includes(user.role),
-  );
-
-  const regularUsersCount = users.filter((user) => user.role === "user").length;
-
-  const administratorsCount = users.filter((user) =>
-    ["admin", "superadmin"].includes(user.role),
-  ).length;
+  const unverifiedUsers = users.length - verifiedUsers;
 
   function openEditor(user) {
     setEditingUser(user);
+
     setForm({
       firstName: user.firstName || "",
       lastName: user.lastName || "",
       phoneNumber: user.phoneNumber || "",
       address: user.address || "",
     });
+
     setFormError("");
     setSuccessMessage("");
   }
@@ -369,66 +308,6 @@ export default function AdminUsers({ currentUser }) {
     }
   }
 
-  function openRoleConfirmation(user) {
-    setRoleError("");
-    setSuccessMessage("");
-    setRoleTarget(user);
-  }
-
-  function closeRoleConfirmation() {
-    if (roleSaving) return;
-
-    setRoleTarget(null);
-    setRoleError("");
-  }
-
-  async function confirmRoleChange() {
-    if (!roleTarget || roleSaving) return;
-
-    const nextRole = roleTarget.role === "user" ? "admin" : "user";
-
-    setRoleSaving(true);
-    setRoleError("");
-    setSuccessMessage("");
-
-    try {
-      const response = await fetch(
-        `/api/admin/users/${encodeURIComponent(roleTarget.id)}/role`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ role: nextRole }),
-        },
-      );
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(data.error || "Не удалось изменить роль.");
-      }
-
-      setUsers((previous) =>
-        previous.map((user) =>
-          user.id === roleTarget.id ? { ...user, ...data.user } : user,
-        ),
-      );
-
-      setRoleTarget(null);
-      setSuccessMessage("Роль пользователя успешно обновлена.");
-
-      setTimeout(() => setSuccessMessage(""), 4000);
-    } catch (err) {
-      setRoleError(err.message || "Ошибка при изменении роли.");
-    } finally {
-      setRoleSaving(false);
-    }
-  }
-
-  const nextRoleLabel =
-    roleTarget?.role === "user" ? "Администратор" : "Пользователь";
-
   return (
     <main className={styles.page}>
       <div className={styles.container}>
@@ -439,21 +318,21 @@ export default function AdminUsers({ currentUser }) {
           </article>
 
           <article className={styles.statCard}>
-            <span>Обычных пользователей</span>
-            <strong>{regularUsersCount}</strong>
+            <span>Подтвердили почту</span>
+            <strong>{verifiedUsers}</strong>
           </article>
 
           <article className={styles.statCard}>
-            <span>Администраторов</span>
-            <strong>{administratorsCount}</strong>
+            <span>Не подтвердили почту</span>
+            <strong>{unverifiedUsers}</strong>
           </article>
         </section>
 
         <section className={styles.usersSection}>
           <div className={styles.sectionHeader}>
             <div>
-              <h2>Управление аккаунтами</h2>
-              <p>Поиск по имени или электронной почте</p>
+              <h2>Обычные пользователи</h2>
+              <p>Управление аккаунтами пользователей платформы SmartÜi.</p>
             </div>
 
             <button
@@ -496,49 +375,16 @@ export default function AdminUsers({ currentUser }) {
           ) : loading ? (
             <div className={styles.empty}>Загрузка пользователей...</div>
           ) : (
-            <>
-              <section className={styles.tableSection}>
-                <div className={styles.tableSectionHeader}>
-                  <h3>Администраторы</h3>
-                  <span>{administrators.length}</span>
-                </div>
-
-                <UsersTable
-                  users={administrators}
-                  emptyText="Администраторы не найдены."
-                  onEdit={openEditor}
-                  onDelete={openDeleteConfirmation}
-                  onChangeRole={openRoleConfirmation}
-                  canDelete={currentUser.role === "superadmin"}
-                  canChangeRole={currentUser.role === "superadmin"}
-                  currentUserId={currentUser.id}
-                  currentUserRole={currentUser.role}
-                />
-              </section>
-
-              <section className={styles.tableSection}>
-                <div className={styles.tableSectionHeader}>
-                  <h3>Пользователи</h3>
-                  <span>{regularUsers.length}</span>
-                </div>
-
-                <UsersTable
-                  users={regularUsers}
-                  emptyText="Пользователи не найдены."
-                  onEdit={openEditor}
-                  onDelete={openDeleteConfirmation}
-                  onChangeRole={openRoleConfirmation}
-                  canDelete={currentUser.role === "superadmin"}
-                  canChangeRole={currentUser.role === "superadmin"}
-                  currentUserId={currentUser.id}
-                  currentUserRole={currentUser.role}
-                />
-              </section>
-            </>
+            <UsersTable
+              users={filteredUsers}
+              onEdit={openEditor}
+              onDelete={openDeleteConfirmation}
+              canDelete={currentUser.role === "superadmin"}
+            />
           )}
 
           <p className={styles.footerNote}>
-            Отображаются последние 100 зарегистрированных аккаунтов.
+            Отображаются последние 100 зарегистрированных обычных пользователей.
           </p>
         </section>
       </div>
@@ -547,7 +393,9 @@ export default function AdminUsers({ currentUser }) {
         <div
           className={styles.modalOverlay}
           onMouseDown={(event) => {
-            if (event.target === event.currentTarget) closeEditor();
+            if (event.target === event.currentTarget) {
+              closeEditor();
+            }
           }}
         >
           <section
@@ -576,9 +424,9 @@ export default function AdminUsers({ currentUser }) {
             <div className={styles.readOnlyInfo}>
               <span>Электронная почта</span>
               <strong>{editingUser.email}</strong>
-              <span>Роль</span>
+              <span>Статус почты</span>
               <strong>
-                {roleLabels[editingUser.role] || editingUser.role}
+                {editingUser.emailVerified ? "Подтверждена" : "Не подтверждена"}
               </strong>
             </div>
 
@@ -716,87 +564,6 @@ export default function AdminUsers({ currentUser }) {
                 disabled={deleting}
               >
                 {deleting ? "Удаление..." : "Да, удалить"}
-              </button>
-            </div>
-          </section>
-        </div>
-      )}
-
-      {roleTarget && (
-        <div
-          className={styles.modalOverlay}
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              closeRoleConfirmation();
-            }
-          }}
-        >
-          <section
-            className={styles.modal}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="change-role-title"
-          >
-            <div className={styles.modalHeader}>
-              <div>
-                <span className={styles.eyebrow}>УПРАВЛЕНИЕ РОЛЯМИ</span>
-                <h2 id="change-role-title">Изменить роль пользователя?</h2>
-              </div>
-
-              <button
-                type="button"
-                className={styles.closeButton}
-                onClick={closeRoleConfirmation}
-                disabled={roleSaving}
-                aria-label="Закрыть"
-              >
-                ×
-              </button>
-            </div>
-
-            <div className={styles.deleteUserInfo}>
-              <strong>
-                {[roleTarget.firstName, roleTarget.lastName]
-                  .filter(Boolean)
-                  .join(" ") ||
-                  roleTarget.name ||
-                  "Без имени"}
-              </strong>
-              <span>{roleTarget.email}</span>
-            </div>
-
-            <div className={styles.readOnlyInfo}>
-              <span>Текущая роль</span>
-              <strong>{roleLabels[roleTarget.role]}</strong>
-              <span>Новая роль</span>
-              <strong>{nextRoleLabel}</strong>
-            </div>
-
-            <p>
-              {roleTarget.role === "user"
-                ? "Пользователь получит доступ к административной панели и возможность редактировать обычные аккаунты."
-                : "Пользователь потеряет доступ к административной панели и станет обычным пользователем."}
-            </p>
-
-            {roleError && <div className={styles.formError}>{roleError}</div>}
-
-            <div className={styles.modalActions}>
-              <button
-                type="button"
-                className={styles.cancelButton}
-                onClick={closeRoleConfirmation}
-                disabled={roleSaving}
-              >
-                Отмена
-              </button>
-
-              <button
-                type="button"
-                className={styles.saveButton}
-                onClick={confirmRoleChange}
-                disabled={roleSaving}
-              >
-                {roleSaving ? "Сохранение..." : "Подтвердить"}
               </button>
             </div>
           </section>

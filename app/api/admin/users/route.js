@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 import { requireRole } from "@/lib/auth-guard";
 import { db } from "@/lib/db";
@@ -27,6 +27,7 @@ export async function GET() {
         createdAt: userTable.createdAt,
       })
       .from(userTable)
+      .where(eq(userTable.role, "user"))
       .orderBy(desc(userTable.createdAt))
       .limit(100);
 
