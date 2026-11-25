@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 
 import { requireRole } from "@/lib/auth-guard";
+import { logAdminActivity } from "@/lib/admin-activity";
 import { db } from "@/lib/db";
 import { user as userTable } from "@/lib/db/schema";
 
@@ -17,8 +18,6 @@ export async function PATCH(request, { params }) {
     const body = await request.json();
     const { role } = body;
 
-    // Через этот API можно назначать только user или admin.
-    // Назначение superadmin выполняется отдельно.
     if (!["user", "admin"].includes(role)) {
       return NextResponse.json(
         { error: "Недопустимая роль." },
@@ -26,7 +25,6 @@ export async function PATCH(request, { params }) {
       );
     }
 
-    // Запрещаем менять собственную роль.
     if (id === context.user.id) {
       return NextResponse.json(
         { error: "Нельзя изменять собственную роль." },
@@ -56,8 +54,7 @@ export async function PATCH(request, { params }) {
 
     const isProtectedSuperadmin =
       targetUser.role === "superadmin" ||
-      (Boolean(superadminEmail) &&
-        targetUser.email.toLowerCase() === superadminEmail);
+      targetUser.email.toLowerCase() === superadminEmail;
 
     if (isProtectedSuperadmin) {
       return NextResponse.json(
@@ -73,6 +70,13 @@ export async function PATCH(request, { params }) {
       );
     }
 
+    if (targetUser.role === role) {
+      return NextResponse.json(
+        { error: "У пользователя уже установлена эта роль." },
+        { status: 400 },
+      );
+    }
+
     const [updatedUser] = await db
       .update(userTable)
       .set({ role })
@@ -82,6 +86,17 @@ export async function PATCH(request, { params }) {
         email: userTable.email,
         role: userTable.role,
       });
+
+    await logAdminActivity({
+      actor: context.user,
+      action: role === "admin" ? "user_role_assigned" : "user_role_removed",
+      targetUserId: targetUser.id,
+      targetEmail: targetUser.email,
+      details: {
+        previousRole: targetUser.role,
+        newRole: role,
+      },
+    });
 
     return NextResponse.json({
       message: "Роль пользователя обновлена.",

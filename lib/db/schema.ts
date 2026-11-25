@@ -6,6 +6,7 @@ import {
   boolean,
   integer,
   index,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
@@ -125,6 +126,36 @@ export const passkey = pgTable(
   (table) => [
     index("passkey_userId_idx").on(table.userId),
     index("passkey_credentialID_idx").on(table.credentialID),
+  ],
+);
+
+export const adminActivity = pgTable(
+  "admin_activity",
+  {
+    id: text("id").primaryKey(),
+
+    // Кто выполнил действие — сохраняем данные на момент события.
+    actorId: text("actor_id").notNull(),
+    actorName: text("actor_name"),
+    actorEmail: text("actor_email").notNull(),
+
+    // Какое действие было выполнено.
+    action: text("action").notNull(),
+
+    // Над каким пользователем выполнено действие.
+    targetUserId: text("target_user_id"),
+    targetEmail: text("target_email"),
+
+    // Дополнительные сведения об изменении.
+    details: jsonb("details"),
+
+    // Дата и время события.
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("admin_activity_created_at_idx").on(table.createdAt),
+    index("admin_activity_actor_id_idx").on(table.actorId),
+    index("admin_activity_action_idx").on(table.action),
   ],
 );
 

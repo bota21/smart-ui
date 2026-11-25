@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 
 import { requireRole } from "@/lib/auth-guard";
+import { logAdminActivity } from "@/lib/admin-activity";
 import { db } from "@/lib/db";
 import { user as userTable } from "@/lib/db/schema";
 
@@ -16,12 +17,24 @@ export async function PATCH(request, { params }) {
     const { id } = await params;
     const body = await request.json();
 
+    const allowedFields = [
+      "name",
+      "firstName",
+      "lastName",
+      "phoneNumber",
+      "address",
+    ];
+
     const [targetUser] = await db
       .select({
         id: userTable.id,
         email: userTable.email,
-        emailVerified: userTable.emailVerified,
         role: userTable.role,
+        name: userTable.name,
+        firstName: userTable.firstName,
+        lastName: userTable.lastName,
+        phoneNumber: userTable.phoneNumber,
+        address: userTable.address,
       })
       .from(userTable)
       .where(eq(userTable.id, id))
@@ -34,15 +47,6 @@ export async function PATCH(request, { params }) {
       );
     }
 
-    // Через раздел пользователей разрешено удалять только обычные аккаунты.
-    if (targetUser.role !== "user") {
-      return NextResponse.json(
-        { error: "Нельзя удалить административный аккаунт через этот раздел." },
-        { status: 403 },
-      );
-    }
-
-    // Раздел обычных пользователей не должен изменять административные аккаунты.
     if (targetUser.role !== "user") {
       return NextResponse.json(
         { error: "Этот аккаунт не относится к обычным пользователям." },
@@ -50,34 +54,35 @@ export async function PATCH(request, { params }) {
       );
     }
 
-    const allowedFields = [
-      "name",
-      "firstName",
-      "lastName",
-      "phoneNumber",
-      "address",
-    ];
-
     const updates = {};
+    const changedFields = [];
 
     for (const field of allowedFields) {
-      if (Object.hasOwn(body, field)) {
-        if (typeof body[field] !== "string") {
-          return NextResponse.json(
-            { error: `Некорректное значение поля ${field}.` },
-            { status: 400 },
-          );
-        }
+      if (!Object.hasOwn(body, field)) {
+        continue;
+      }
 
-        updates[field] = body[field].trim();
+      if (typeof body[field] !== "string") {
+        return NextResponse.json(
+          { error: `Некорректное значение поля ${field}.` },
+          { status: 400 },
+        );
+      }
+
+      const newValue = body[field].trim();
+      const oldValue = targetUser[field] ?? "";
+
+      if (newValue !== oldValue) {
+        updates[field] = newValue;
+        changedFields.push(field);
       }
     }
 
-    if (Object.keys(updates).length === 0) {
-      return NextResponse.json(
-        { error: "Нет данных для обновления." },
-        { status: 400 },
-      );
+    if (changedFields.length === 0) {
+      return NextResponse.json({
+        message: "Данные пользователя не изменились.",
+        user: targetUser,
+      });
     }
 
     const [updatedUser] = await db
@@ -92,6 +97,16 @@ export async function PATCH(request, { params }) {
         phoneNumber: userTable.phoneNumber,
         address: userTable.address,
       });
+
+    await logAdminActivity({
+      actor: context.user,
+      action: "user_updated",
+      targetUserId: targetUser.id,
+      targetEmail: targetUser.email,
+      details: {
+        changedFields,
+      },
+    });
 
     return NextResponse.json({
       message: "Данные пользователя обновлены.",
@@ -108,7 +123,6 @@ export async function PATCH(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-  // Удалять аккаунты может только суперадминистратор.
   const { context, response } = await requireRole(["superadmin"]);
 
   if (response) {
@@ -118,7 +132,6 @@ export async function DELETE(request, { params }) {
   try {
     const { id } = await params;
 
-    // Защита от удаления собственного аккаунта.
     if (id === context.user.id) {
       return NextResponse.json(
         { error: "Нельзя удалить собственный аккаунт." },
@@ -144,7 +157,6 @@ export async function DELETE(request, { params }) {
       );
     }
 
-    // Нельзя удалить другой аккаунт суперадминистратора.
     const superadminEmail = process.env.SUPERADMIN_EMAIL?.trim().toLowerCase();
 
     const isProtectedSuperadmin =
@@ -161,6 +173,13 @@ export async function DELETE(request, { params }) {
     }
 
     await db.delete(userTable).where(eq(userTable.id, id));
+
+    await logAdminActivity({
+      actor: context.user,
+      action: "user_deleted",
+      targetUserId: targetUser.id,
+      targetEmail: targetUser.email,
+    });
 
     return NextResponse.json({
       success: true,
