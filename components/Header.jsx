@@ -215,7 +215,7 @@ export default function Header({ children }) {
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <span className={styles.menuIcon}>♙</span>
-                        Личный кабинет
+                        {t("personal_account")}
                       </Link>
 
                       <Link
@@ -224,7 +224,7 @@ export default function Header({ children }) {
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <span className={styles.menuIcon}>⚙</span>
-                        Настройки
+                        {t("settings")}
                       </Link>
 
                       {canAccessAdmin && (
@@ -237,7 +237,7 @@ export default function Header({ children }) {
                             onClick={() => setUserMenuOpen(false)}
                           >
                             <span className={styles.menuIcon}>♙</span>
-                            Панель администратора
+                            {t("admin_panel")}
                           </Link>
                         </>
                       )}
@@ -251,18 +251,14 @@ export default function Header({ children }) {
                         disabled={loggingOut}
                       >
                         <span className={styles.menuIcon}>↪</span>
-                        {loggingOut ? "Выходим..." : "Выйти"}
+                        {loggingOut ? t("loggingOut") : t("logout")}
                       </button>
                     </div>
                   )}
                 </>
               ) : (
-                <Link
-                  href="/login"
-                  className={styles.loginButton}
-                  data-i18n="enter"
-                >
-                  Войти
+                <Link href="/login" className={styles.loginButton}>
+                  {t("login")}
                 </Link>
               )}
             </div>

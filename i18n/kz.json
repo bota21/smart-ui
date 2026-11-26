@@ -9,6 +9,14 @@
   "floating_telegram": "Telegram",
   "floating_whatsapp": "WhatsApp",
   "floating_contact_us": "Байланысу",
+
+  "personal_account": "Жеке кабинет",
+  "settings": "Баптаулар",
+  "admin_panel": "Админ панелі",
+  "logout": "Шығу",
+  "loggingOut": "Шығып жатырмыз...",
+  "login": "Кіру",
+
   "hero_header": "Алиса арқылы смарт үй Алматыда",
   "hero_text": "Сіздің жайлылығыңыз бен қауіпсіздігіңізге арналған толық интеграцияланған смарт үй жүйесі",
   "hero_cost": "Бағаны есептеу",
