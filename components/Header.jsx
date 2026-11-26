@@ -214,7 +214,7 @@ export default function Header({ children }) {
                         className={styles.dropdownLink}
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <span className={styles.menuIcon}>♙</span>
+                        <span className={styles.menuIcon}>👤</span>
                         {t("personal_account")}
                       </Link>
 
@@ -223,7 +223,7 @@ export default function Header({ children }) {
                         className={styles.dropdownLink}
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <span className={styles.menuIcon}>⚙</span>
+                        <span className={styles.menuIcon}>⚙️</span>
                         {t("settings")}
                       </Link>
 
@@ -236,7 +236,7 @@ export default function Header({ children }) {
                             className={styles.dropdownLink}
                             onClick={() => setUserMenuOpen(false)}
                           >
-                            <span className={styles.menuIcon}>♙</span>
+                            <span className={styles.menuIcon}>🧑‍💼</span>
                             {t("admin_panel")}
                           </Link>
                         </>
@@ -250,7 +250,7 @@ export default function Header({ children }) {
                         onClick={handleLogout}
                         disabled={loggingOut}
                       >
-                        <span className={styles.menuIcon}>↪</span>
+                        <span className={styles.menuIcon}>➡️</span>
                         {loggingOut ? t("loggingOut") : t("logout")}
                       </button>
                     </div>

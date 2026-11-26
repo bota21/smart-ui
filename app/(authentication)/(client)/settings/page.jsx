@@ -86,7 +86,7 @@ export default function SettingsPage() {
   }
 
   const sections = [
-    { id: "security", label: "Безопасность", icon: "🛡" },
+    { id: "security", label: "Безопасность", icon: "🛡️" },
     { id: "password", label: "Пароль", icon: "🔑" },
     { id: "twoFactor", label: "Двухфакторная защита", icon: "🔐" },
     { id: "sessions", label: "Активные сеансы", icon: "💻" },
@@ -349,7 +349,7 @@ export default function SettingsPage() {
                 </p>
 
                 <div className={styles.infoCard}>
-                  <div className={styles.infoIcon}>✉</div>
+                  <div className={styles.infoIcon}> 📧</div>
                   <div className={styles.infoText}>
                     <h3>Электронная почта</h3>
                     <p>{user.email}</p>
