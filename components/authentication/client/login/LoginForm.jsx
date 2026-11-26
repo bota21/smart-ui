@@ -39,6 +39,17 @@ export default function LoginForm() {
       });
 
       if (result.error) {
+        const errorCode = result.error.code;
+
+        if (
+          errorCode === "INVALID_EMAIL_OR_PASSWORD" ||
+          /invalid email or password/i.test(result.error.message || "")
+        ) {
+          throw new Error(
+            "Не удалось войти. Проверьте правильность электронной почты и пароля. Если у вас ещё нет аккаунта, пожалуйста, зарегистрируйтесь.",
+          );
+        }
+
         throw new Error(result.error.message || "Не удалось выполнить вход.");
       }
 
