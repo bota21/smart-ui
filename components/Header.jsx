@@ -69,15 +69,19 @@ export default function Header({ children }) {
   }
 
   async function handleLogout() {
+    if (loggingOut) return;
+
     setLoggingOut(true);
 
     try {
       await authClient.signOut();
+
       setUserMenuOpen(false);
       router.replace("/login");
       router.refresh();
     } catch (error) {
       console.error("Logout error:", error);
+    } finally {
       setLoggingOut(false);
     }
   }
