@@ -16,6 +16,8 @@ export default function RegisterForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   function handlePhoneChange(value) {
     const digits = value.replace(/\D/g, "").slice(0, 11);
@@ -156,30 +158,132 @@ export default function RegisterForm() {
         <label className={styles.label} htmlFor="register-password">
           Пароль
         </label>
-        <input
-          id="register-password"
-          className={styles.input}
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          minLength={8}
-          autoComplete="new-password"
-          required
-        />
+
+        <div className={styles.passwordField}>
+          <input
+            id="register-password"
+            className={`${styles.input} ${styles.passwordInput}`}
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength={8}
+            autoComplete="new-password"
+            required
+          />
+
+          <button
+            type="button"
+            className={styles.passwordToggle}
+            onClick={() => setShowPassword((prev) => !prev)}
+            aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+            aria-pressed={showPassword}
+            title={showPassword ? "Скрыть пароль" : "Показать пароль"}
+          >
+            {showPassword ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M9.9 5.2A10.8 10.8 0 0112 5c5 0 8.5 4.2 9.5 7-.4 1.1-1.2 2.3-2.3 3.3M6.2 6.2C3.9 7.7 2.8 9.6 2.5 12c.8 2.5 4.3 7 9.5 7 1.3 0 2.5-.3 3.6-.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinejoin="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
 
         <label className={styles.label} htmlFor="confirm-password">
           Повторите пароль
         </label>
-        <input
-          id="confirm-password"
-          className={styles.input}
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          minLength={8}
-          autoComplete="new-password"
-          required
-        />
+
+        <div className={styles.passwordField}>
+          <input
+            id="confirm-password"
+            className={`${styles.input} ${styles.passwordInput}`}
+            type={showConfirmPassword ? "text" : "password"}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            minLength={8}
+            autoComplete="new-password"
+            required
+          />
+
+          <button
+            type="button"
+            className={styles.passwordToggle}
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
+            aria-label={
+              showConfirmPassword ? "Скрыть пароль" : "Показать пароль"
+            }
+            aria-pressed={showConfirmPassword}
+            title={showConfirmPassword ? "Скрыть пароль" : "Показать пароль"}
+          >
+            {showConfirmPassword ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M9.9 5.2A10.8 10.8 0 0112 5c5 0 8.5 4.2 9.5 7-.4 1.1-1.2 2.3-2.3 3.3M6.2 6.2C3.9 7.7 2.8 9.6 2.5 12c.8 2.5 4.3 7 9.5 7 1.3 0 2.5-.3 3.6-.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinejoin="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
 
         {error && <p className={styles.error}>{error}</p>}
 

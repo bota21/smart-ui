@@ -14,6 +14,7 @@ export default function LoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passkeyLoading, setPasskeyLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   function redirectAfterLogin(user) {
     if (["admin", "superadmin"].includes(user?.role)) {
@@ -108,15 +109,64 @@ export default function LoginForm() {
           Пароль
         </label>
 
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          required
-          autoComplete="current-password"
-          className={styles.input}
-        />
+        <div className={styles.passwordField}>
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+            autoComplete="current-password"
+            className={`${styles.input} ${styles.passwordInput}`}
+          />
+
+          <button
+            type="button"
+            className={styles.passwordToggle}
+            onClick={() => setShowPassword((prev) => !prev)}
+            aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+            aria-pressed={showPassword}
+            title={showPassword ? "Скрыть пароль" : "Показать пароль"}
+          >
+            {showPassword ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M9.9 5.2A10.8 10.8 0 0112 5c5 0 8.5 4.2 9.5 7-.4 1.1-1.2 2.3-2.3 3.3M6.2 6.2C3.9 7.7 2.8 9.6 2.5 12c.8 2.5 4.3 7 9.5 7 1.3 0 2.5-.3 3.6-.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinejoin="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
 
         <div className={styles.forgotPasswordWrapper}>
           <Link href="/forgot-password" className={styles.forgotPassword}>

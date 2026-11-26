@@ -187,3 +187,46 @@
     grid-template-columns: 1fr;
   }
 }
+
+.passwordField {
+  position: relative;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.passwordInput {
+  padding-right: 48px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--gray-500);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color var(--transition-fast);
+}
+
+.passwordToggle:hover {
+  color: var(--purple-800);
+}
+
+.passwordToggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--purple-700);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
