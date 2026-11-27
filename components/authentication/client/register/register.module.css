@@ -1,0 +1,232 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background: var(--gray-100);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 460px;
+  padding: 36px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  box-shadow: var(--shadow-auth);
+}
+
+.logo {
+  margin-bottom: 24px;
+  color: var(--purple-800);
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 8px;
+  color: var(--gray-900);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0 0 26px;
+  color: var(--gray-600);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.nameRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 18px;
+  box-sizing: border-box;
+}
+
+.nameRow > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  color: var(--gray-800);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  box-sizing: border-box;
+  border: 1px solid var(--gray-300);
+  border-radius: 9px;
+  outline: none;
+  background: var(--white);
+  color: var(--gray-900);
+  font-family: inherit;
+  font-size: 14px;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--gray-400);
+}
+
+.input:focus {
+  border-color: var(--purple-700);
+  box-shadow: 0 0 0 3px var(--shadow-auth);
+}
+
+.card > .input {
+  margin-bottom: 18px;
+}
+
+.error {
+  margin: 0 0 16px;
+  color: var(--danger);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 4px;
+  padding: 12px 18px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-900));
+  color: var(--white);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.button:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.footer {
+  margin: 22px 0 0;
+  color: var(--gray-600);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--purple-800);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .page {
+    align-items: flex-start;
+    padding: 24px 14px;
+  }
+
+  .card {
+    max-width: 100%;
+    padding: 26px 20px;
+    border-radius: 16px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .nameRow {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nameRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.passwordField {
+  position: relative;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.passwordInput {
+  padding-right: 48px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--gray-500);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color var(--transition-fast);
+}
+
+.passwordToggle:hover {
+  color: var(--purple-800);
+}
+
+.passwordToggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid var(--purple-700);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

@@ -1,3 +1,4 @@
+import "@/styles/tokens.css";
 import "@/styles/style.css";
 import "@/styles/layout.css";
 import "@/styles/catalog.css";
@@ -15,11 +16,7 @@ export default function App({ Component, pageProps }) {
     <LanguageProvider>
       <Head>
         <title>SmartÜi — Умный дом с Алисой</title>
-        <link
-          rel="icon"
-          // href="/assets/logo/Shanyrak-black.png"
-          type="image/png"
-        />{" "}
+        <link rel="icon" href="/favicon.png" type="image/png" />{" "}
       </Head>
 
       <LayoutContent>

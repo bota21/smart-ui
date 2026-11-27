@@ -128,7 +128,7 @@
 .text_tab {
   font-size: 16px;
   line-height: 1.6;
-  color: #e5e7eb;
+  color: var(--text-on-dark);
 }
 
 .text_tab p {

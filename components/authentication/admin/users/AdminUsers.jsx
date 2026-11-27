@@ -1,0 +1,574 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
+import styles from "./admin-users.module.css";
+
+const emptyForm = {
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  address: "",
+};
+
+function formatDate(value) {
+  if (!value) return "—";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "—";
+
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+
+function UsersTable({ users, onEdit, onDelete, canDelete }) {
+  if (users.length === 0) {
+    return <div className={styles.empty}>Пользователи не найдены.</div>;
+  }
+
+  return (
+    <div className={styles.tableWrapper}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Пользователь</th>
+            <th>Телефон</th>
+            <th>Почта</th>
+            <th>Регистрация</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>
+                <div className={styles.userCell}>
+                  <span className={styles.userAvatar}>
+                    {(user.firstName ||
+                      user.name ||
+                      user.email ||
+                      "U")[0].toUpperCase()}
+                  </span>
+
+                  <span className={styles.userInfo}>
+                    <strong>
+                      {[user.firstName, user.lastName]
+                        .filter(Boolean)
+                        .join(" ") ||
+                        user.name ||
+                        "Без имени"}
+                    </strong>
+                    <small>{user.email}</small>
+                  </span>
+                </div>
+              </td>
+
+              <td>{user.phoneNumber || "—"}</td>
+
+              <td>
+                <span
+                  className={
+                    user.emailVerified ? styles.verified : styles.unverified
+                  }
+                >
+                  {user.emailVerified ? "Подтверждена" : "Не подтверждена"}
+                </span>
+              </td>
+
+              <td className={styles.date}>{formatDate(user.createdAt)}</td>
+
+              <td>
+                <div className={styles.actions}>
+                  <button
+                    type="button"
+                    className={styles.editButton}
+                    onClick={() => onEdit(user)}
+                  >
+                    Редактировать
+                  </button>
+
+                  {canDelete && (
+                    <button
+                      type="button"
+                      className={styles.deleteButton}
+                      onClick={() => onDelete(user)}
+                    >
+                      Удалить
+                    </button>
+                  )}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default function AdminUsers({ currentUser }) {
+  const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [deleteError, setDeleteError] = useState("");
+  const [deletingUser, setDeletingUser] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+
+  const [editingUser, setEditingUser] = useState(null);
+  const [form, setForm] = useState(emptyForm);
+  const [saving, setSaving] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const loadUsers = useCallback(async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/admin/users", {
+        method: "GET",
+        cache: "no-store",
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось загрузить пользователей.");
+      }
+
+      setUsers(data.users || []);
+    } catch (err) {
+      setError(err.message || "Произошла ошибка при загрузке.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
+
+  const filteredUsers = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    if (!query) return users;
+
+    return users.filter((user) => {
+      const fullName = [user.firstName, user.lastName, user.name]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return (
+        fullName.includes(query) ||
+        (user.email || "").toLowerCase().includes(query)
+      );
+    });
+  }, [users, search]);
+
+  const verifiedUsers = users.filter((user) => user.emailVerified).length;
+
+  const unverifiedUsers = users.length - verifiedUsers;
+
+  function openEditor(user) {
+    setEditingUser(user);
+
+    setForm({
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      phoneNumber: user.phoneNumber || "",
+      address: user.address || "",
+    });
+
+    setFormError("");
+    setSuccessMessage("");
+  }
+
+  function closeEditor() {
+    if (saving) return;
+
+    setEditingUser(null);
+    setForm(emptyForm);
+    setFormError("");
+  }
+
+  function updateField(event) {
+    const { name, value } = event.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
+
+  async function saveUser(event) {
+    event.preventDefault();
+
+    if (!editingUser || saving) return;
+
+    setSaving(true);
+    setFormError("");
+
+    const firstName = form.firstName.trim();
+    const lastName = form.lastName.trim();
+
+    try {
+      const response = await fetch(
+        `/api/admin/users/${encodeURIComponent(editingUser.id)}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            name: [firstName, lastName].filter(Boolean).join(" "),
+            phoneNumber: form.phoneNumber.trim(),
+            address: form.address.trim(),
+          }),
+        },
+      );
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось сохранить изменения.");
+      }
+
+      setUsers((previous) =>
+        previous.map((user) =>
+          user.id === editingUser.id ? { ...user, ...data.user } : user,
+        ),
+      );
+
+      setEditingUser(null);
+      setForm(emptyForm);
+      setSuccessMessage("Данные пользователя успешно обновлены.");
+
+      setTimeout(() => setSuccessMessage(""), 4000);
+    } catch (err) {
+      setFormError(err.message || "Произошла ошибка при сохранении.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function openDeleteConfirmation(user) {
+    setDeleteError("");
+    setDeletingUser(user);
+  }
+
+  function closeDeleteConfirmation() {
+    if (deleting) return;
+
+    setDeletingUser(null);
+    setDeleteError("");
+  }
+
+  async function confirmDeleteUser() {
+    if (!deletingUser || deleting) return;
+
+    setDeleting(true);
+    setDeleteError("");
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch(
+        `/api/admin/users/${encodeURIComponent(deletingUser.id)}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Не удалось удалить пользователя.");
+      }
+
+      setUsers((previous) =>
+        previous.filter((item) => item.id !== deletingUser.id),
+      );
+
+      setDeletingUser(null);
+      setSuccessMessage("Пользователь успешно удалён.");
+
+      setTimeout(() => setSuccessMessage(""), 4000);
+    } catch (err) {
+      setDeleteError(err.message || "Ошибка при удалении пользователя.");
+    } finally {
+      setDeleting(false);
+    }
+  }
+
+  return (
+    <main className={styles.page}>
+      <div className={styles.container}>
+        <section className={styles.stats}>
+          <article className={styles.statCard}>
+            <span>Всего пользователей</span>
+            <strong>{users.length}</strong>
+          </article>
+
+          <article className={styles.statCard}>
+            <span>Подтвердили почту</span>
+            <strong>{verifiedUsers}</strong>
+          </article>
+
+          <article className={styles.statCard}>
+            <span>Не подтвердили почту</span>
+            <strong>{unverifiedUsers}</strong>
+          </article>
+        </section>
+
+        <section className={styles.usersSection}>
+          <div className={styles.sectionHeader}>
+            <div>
+              <h2>Обычные пользователи</h2>
+              <p>Управление аккаунтами пользователей платформы SmartÜi.</p>
+            </div>
+
+            <button
+              type="button"
+              className={styles.refreshButton}
+              onClick={loadUsers}
+              disabled={loading}
+            >
+              {loading ? "Загрузка..." : "Обновить"}
+            </button>
+          </div>
+
+          <div className={styles.toolbar}>
+            <input
+              className={styles.search}
+              type="search"
+              placeholder="Поиск по имени или электронной почте"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+
+            <span className={styles.resultCount}>
+              Найдено: {filteredUsers.length}
+            </span>
+          </div>
+
+          {successMessage && (
+            <div className={styles.successMessage}>{successMessage}</div>
+          )}
+
+          {deleteError && <div className={styles.error}>{deleteError}</div>}
+
+          {error ? (
+            <div className={styles.error}>
+              {error}
+              <button type="button" onClick={loadUsers}>
+                Повторить
+              </button>
+            </div>
+          ) : loading ? (
+            <div className={styles.empty}>Загрузка пользователей...</div>
+          ) : (
+            <UsersTable
+              users={filteredUsers}
+              onEdit={openEditor}
+              onDelete={openDeleteConfirmation}
+              canDelete={currentUser.role === "superadmin"}
+            />
+          )}
+
+          <p className={styles.footerNote}>
+            Отображаются последние 100 зарегистрированных обычных пользователей.
+          </p>
+        </section>
+      </div>
+
+      {editingUser && (
+        <div
+          className={styles.modalOverlay}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closeEditor();
+            }
+          }}
+        >
+          <section
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="edit-user-title"
+          >
+            <div className={styles.modalHeader}>
+              <div>
+                <span className={styles.eyebrow}>УПРАВЛЕНИЕ АККАУНТОМ</span>
+                <h2 id="edit-user-title">Редактирование пользователя</h2>
+              </div>
+
+              <button
+                type="button"
+                className={styles.closeButton}
+                onClick={closeEditor}
+                disabled={saving}
+                aria-label="Закрыть"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className={styles.readOnlyInfo}>
+              <span>Электронная почта</span>
+              <strong>{editingUser.email}</strong>
+              <span>Статус почты</span>
+              <strong>
+                {editingUser.emailVerified ? "Подтверждена" : "Не подтверждена"}
+              </strong>
+            </div>
+
+            <form className={styles.editForm} onSubmit={saveUser}>
+              <label>
+                Имя
+                <input
+                  name="firstName"
+                  value={form.firstName}
+                  onChange={updateField}
+                  maxLength={100}
+                />
+              </label>
+
+              <label>
+                Фамилия
+                <input
+                  name="lastName"
+                  value={form.lastName}
+                  onChange={updateField}
+                  maxLength={100}
+                />
+              </label>
+
+              <label>
+                Телефон
+                <input
+                  name="phoneNumber"
+                  type="tel"
+                  value={form.phoneNumber}
+                  onChange={updateField}
+                  maxLength={30}
+                />
+              </label>
+
+              <label>
+                Адрес
+                <textarea
+                  name="address"
+                  value={form.address}
+                  onChange={updateField}
+                  rows={3}
+                  maxLength={500}
+                />
+              </label>
+
+              {formError && <div className={styles.formError}>{formError}</div>}
+
+              <div className={styles.modalActions}>
+                <button
+                  type="button"
+                  className={styles.cancelButton}
+                  onClick={closeEditor}
+                  disabled={saving}
+                >
+                  Отмена
+                </button>
+
+                <button
+                  type="submit"
+                  className={styles.saveButton}
+                  disabled={saving}
+                >
+                  {saving ? "Сохранение..." : "Сохранить изменения"}
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      )}
+
+      {deletingUser && (
+        <div
+          className={styles.modalOverlay}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closeDeleteConfirmation();
+            }
+          }}
+        >
+          <section
+            className={`${styles.modal} ${styles.deleteModal}`}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-user-title"
+            aria-describedby="delete-user-description"
+          >
+            <div className={styles.deleteIcon}>!</div>
+
+            <div className={styles.deleteContent}>
+              <span className={styles.eyebrow}>УДАЛЕНИЕ АККАУНТА</span>
+
+              <h2 id="delete-user-title">Удалить пользователя?</h2>
+
+              <p id="delete-user-description">
+                Ты собираешься удалить аккаунт:
+              </p>
+
+              <div className={styles.deleteUserInfo}>
+                <strong>
+                  {[deletingUser.firstName, deletingUser.lastName]
+                    .filter(Boolean)
+                    .join(" ") ||
+                    deletingUser.name ||
+                    "Без имени"}
+                </strong>
+
+                <span>{deletingUser.email}</span>
+              </div>
+
+              <p className={styles.deleteWarning}>
+                Это действие нельзя отменить. Данные аккаунта, связанные сессии
+                и способы аутентификации будут удалены.
+              </p>
+            </div>
+
+            {deleteError && (
+              <div className={styles.formError}>{deleteError}</div>
+            )}
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={closeDeleteConfirmation}
+                disabled={deleting}
+              >
+                Отмена
+              </button>
+
+              <button
+                type="button"
+                className={styles.confirmDeleteButton}
+                onClick={confirmDeleteUser}
+                disabled={deleting}
+              >
+                {deleting ? "Удаление..." : "Да, удалить"}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+    </main>
+  );
+}

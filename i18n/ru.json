@@ -1,4 +1,5 @@
 {
+  "enter": "Войти",
   "menu_main": "Главная",
   "menu_catalog": "Каталог",
   "menu_packages": "Пакеты",
@@ -8,6 +9,14 @@
   "floating_telegram": "Telegram",
   "floating_whatsapp": "WhatsApp",
   "floating_contact_us": "Связаться",
+
+  "personal_account": "Личный кабинет",
+  "settings": "Настройки",
+  "admin_panel": "Панель администратора",
+  "logout": "Выйти",
+  "loggingOut": "Выходим...",
+  "login": "Войти",
+
   "hero_header": "Умный дом с Алисой в Алматы",
   "hero_text": "Полностью интегрированная система умного дома для вашего комфорта и безопасности",
   "hero_cost": "Рассчитать стоимость",

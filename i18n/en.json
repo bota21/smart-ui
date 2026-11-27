@@ -1,4 +1,5 @@
 {
+  "enter": "Enter",
   "menu_main": "Main",
   "menu_catalog": "Catalog",
   "menu_packages": "Packages",
@@ -8,6 +9,14 @@
   "floating_telegram": "Telegram",
   "floating_whatsapp": "WhatsApp",
   "floating_contact_us": "Contacts us",
+
+  "personal_account": "Personal Account",
+  "settings": "Settings",
+  "admin_panel": "Admin Panel",
+  "logout": "Log out",
+  "loggingOut": "Logging out...",
+  "login": "Log in",
+
   "hero_header": "Smart Home with Alice in Almaty",
   "hero_text": "Fully integrated smart home system for your comfort and safety",
   "hero_cost": "Calculate Price",
