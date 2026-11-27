@@ -86,11 +86,11 @@ export default function SettingsPage() {
   }
 
   const sections = [
-    { id: "security", label: "Безопасность", icon: "🛡️" },
-    { id: "password", label: "Пароль", icon: "🔑" },
-    { id: "twoFactor", label: "Двухфакторная защита", icon: "🔐" },
-    { id: "sessions", label: "Активные сеансы", icon: "💻" },
-    { id: "passkeys", label: "Вход без пароля", icon: "👆" },
+    { id: "security", label: "Безопасность", icon: "security" },
+    { id: "password", label: "Пароль", icon: "password" },
+    { id: "twoFactor", label: "Двухфакторная защита", icon: "2fa" },
+    { id: "sessions", label: "Активные сеансы", icon: "computer" },
+    { id: "passkeys", label: "Вход без пароля", icon: "fingerprint" },
   ];
 
   async function handlePasswordChange(event) {
@@ -333,7 +333,10 @@ export default function SettingsPage() {
                   }`}
                   onClick={() => setActiveSection(section.id)}
                 >
-                  <span className={styles.navIcon}>{section.icon}</span>
+                  <img
+                    src={`/assets/icons/${section.icon}.svg`}
+                    className={styles.navIcon}
+                  />
                   <span>{section.label}</span>
                 </button>
               ))}
@@ -349,7 +352,13 @@ export default function SettingsPage() {
                 </p>
 
                 <div className={styles.infoCard}>
-                  <div className={styles.infoIcon}> 📧</div>
+                  <div className={styles.infoIcon}>
+                    {" "}
+                    <img
+                      src="/assets/icons/email.svg"
+                      className={styles.navIcon}
+                    />
+                  </div>
                   <div className={styles.infoText}>
                     <h3>Электронная почта</h3>
                     <p>{user.email}</p>
@@ -372,7 +381,13 @@ export default function SettingsPage() {
                   className={`${styles.infoCard} ${styles.infoCardAction}`}
                   onClick={() => setActiveSection("twoFactor")}
                 >
-                  <div className={styles.infoIcon}>🔐</div>
+                  <div className={styles.infoIcon}>
+                    {" "}
+                    <img
+                      src="/assets/icons/2fa.svg"
+                      className={styles.navIcon}
+                    />
+                  </div>
                   <div className={styles.infoText}>
                     <h3>Двухфакторная аутентификация</h3>
                     <p>
@@ -395,7 +410,13 @@ export default function SettingsPage() {
                   className={`${styles.infoCard} ${styles.infoCardAction}`}
                   onClick={() => setActiveSection("passkeys")}
                 >
-                  <div className={styles.infoIcon}>👆</div>
+                  <div className={styles.infoIcon}>
+                    {" "}
+                    <img
+                      src="/assets/icons/fingerprint.svg"
+                      className={styles.navIcon}
+                    />
+                  </div>
                   <div className={styles.infoText}>
                     <h3>Вход без пароля</h3>
                     <p>
@@ -428,7 +449,13 @@ export default function SettingsPage() {
                   className={`${styles.infoCard} ${styles.infoCardAction}`}
                   onClick={() => setActiveSection("password")}
                 >
-                  <div className={styles.infoIcon}>🔑</div>
+                  <div className={styles.infoIcon}>
+                    {" "}
+                    <img
+                      src="/assets/icons/password.svg"
+                      className={styles.navIcon}
+                    />
+                  </div>
                   <div className={styles.infoText}>
                     <h3>Пароль</h3>
                     <p>Изменение пароля и управление доступом к аккаунту.</p>
@@ -554,7 +581,12 @@ export default function SettingsPage() {
                 </p>
 
                 <div className={styles.twoFactorStatus}>
-                  <span className={styles.twoFactorStatusIcon}>🔐</span>
+                  <span className={styles.twoFactorStatusIcon}>
+                    <img
+                      src="/assets/icons/2fa.svg"
+                      className={styles.navIcon}
+                    />
+                  </span>
                   <div>
                     <strong>
                       {twoFactorEnabled

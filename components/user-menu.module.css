@@ -114,7 +114,6 @@
   display: flex;
   align-items: center;
   gap: 11px;
-  width: 100%;
   padding: 11px 10px;
   border: none;
   border-radius: 8px;
@@ -126,6 +125,9 @@
   text-decoration: none;
   cursor: pointer;
   transition: background var(--transition-fast);
+}
+.logoutButton {
+  width: 100%;
 }
 
 .dropdownLink:hover {

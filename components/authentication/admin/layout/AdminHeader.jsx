@@ -11,17 +11,15 @@ const roleLabels = {
 };
 
 const navigation = [
-  { label: "Обзор", href: "/admin", icon: "📊" },
-  { label: "Пользователи", href: "/admin/users", icon: "👥" },
+  { label: "Обзор", href: "/admin" },
+  { label: "Пользователи", href: "/admin/users" },
   {
     label: "Администраторы",
     href: "/admin/administrators",
-    icon: "🧑‍💼",
   },
   {
     label: "Журнал действий",
     href: "/admin/activity",
-    icon: "📋",
   },
 ];
 
@@ -69,7 +67,6 @@ export default function AdminHeader({ currentUser }) {
                 className={`${styles.navLink} ${isActive ? styles.active : ""}`}
                 aria-current={isActive ? "page" : undefined}
               >
-                <span className={styles.navIcon}>{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             );

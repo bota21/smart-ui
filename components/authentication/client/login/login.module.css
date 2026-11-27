@@ -150,6 +150,11 @@
 }
 
 @media (max-width: 480px) {
+  .form {
+    width: 100%;
+    padding: 15px;
+  }
+
   .card {
     padding: 30px 22px;
   }

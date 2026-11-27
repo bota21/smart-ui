@@ -218,7 +218,10 @@ export default function Header({ children }) {
                         className={styles.dropdownLink}
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <span className={styles.menuIcon}>👤</span>
+                        <img
+                          src="/assets/icons/personal_account.svg"
+                          className={styles.menuIcon}
+                        />
                         {t("personal_account")}
                       </Link>
 
@@ -227,7 +230,10 @@ export default function Header({ children }) {
                         className={styles.dropdownLink}
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <span className={styles.menuIcon}>⚙️</span>
+                        <img
+                          src="/assets/icons/settings.svg"
+                          className={styles.menuIcon}
+                        />
                         {t("settings")}
                       </Link>
 
@@ -240,7 +246,10 @@ export default function Header({ children }) {
                             className={styles.dropdownLink}
                             onClick={() => setUserMenuOpen(false)}
                           >
-                            <span className={styles.menuIcon}>🧑‍💼</span>
+                            <img
+                              src="/assets/icons/admin_panel.svg"
+                              className={styles.menuIcon}
+                            />
                             {t("admin_panel")}
                           </Link>
                         </>
@@ -254,7 +263,10 @@ export default function Header({ children }) {
                         onClick={handleLogout}
                         disabled={loggingOut}
                       >
-                        <span className={styles.menuIcon}>➡️</span>
+                        <img
+                          src="/assets/icons/logout.svg"
+                          className={styles.menuIcon}
+                        />
                         {loggingOut ? t("loggingOut") : t("logout")}
                       </button>
                     </div>

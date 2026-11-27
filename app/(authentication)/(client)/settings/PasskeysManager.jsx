@@ -173,7 +173,9 @@ export default function PasskeysManager() {
   return (
     <div className={styles.container}>
       <div className={styles.intro}>
-        <div className={styles.introIcon}>👆</div>
+        <div className={styles.introIcon}>
+          <img src="/assets/icons/fingerprint.svg" className={styles.navIcon} />
+        </div>
         <div>
           <h3>Ключи доступа</h3>
           <p>
@@ -239,7 +241,13 @@ export default function PasskeysManager() {
 
       {passkeys.length === 0 ? (
         <div className={styles.emptyState}>
-          <span className={styles.emptyIcon}>🔐</span>
+          <span className={styles.emptyIcon}>
+            {" "}
+            <img
+              src="/assets/icons/fingerprint.svg"
+              className={styles.navIcon}
+            />
+          </span>
           <strong>Пока нет ключей доступа</strong>
           <p>Добавьте ключ, чтобы в будущем входить без ввода пароля.</p>
         </div>

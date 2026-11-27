@@ -221,6 +221,12 @@
   margin-top: 8px;
 }
 
+.navIcon {
+  width: 22px;
+  font-size: 17px;
+  text-align: center;
+}
+
 .emptyState,
 .message {
   padding: 22px;

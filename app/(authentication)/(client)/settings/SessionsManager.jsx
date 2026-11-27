@@ -5,6 +5,12 @@ import { authClient } from "@/lib/client-auth";
 import styles from "./sessions-manager.module.css";
 
 function getDeviceInfo(userAgent) {
+  const IconComp = (
+    <img src="/assets/icons/computer.svg" className={styles.navIcon} />
+  );
+  const IconPhone = (
+    <img src="/assets/icons/mobile.svg" className={styles.navIcon} />
+  );
   if (!userAgent) {
     return {
       icon: "💻",
@@ -43,7 +49,8 @@ function getDeviceInfo(userAgent) {
   }
 
   return {
-    icon: isMobile ? "📱" : "💻",
+    // icon: isMobile ? "📱" : "💻",
+    icon: isMobile ? IconPhone : IconComp,
     label: `${browser} · ${os}`,
   };
 }

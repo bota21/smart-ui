@@ -303,6 +303,11 @@
   background: var(--success-light);
   color: var(--success-text);
 }
+.navIcon {
+  width: 22px;
+  font-size: 17px;
+  text-align: center;
+}
 
 @media (max-width: 600px) {
   .addForm {
