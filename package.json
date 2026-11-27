@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "tests": "npx playwright test --config=e2e/playwright.config.ts",
+    "tests:ui": "npx playwright test --config=e2e/playwright.config.ts --ui",
+    "tests:report": "npx playwright show-report"
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.27",
@@ -22,6 +25,8 @@
     "resend": "^6.39.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.15.8"
+    "@netlify/plugin-nextjs": "^5.15.8",
+    "@playwright/test": "^1.65.1",
+    "dotenv-cli": "^11.1.0"
   }
 }
