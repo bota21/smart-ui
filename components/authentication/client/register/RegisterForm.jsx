@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { authClient } from "@/lib/client-auth";
 import VerificationNotice from "@/components/authentication/shared/verification/VerificationNotice";
 import styles from "./register.module.css";
 
-export default function RegisterForm() {
+export default function RegisterForm({ initialEmail = "", onBack }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("+7");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -152,8 +151,14 @@ export default function RegisterForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="example@mail.com"
           autoComplete="email"
+          readOnly={Boolean(initialEmail)}
           required
         />
+        {onBack && (
+          <button type="button" className={styles.changeEmail} onClick={onBack}>
+            Изменить адрес электронной почты
+          </button>
+        )}
 
         <label className={styles.label} htmlFor="register-password">
           Пароль
@@ -290,10 +295,6 @@ export default function RegisterForm() {
         <button className={styles.button} disabled={loading}>
           {loading ? "Создаём аккаунт..." : "Зарегистрироваться"}
         </button>
-
-        <p className={styles.footer}>
-          Уже есть аккаунт? <Link href="/login">Войти</Link>
-        </p>
       </form>
     </main>
   );

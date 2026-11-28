@@ -129,6 +129,12 @@ export const passkey = pgTable(
   ],
 );
 
+export const emailCheckRateLimit = pgTable("email_check_rate_limit", {
+  id: text("id").primaryKey(),
+  count: integer("count").default(0).notNull(),
+  windowStartedAt: timestamp("window_started_at").notNull(),
+});
+
 export const adminActivity = pgTable(
   "admin_activity",
   {
