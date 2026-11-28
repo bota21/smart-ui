@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { authClient } from "@/lib/client-auth";
 import styles from "./verification.module.css";
 
-export default function VerificationNotice({ email }) {
+export default function VerificationNotice({ email, onBack }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -63,9 +62,9 @@ export default function VerificationNotice({ email }) {
           {loading ? "Отправка..." : "Отправить письмо повторно"}
         </button>
 
-        <Link href="/login" className={styles.link}>
+        <button type="button" className={styles.link} onClick={onBack}>
           Вернуться ко входу
-        </Link>
+        </button>
       </section>
     </main>
   );

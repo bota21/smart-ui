@@ -43,6 +43,13 @@
       "when": 1795593281068,
       "tag": "0005_gorgeous_wolfsbane",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1795803435539,
+      "tag": "0006_add_email_check_rate_limit",
+      "breakpoints": true
     }
   ]
 }

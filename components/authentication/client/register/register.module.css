@@ -160,6 +160,21 @@
 .footer a:hover {
   text-decoration: underline;
 }
+.changeEmail {
+  display: block;
+  margin: -10px 0 18px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--purple-800);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.changeEmail:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 520px) {
   .page {

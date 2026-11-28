@@ -1,10 +1,5 @@
-import RegisterForm from "@/components/authentication/client/register/RegisterForm";
-import RedirectIfAuthenticated from "@/components/authentication/client/RedirectIfAuthenticated";
+import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
-  return (
-    <RedirectIfAuthenticated>
-      <RegisterForm />
-    </RedirectIfAuthenticated>
-  );
+  redirect("/login");
 }
