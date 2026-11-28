@@ -41,6 +41,7 @@ export default function SecuritySection() {
   const authorizeManagement = async (action) => {
     const response = await fetch("/api/security/passkeys/reauth", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

@@ -56,6 +56,16 @@ function hashValue(value) {
   return createHmac("sha256", getSecret()).update(value).digest("hex");
 }
 
+function getRateLimitId(request) {
+  const ip = getClientIp(request);
+
+  if (!ip) return null;
+
+  // Новый идентификатор отделяет счётчик неправильных паролей
+  // от старого счётчика всех операций управления Passkey.
+  return `passkey-password-failures:${hashValue(ip)}`;
+}
+
 function signToken(token) {
   return createHmac("sha256", getSecret())
     .update(`passkey-management:${token}`)
@@ -63,17 +73,49 @@ function signToken(token) {
 }
 
 async function checkRateLimit(request) {
-  const ip = getClientIp(request);
+  const id = getRateLimitId(request);
 
-  if (!ip) {
+  if (!id) {
     return { unavailable: true };
   }
 
+  const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS);
+
+  const [bucket] = await db
+    .select({
+      count: emailCheckRateLimit.count,
+      windowStartedAt: emailCheckRateLimit.windowStartedAt,
+    })
+    .from(emailCheckRateLimit)
+    .where(eq(emailCheckRateLimit.id, id))
+    .limit(1);
+
+  if (
+    !bucket ||
+    new Date(bucket.windowStartedAt).getTime() <= windowStart.getTime()
+  ) {
+    return {
+      unavailable: false,
+      allowed: true,
+      id,
+    };
+  }
+
+  const resetAt =
+    new Date(bucket.windowStartedAt).getTime() + RATE_LIMIT_WINDOW_MS;
+
+  return {
+    unavailable: false,
+    allowed: bucket.count < RATE_LIMIT_MAX,
+    retryAfter: Math.max(1, Math.ceil((resetAt - Date.now()) / 1000)),
+    id,
+  };
+}
+
+async function recordFailedPasswordAttempt(id) {
   const now = new Date();
   const windowStart = new Date(now.getTime() - RATE_LIMIT_WINDOW_MS);
   const retentionCutoff = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-
-  const id = `passkey-management:${hashValue(ip)}`;
 
   await db
     .delete(emailCheckRateLimit)
@@ -107,19 +149,13 @@ async function checkRateLimit(request) {
     })
     .returning({
       count: emailCheckRateLimit.count,
-      windowStartedAt: emailCheckRateLimit.windowStartedAt,
     });
 
-  const resetAt =
-    new Date(bucket.windowStartedAt).getTime() + RATE_LIMIT_WINDOW_MS;
+  return bucket;
+}
 
-  const retryAfter = Math.max(1, Math.ceil((resetAt - Date.now()) / 1000));
-
-  return {
-    unavailable: false,
-    allowed: bucket.count <= RATE_LIMIT_MAX,
-    retryAfter,
-  };
+async function resetFailedPasswordAttempts(id) {
+  await db.delete(emailCheckRateLimit).where(eq(emailCheckRateLimit.id, id));
 }
 
 export async function POST(request) {
@@ -137,33 +173,7 @@ export async function POST(request) {
     return jsonResponse({ error: "Недопустимое действие." }, 400);
   }
 
-  let rateLimit;
-
   try {
-    rateLimit = await checkRateLimit(request);
-  } catch (error) {
-    console.error("[PASSKEY MANAGEMENT RATE LIMIT]", error);
-
-    return jsonResponse({ error: "Сервис временно недоступен." }, 503);
-  }
-
-  if (rateLimit.unavailable) {
-    return jsonResponse(
-      { error: "Не удалось определить источник запроса." },
-      503,
-    );
-  }
-
-  if (!rateLimit.allowed) {
-    return jsonResponse(
-      { error: "Слишком много попыток. Повторите позже." },
-      429,
-      { "Retry-After": String(rateLimit.retryAfter) },
-    );
-  }
-
-  try {
-    // Получаем текущую авторизованную сессию.
     const currentSession = await auth.api.getSession({
       headers: request.headers,
     });
@@ -175,7 +185,6 @@ export async function POST(request) {
     const userId = currentSession.user.id;
     const sessionId = currentSession.session.id;
 
-    // Проверяем, имеется ли у пользователя пароль.
     const [credentialAccount] = await db
       .select({
         id: accountTable.id,
@@ -196,7 +205,6 @@ export async function POST(request) {
     let method;
 
     if (hasPassword) {
-      // Для аккаунта с паролем подтверждаем действие паролем.
       if (typeof body.password !== "string" || !body.password) {
         return jsonResponse(
           {
@@ -204,6 +212,25 @@ export async function POST(request) {
             message: "Введите пароль для подтверждения действия.",
           },
           400,
+        );
+      }
+
+      const rateLimit = await checkRateLimit(request);
+
+      if (rateLimit.unavailable) {
+        return jsonResponse(
+          { error: "Не удалось определить источник запроса." },
+          503,
+        );
+      }
+
+      if (!rateLimit.allowed) {
+        return jsonResponse(
+          {
+            error: "Слишком много попыток. Повторите позже.",
+          },
+          429,
+          { "Retry-After": String(rateLimit.retryAfter) },
         );
       }
 
@@ -215,6 +242,14 @@ export async function POST(request) {
           headers: request.headers,
         });
       } catch {
+        try {
+          await recordFailedPasswordAttempt(rateLimit.id);
+        } catch (error) {
+          console.error("[PASSKEY PASSWORD RATE LIMIT]", error);
+
+          return jsonResponse({ error: "Сервис временно недоступен." }, 503);
+        }
+
         return jsonResponse(
           {
             error: "INVALID_PASSWORD",
@@ -224,14 +259,15 @@ export async function POST(request) {
         );
       }
 
+      // Успешное подтверждение сбрасывает счётчик ошибок.
+      await resetFailedPasswordAttempts(rateLimit.id);
+
       method = "password";
     } else {
-      // Для аккаунта без пароля требуется настоящая
-      // WebAuthn-проверка существующим Passkey.
+      // Для аккаунта без пароля используется существующий Passkey.
       method = "passkey";
     }
 
-    // Создаём одноразовое разрешение.
     const token = randomBytes(32).toString("base64url");
     const expiresAt = new Date(Date.now() + TOKEN_TTL_MS);
 
@@ -261,7 +297,6 @@ export async function POST(request) {
           },
     );
 
-    // Cookie доступна Better Auth API и защищена от JavaScript.
     response.cookies.set(
       "smartui_passkey_management",
       `${token}.${signToken(token)}`,
