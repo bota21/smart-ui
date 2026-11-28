@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { authClient } from "@/lib/client-auth";
 import styles from "./profile.module.css";
 
+import SecuritySection from "@/components/profile/SecuritySection";
+
 export default function ProfilePage() {
   const { data: session, isPending, refetch } = authClient.useSession();
   const user = session?.user;
@@ -119,6 +121,8 @@ export default function ProfilePage() {
         <div className={styles.avatar}>
           {(user.name || user.email || "U")[0].toUpperCase()}
         </div>
+
+        <SecuritySection />
 
         <h1 className={styles.title}>Личный кабинет</h1>
         <p className={styles.subtitle}>Информация о вашем аккаунте SmartÜi</p>

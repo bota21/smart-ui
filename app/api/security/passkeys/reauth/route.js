@@ -16,7 +16,6 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const TOKEN_TTL_MS = 5 * 60 * 1000;
-const PASSWORDLESS_SESSION_WINDOW_MS = 5 * 60 * 1000;
 
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
@@ -71,9 +70,7 @@ async function checkRateLimit(request) {
   }
 
   const now = new Date();
-
   const windowStart = new Date(now.getTime() - RATE_LIMIT_WINDOW_MS);
-
   const retentionCutoff = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
   const id = `passkey-management:${hashValue(ip)}`;
@@ -94,16 +91,14 @@ async function checkRateLimit(request) {
       set: {
         count: sql`
           CASE
-            WHEN ${emailCheckRateLimit.windowStartedAt}
-              <= ${windowStart}
+            WHEN ${emailCheckRateLimit.windowStartedAt} <= ${windowStart}
             THEN 1
             ELSE ${emailCheckRateLimit.count} + 1
           END
         `,
         windowStartedAt: sql`
           CASE
-            WHEN ${emailCheckRateLimit.windowStartedAt}
-              <= ${windowStart}
+            WHEN ${emailCheckRateLimit.windowStartedAt} <= ${windowStart}
             THEN ${now}
             ELSE ${emailCheckRateLimit.windowStartedAt}
           END
@@ -178,6 +173,7 @@ export async function POST(request) {
     }
 
     const userId = currentSession.user.id;
+    const sessionId = currentSession.session.id;
 
     // Проверяем, имеется ли у пользователя пароль.
     const [credentialAccount] = await db
@@ -197,15 +193,20 @@ export async function POST(request) {
 
     const hasPassword = Boolean(credentialAccount);
 
+    let method;
+
     if (hasPassword) {
+      // Для аккаунта с паролем подтверждаем действие паролем.
       if (typeof body.password !== "string" || !body.password) {
         return jsonResponse(
-          { error: "Введите пароль для подтверждения действия." },
+          {
+            error: "PASSWORD_REQUIRED",
+            message: "Введите пароль для подтверждения действия.",
+          },
           400,
         );
       }
 
-      // Better Auth проверяет пароль текущего пользователя.
       try {
         await auth.api.verifyPassword({
           body: {
@@ -222,52 +223,45 @@ export async function POST(request) {
           401,
         );
       }
+
+      method = "password";
     } else {
-      // У пользователя без пароля должна быть свежая сессия,
-      // созданная после входа через Passkey и прохождения 2FA,
-      // если она включена.
-      const sessionCreatedAt = new Date(
-        currentSession.session.createdAt,
-      ).getTime();
-
-      const sessionAge = Date.now() - sessionCreatedAt;
-
-      if (
-        !Number.isFinite(sessionCreatedAt) ||
-        sessionAge < 0 ||
-        sessionAge > PASSWORDLESS_SESSION_WINDOW_MS
-      ) {
-        return jsonResponse(
-          {
-            error: "FRESH_PASSKEY_LOGIN_REQUIRED",
-            message:
-              "Для этого аккаунта необходимо заново войти с помощью Passkey, а затем повторить действие.",
-          },
-          403,
-        );
-      }
+      // Для аккаунта без пароля требуется настоящая
+      // WebAuthn-проверка существующим Passkey.
+      method = "passkey";
     }
 
-    // Создаём одноразовое разрешение на две минуты.
+    // Создаём одноразовое разрешение.
     const token = randomBytes(32).toString("base64url");
+    const expiresAt = new Date(Date.now() + TOKEN_TTL_MS);
 
     await db.insert(verification).values({
       id: randomUUID(),
       identifier: `passkey-management:${token}`,
       value: JSON.stringify({
         userId,
-        sessionId: currentSession.session.id,
+        sessionId,
         action,
+        method,
+        verified: method === "password",
       }),
-      expiresAt: new Date(Date.now() + TOKEN_TTL_MS),
+      expiresAt,
     });
 
-    const response = jsonResponse({
-      authorized: true,
-      method: hasPassword ? "password" : "recent-passkey",
-    });
+    const response = jsonResponse(
+      method === "password"
+        ? {
+            authorized: true,
+            method: "password",
+          }
+        : {
+            authorized: false,
+            requiresPasskey: true,
+            method: "passkey",
+          },
+    );
 
-    // HttpOnly cookie будет передаваться только auth API.
+    // Cookie доступна Better Auth API и защищена от JavaScript.
     response.cookies.set(
       "smartui_passkey_management",
       `${token}.${signToken(token)}`,
