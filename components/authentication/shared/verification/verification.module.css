@@ -83,10 +83,15 @@
 .link {
   display: inline-block;
   margin-top: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
   color: var(--purple-800);
+  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .link:hover {

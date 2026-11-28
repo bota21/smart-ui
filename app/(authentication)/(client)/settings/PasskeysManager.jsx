@@ -34,6 +34,8 @@ export default function PasskeysManager() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
   const [newName, setNewName] = useState("");
+  const [password, setPassword] = useState("");
+  const [deletePassword, setDeletePassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -66,34 +68,69 @@ export default function PasskeysManager() {
     loadPasskeys();
   }, []);
 
+  async function authorizeManagement(action, enteredPassword = "") {
+    const response = await fetch("/api/security/passkeys/reauth", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action,
+        ...(enteredPassword ? { password: enteredPassword } : {}),
+      }),
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        result.message ||
+          result.error ||
+          "Не удалось подтвердить личность. Проверьте пароль.",
+      );
+    }
+
+    if (result.requiresPasskey) {
+      const passkeyResult = await authClient.signIn.passkey();
+
+      if (passkeyResult.error?.code !== "PASSKEY_MANAGEMENT_REAUTH_SUCCESS") {
+        throw new Error(
+          passkeyResult.error?.message ||
+            "Не удалось подтвердить личность с помощью Passkey.",
+        );
+      }
+    } else if (!result.authorized) {
+      throw new Error("Не удалось подтвердить личность.");
+    }
+  }
+
   async function handleAddPasskey() {
     setError("");
     setSuccess("");
     setIsAdding(true);
 
     try {
+      await authorizeManagement("add", password);
+
       const { data, error } = await authClient.passkey.addPasskey({
         name: newName.trim() || undefined,
       });
 
       if (error || !data) {
-        setError(
+        throw new Error(
           error?.message ||
             "Не удалось добавить ключ доступа. Попробуйте ещё раз.",
         );
-        return;
       }
 
       setNewName("");
+      setPassword("");
       setSuccess("Ключ доступа успешно добавлен.");
 
       await loadPasskeys();
     } catch (err) {
-      if (err?.name === "NotAllowedError") {
-        setError("Регистрация ключа была отменена или не завершена.");
-      } else {
-        setError("Не удалось добавить ключ доступа. Попробуйте ещё раз.");
-      }
+      setError(err.message || "Не удалось добавить ключ доступа.");
     } finally {
       setIsAdding(false);
     }
@@ -144,23 +181,25 @@ export default function PasskeysManager() {
     setDeletingId(passkeyId);
 
     try {
+      await authorizeManagement("delete", deletePassword);
+
       const { error } = await authClient.passkey.deletePasskey({
         id: passkeyId,
       });
 
       if (error) {
-        setError(error.message || "Не удалось удалить ключ доступа.");
-        return;
+        throw new Error(error.message || "Не удалось удалить ключ доступа.");
       }
 
       setPasskeys((previous) =>
         previous.filter((item) => item.id !== passkeyId),
       );
 
+      setDeletePassword("");
       setConfirmDeleteId(null);
       setSuccess("Ключ доступа удалён.");
-    } catch {
-      setError("Не удалось удалить ключ доступа.");
+    } catch (err) {
+      setError(err.message || "Не удалось удалить ключ доступа.");
     } finally {
       setDeletingId("");
     }
@@ -174,8 +213,13 @@ export default function PasskeysManager() {
     <div className={styles.container}>
       <div className={styles.intro}>
         <div className={styles.introIcon}>
-          <img src="/assets/icons/fingerprint.svg" className={styles.navIcon} />
+          <img
+            src="/assets/icons/fingerprint.svg"
+            className={styles.navIcon}
+            alt=""
+          />
         </div>
+
         <div>
           <h3>Ключи доступа</h3>
           <p>
@@ -214,6 +258,15 @@ export default function PasskeysManager() {
             disabled={isAdding}
           />
 
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Пароль аккаунта"
+            autoComplete="current-password"
+            disabled={isAdding}
+          />
+
           <button
             type="button"
             className={styles.primaryButton}
@@ -225,8 +278,8 @@ export default function PasskeysManager() {
         </div>
 
         <span className={styles.hint}>
-          После нажатия браузер предложит выбрать доступный способ создания
-          ключа.
+          Подтвердите пароль аккаунта. После проверки браузер предложит создать
+          ключ доступа на устройстве.
         </span>
       </div>
 
@@ -242,12 +295,13 @@ export default function PasskeysManager() {
       {passkeys.length === 0 ? (
         <div className={styles.emptyState}>
           <span className={styles.emptyIcon}>
-            {" "}
             <img
               src="/assets/icons/fingerprint.svg"
               className={styles.navIcon}
+              alt=""
             />
           </span>
+
           <strong>Пока нет ключей доступа</strong>
           <p>Добавьте ключ, чтобы в будущем входить без ввода пароля.</p>
         </div>
@@ -297,6 +351,7 @@ export default function PasskeysManager() {
                     <div className={styles.meta}>
                       <span>{getDeviceLabel(item)}</span>
                       <span>Добавлен: {formatDate(item.createdAt)}</span>
+
                       {item.backedUp && (
                         <span>Синхронизируется между устройствами</span>
                       )}
@@ -305,6 +360,24 @@ export default function PasskeysManager() {
                     {confirmDeleteId === item.id ? (
                       <div className={styles.confirmDelete}>
                         <p>Удалить этот ключ доступа?</p>
+
+                        <div className={styles.editForm}>
+                          <label htmlFor={`delete-password-${item.id}`}>
+                            Подтвердите пароль аккаунта
+                          </label>
+
+                          <input
+                            id={`delete-password-${item.id}`}
+                            type="password"
+                            value={deletePassword}
+                            onChange={(event) =>
+                              setDeletePassword(event.target.value)
+                            }
+                            placeholder="Пароль аккаунта"
+                            autoComplete="current-password"
+                            disabled={deletingId === item.id}
+                          />
+                        </div>
 
                         <div className={styles.actions}>
                           <button
@@ -321,7 +394,10 @@ export default function PasskeysManager() {
                           <button
                             type="button"
                             className={styles.cancelButton}
-                            onClick={() => setConfirmDeleteId(null)}
+                            onClick={() => {
+                              setConfirmDeleteId(null);
+                              setDeletePassword("");
+                            }}
                           >
                             Отмена
                           </button>
@@ -347,6 +423,7 @@ export default function PasskeysManager() {
                           className={styles.deleteButton}
                           onClick={() => {
                             setConfirmDeleteId(item.id);
+                            setDeletePassword("");
                             setError("");
                             setSuccess("");
                           }}
