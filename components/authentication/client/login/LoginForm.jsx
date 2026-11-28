@@ -109,11 +109,12 @@ export default function LoginForm() {
         email,
         password,
       });
+      console.log(result);
 
       if (result.error) {
         const errorCode = result.error.code;
 
-        if (errorCode === "EMAIL_NOT_VERIFIED" || result.error.status === 403) {
+        if (errorCode === "EMAIL_NOT_VERIFIED") {
           setNotice(
             "Электронная почта ещё не подтверждена. Мы отправили вам письмо с подтверждением. Проверьте почту.",
           );
@@ -180,9 +181,6 @@ export default function LoginForm() {
 
       const passkeyError = result.error || result.data?.error;
 
-      console.log("[PASSKEY RESULT]", result);
-      console.log("[PASSKEY ERROR]", passkeyError);
-
       // Если включена двухфакторная защита, переходим к проверке второго фактора
       if (passkeyError?.code === "TWO_FACTOR_REQUIRED") {
         router.replace("/mfa");
@@ -196,7 +194,7 @@ export default function LoginForm() {
       }
 
       const user = result.data?.user;
-      console.log("[PASSKEY USER]", result.data?.user);
+
       if (!user) {
         throw new Error("Не удалось получить данные пользователя.");
       }
@@ -270,10 +268,10 @@ export default function LoginForm() {
             Изменить адрес электронной почты
           </button>
 
-          {!emailVerified && (
+          {(!emailVerified || notice) && (
             <p role="status" className={styles.notice}>
-              Электронная почта ещё не подтверждена. После ввода правильного
-              пароля мы отправим новое письмо для подтверждения.
+              {notice ||
+                "Электронная почта ещё не подтверждена. После ввода правильного пароля мы отправим новое письмо для подтверждения."}
             </p>
           )}
 
@@ -369,12 +367,6 @@ export default function LoginForm() {
             <p className={styles.notice}>
               Для этого аккаунта пока не найден доступный способ входа.
               Обратитесь в поддержку.
-            </p>
-          )}
-
-          {notice && (
-            <p role="status" className={styles.notice}>
-              {notice}
             </p>
           )}
 

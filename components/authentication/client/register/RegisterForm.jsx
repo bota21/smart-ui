@@ -85,7 +85,7 @@ export default function RegisterForm({ initialEmail = "", onBack }) {
   }
 
   if (registered) {
-    return <VerificationNotice email={email} />;
+    return <VerificationNotice email={email} onBack={onBack} />;
   }
 
   return (
